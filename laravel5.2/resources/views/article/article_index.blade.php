@@ -81,8 +81,12 @@
 		<a href="article/info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
 			</h3>
 	<!-- text -->
-	<div class="">
-		
+	<div class="item-txt">
+		<div class="item-img l">
+				<a href="article/info/{{ $article->id }}" target="_blank">
+					<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
+				</a>
+			</div>
 		<p class="item-bd">{{ $article->content }}...</p>
 		<div class="item-btm clearfix">
 			<ul class="l left-info" data-fuid="260194"><li class="hd-pic"><a class="publisher-name" title="永恒战士" href="/u/260194/articles" target="_blank">永恒战士</a></li>
