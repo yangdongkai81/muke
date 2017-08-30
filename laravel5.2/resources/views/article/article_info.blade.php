@@ -31,7 +31,7 @@
 	                            <div class="share-icon-list bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1504062771088">
 	                               
 	                                <div class="icon-warp">
-	                                    <a onclick="_hmt.push(['_trackEvent', 'sjtj_top', 'share', 'wb'])" data-track="topshare-1-2" href="#" class="bds_tsina icon-nav icon-share-weibo share-icon" data-cmd="tsina" title="分享到新浪微博"></a>
+	                                    <a id="blog" class="bds_tsina icon-nav icon-share-weibo share-icon" data-cmd="tsina" title="分享到新浪微博"></a>
 	                                </div>             
 	                            </div>
                                 
@@ -256,4 +256,16 @@
 
 @section('footer')
 	@parent
+<script src="../../js/jquery.min.js"></script>
+<script>
+	$('#blog').click(function(){
+                window.sharetitle = "#{{ $info->title }}#";//标题
+                window.shareUrl = '';//缩略图
+                share();
+            });
+            function share(){
+                //d指的是window
+                (function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(window.sharetitle),'&appkey=2924220432','&pic=',e(window.shareUrl)].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent);
+            }
+</script>
 @stop
