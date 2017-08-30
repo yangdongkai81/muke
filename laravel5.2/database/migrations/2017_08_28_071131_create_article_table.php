@@ -25,6 +25,7 @@ class CreateArticleTable extends Migration
             $table->integer('browser')->comment('浏览量');
             $table->tinyInteger('is_original')->comment('是否原创 0非原创 1原创');
             $table->tinyInteger('status')->comment('发布状态 0后台审核中 1审核通过 2审核不通过');
+            $table->timestamps();
         });
     }
 
