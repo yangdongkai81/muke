@@ -1,4 +1,4 @@
-@extends('layouts/layout')
+@extends('layouts/layouts')
 
 @section('header')
 	@parent
@@ -78,12 +78,12 @@
 <div class="article-lwrap ">
 	
 	<h3 class="item-title">
-		<a href="article/info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
+		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
 			</h3>
 	<!-- text -->
 	<div class="item-txt">
 		<div class="item-img l">
-				<a href="article/info/{{ $article->id }}" target="_blank">
+				<a href="article_info/{{ $article->id }}" target="_blank">
 					<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
 				</a>
 			</div>

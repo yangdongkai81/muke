@@ -16,6 +16,7 @@ class CreateArticleCommentsTable extends Migration
             
             $table->increments('id')->comment('评论ID');
             $table->integer('user_id')->comment('用户ID');
+            $table->integer('art_id')->comment('文章ID');
             $table->string('content',255)->comment('评论内容');
             $table->integer('add_time')->comment('添加时间');
             $table->tinyInteger('status')->default(1)->comment('评论状态 0删除 1正常');

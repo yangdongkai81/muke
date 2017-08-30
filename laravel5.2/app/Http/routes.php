@@ -31,6 +31,6 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('article_index','ArticleController@article_index');
 		Route::get('article_add','ArticleController@article_add');
 		Route::post('article_insert','ArticleController@article_insert');
-		Route::get('article/info/{id}','ArticleController@article_info');
+		Route::get('article_info/{id}','ArticleController@article_info');
     });
 });
