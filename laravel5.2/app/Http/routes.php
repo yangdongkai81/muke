@@ -29,8 +29,15 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
-		Route::get('article_add','ArticleController@article_add');
-		Route::post('article_insert','ArticleController@article_insert');
-		Route::get('article_info/{id}','ArticleController@article_info');
+    		Route::get('article_add','ArticleController@article_add');
+    		Route::post('article_insert','ArticleController@article_insert');
+    		Route::get('article_info/{id}','ArticleController@article_info');
+        Route::get("wenda_index",['uses'=>'WendaController@Index']);
+        Route::get("issue",['uses'=>'WendaController@Issue']);
+        Route::get("question",['uses'=>'WendaController@Question']);
+        Route::any("question_add",['uses'=>'WendaController@Question_Add']);
+        Route::get("question_show",['uses'=>'WendaController@Question_Show']);
+        Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
+        Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
     });
 });

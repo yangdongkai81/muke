@@ -19,7 +19,7 @@ class ArticleController extends Controller
 
     	$articles = $article->all();
 
-    	return view('article.article_index',['articles'=>$articles]);
+    	return view('Home.article.article_index',['articles'=>$articles]);
     }
 
     /**
@@ -29,7 +29,7 @@ class ArticleController extends Controller
     {
     	$tags = Article_tags::all();
 
-    	return view('article.article_add',['tags'=>$tags]);
+    	return view('Home.article.article_add',['tags'=>$tags]);
     }
 
     public function article_insert(Request $request)
@@ -80,6 +80,6 @@ class ArticleController extends Controller
     	$tags = explode(',',$info['tag_id']);
     	$tags_name = Article_tags::whereIn('id',$tags)->lists('tag_name', 'id');
     	
-    	return view('article.article_info',['info'=>$info,'tags'=>$tags_name]);
+    	return view('Home.article.article_info',['info'=>$info,'tags'=>$tags_name]);
     }
 }
