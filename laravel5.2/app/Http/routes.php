@@ -39,5 +39,24 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
+
+        //实战
+        Route::any('index_index', ['uses'=>'IndexController@index']);
+        Route::any('charge_index', ['uses'=>'ChargeController@index']);
+
     });
 });
+
+
+//后台
+Route::group(['namespace' => 'Admin'], function(){
+    Route::group(['prefix' => ''], function(){
+        Route::any('admin_index', ['uses'=>'AdminController@index']);
+        Route::any('admin_charge_index', ['uses'=>'Admin_chargeController@index']);
+        Route::any('admin_charge_type', ['uses'=>'Admin_chargeController@type']);
+        Route::any('admin_charge_direction', ['uses'=>'Admin_chargeController@direction']);
+
+
+    });
+});
+
