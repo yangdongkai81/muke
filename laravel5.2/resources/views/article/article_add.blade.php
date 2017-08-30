@@ -1,4 +1,4 @@
-@extends('layouts/layout')
+@extends('layouts/layouts')
 
 @section('header')
 	@parent
@@ -40,14 +40,14 @@
       <!-- 上传图片 -->
       <div class="form-group clearfix">
           <div class="form-ipt-wrap">
-              <div class="face-upload clearfix">
+              <div class="face-upload clearfix" style="margin-bottom:20px;">
 
 			  <div id="js-face-upload" class="l webuploader-container">
 			  <div id="rt_rt_1boo6gv4p1mv51vmjfq5h8p1l6q1" style="position: absolute; top: 0px; left: 0px; width: 140px; height: 40px; overflow: hidden; bottom: auto; right: auto;"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>
 			  </div>
 			  </div>
 			  <input type="file" name="file" class="webuploader-element-invisible" accept="">
-			  <span class="l">封面为420*260像素的 PNG/JPG/GIF 格式图片</span>
+			  
 			</div>
           </div>
       </div>
