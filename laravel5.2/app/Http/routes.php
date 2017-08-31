@@ -43,7 +43,11 @@ Route::group(['namespace' => 'Home'], function(){
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
         Route::any('charge_index', ['uses'=>'ChargeController@index']);
-
+        // 购物车  订单
+        Route::any('cart_index',['uses'=>'CartController@index']);
+        Route::any('confirm_index',['uses'=>'ConfirmController@index']);
+        Route::any('indent_index',['uses'=>'IndentController@index']);
+        Route::any('buy_index',['uses'=>'BuyController@index']);
     });
 });
 
