@@ -30,9 +30,11 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
         //手记模块
-		Route::get('article_add','ArticleController@article_add');
-		Route::post('article_insert','ArticleController@article_insert');
-		Route::get('article_info/{id}','ArticleController@article_info');
+        Route::get('article_add','ArticleController@article_add');
+        Route::post('article_insert','ArticleController@article_insert');
+        Route::get('article_info/{id}','ArticleController@article_info');
+        Route::get('article_comment_add','ArticleController@comment_add');
+        Route::get('article_reply_add','ArticleController@reply_add');
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
         Route::get("issue",['uses'=>'WendaController@Issue']);
