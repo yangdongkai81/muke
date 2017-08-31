@@ -17,9 +17,7 @@
 
     <tr>
       <td class="did">{{$v->id}}</td>
-      <td><?php if ($v->parent_id>0) {
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----";
-      } ?>{{$v->aspect_name}}</td>
+      <td>{{$v->le}}{{$v->aspect_name}}</td>
       <td>{{$v->parent_id}}</td>
       <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)"  onclick="return del({{$v->id}},2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
     </tr>
