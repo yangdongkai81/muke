@@ -77,7 +77,7 @@
                     <a href="charge_index" target="_self">实战</a>
                 </li>
                 <li><a href="wenda_index" class="active" target="_self">猿问</a></li>
-                <li><a href="article_index"  target="_self">手记</a></li>
+                <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
 
             </ul>
             <div id="login-area">

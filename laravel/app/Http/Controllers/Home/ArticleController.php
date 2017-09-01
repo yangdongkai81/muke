@@ -20,8 +20,26 @@ class ArticleController extends Controller
     	$article = new Article;
 
     	$articles = $article->all();
+        
+        //获取标签信息
+        $tags_order = Article_tags::orderBy('tag_num','desc')->get()->toArray();
+        $tags = Article_tags::all()->toArray();
+        $count = count($tags);
+        for ($i=0; $i < $count; $i++) {
+            if($i < 9){
+                $tags_arr['show'][] =  $tags[$i];
+            } else {
+                $tags_arr['hidden'][] = $tags[$i];
+            }
+            if ($i < 10) {
+                $tags_arr['order'][] = $tags_order[$i];
+            }
+        }
 
-    	return view('Home.article.article_index',['articles'=>$articles]);
+    	return view('Home.article.article_index',[
+            'articles' => $articles,
+            'tags' => $tags_arr,
+        ]);
     }
 
     /**
@@ -157,8 +175,8 @@ class ArticleController extends Controller
     }
 
 
-    public function objectToArray($object)
+    public function tag_article($tag_id)
     {
-        return json_decode(json_encode($object), true);
+        return view('Home.article.');
     }
 }
