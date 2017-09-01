@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('email',20);
             $table->char('pwd',32);
             $table->tinyInteger('status')->default(0);
-            $table->string('addtime',30);
+            $table->string('add_time',30);
             $table->string('end_time',30);
             $table->rememberToken();
             $table->timestamps();
