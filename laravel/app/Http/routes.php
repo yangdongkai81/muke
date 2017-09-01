@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 <?php
 
 /*
@@ -31,9 +34,19 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
         //手记模块
+<<<<<<< HEAD
 		Route::get('article_add','ArticleController@article_add');
 		Route::post('article_insert','ArticleController@article_insert');
 		Route::get('article_info/{id}','ArticleController@article_info');
+=======
+        Route::get('article_add','ArticleController@article_add');
+        Route::post('article_insert','ArticleController@article_insert');
+        Route::get('article_info/{id}','ArticleController@article_info');
+        Route::get('article_comment_add','ArticleController@comment_add');
+        Route::get('article_reply_add','ArticleController@reply_add');
+        Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
         Route::get("issue",['uses'=>'WendaController@Issue']);
@@ -42,6 +55,11 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
+<<<<<<< HEAD
+=======
+        Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
+        Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
@@ -61,14 +79,20 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
         Route::get('login_qq','LoginController@qqlogin');
+<<<<<<< HEAD
         //个人中心
         Route::get('user_index/{login_id}','UserController@index');
+=======
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
         // Route::get('index','LoginController@qqlogin');
         //课程
         Route::get('/course_index',['uses'=>'CourseController@course_index']);
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
+<<<<<<< HEAD
 
+=======
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
     });
 });
 
@@ -100,6 +124,10 @@ Route::group(['namespace' => 'Admin'], function(){
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
     Route::get('/home', 'HomeController@index');
 });
 

@@ -12,6 +12,7 @@ class IndexController extends Controller
 {
 	public function index()
 	{
+<<<<<<< HEAD
 		if(Session::get('login_id')){
 			$login_id = Session::get('login_id');
 			//通过session获取login_id查users表所对应的用户信息
@@ -25,5 +26,8 @@ class IndexController extends Controller
 				'id'=>0,
 				]);
 		}
+=======
+		return view('index/index');
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 	}
 }
