@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 use Session,Redirect;
 use App\Models\Article_tags;
 use App\Models\Article;
-<<<<<<< HEAD
-=======
+
 use App\Models\Article_comment;
 use App\Models\Article_replies;
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -23,10 +21,10 @@ class ArticleController extends Controller
     	$article = new Article;
 
     	$articles = $article->all();
-<<<<<<< HEAD
 
-    	return view('Home.article.article_index',['articles'=>$articles]);
-=======
+
+    	// return view('Home.article.article_index',['articles'=>$articles]);
+
         
         //获取标签信息
         $tags_order = Article_tags::orderBy('tag_num','desc')->get()->toArray();
@@ -42,12 +40,12 @@ class ArticleController extends Controller
                 $tags_arr['order'][] = $tags_order[$i];
             }
         }
-
+        // dd($count);die;  
     	return view('Home.article.article_index',[
             'articles' => $articles,
             'tags' => $tags_arr,
         ]);
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
     }
 
     /**
@@ -103,14 +101,14 @@ class ArticleController extends Controller
      */
     public function article_info($id)
     {
-<<<<<<< HEAD
+
     	$article = new Article;
     	$info = $article->where('id',$id)->first();
     	$tags = explode(',',$info['tag_id']);
     	$tags_name = Article_tags::whereIn('id',$tags)->lists('tag_name', 'id');
     	
     	return view('Home.article.article_info',['info'=>$info,'tags'=>$tags_name]);
-=======
+
         $article = new Article;
         $comment = new Article_comment;
         //获取文章详情
@@ -194,6 +192,6 @@ class ArticleController extends Controller
     public function tag_article($tag_id)
     {
         return view('Home.article.');
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
     }
 }

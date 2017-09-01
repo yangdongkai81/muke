@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
+
 <style type="text/css">
 	.cent{
 		 position:absolute;
@@ -12,8 +12,7 @@
 		border:3px dashed #000;
 	}
 </style>
-=======
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
 <meta charset="utf-8">
 <title>慕课网-程序员的梦工厂</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -104,7 +103,7 @@ var _cart_num = 0;
                     </a>
                     <div class="my-cart" id="js-my-cart"></div>
                 </li>
-<<<<<<< HEAD
+
                                
 					@if($id == 0)
 						<li class="header-signin">
@@ -194,13 +193,7 @@ var _cart_num = 0;
 				}
 			);
         </script>
-=======
-                                <li class="header-signin">
-                    <a href="{{url('login_index')}}" id="js-signin-btn">登录</a> / <a href="{{url('login_register')}}" id="js-signup-btn">注册</a>
-                </li>
-                            </ul>
-        </div>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
                 <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
                             <div class="pa searchTags" >
                                     <a href="http://class.imooc.com/sc/20" target="_blank">前端入门</a>

@@ -3,7 +3,7 @@
     <!DOCTYPE html>
     <html>
     <head>
-<<<<<<< HEAD
+
     <style type="text/css">
     .cent{
          position:absolute;
@@ -13,8 +13,7 @@
     }
 </style>
 
-=======
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
         <meta charset="utf-8">
         <title>@yield('title')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -73,11 +72,7 @@
 
     <div id="header">
         <div class="page-container" id="nav"  >
-<<<<<<< HEAD
             <div id="logo" class="logo"><a href="{{url('index_index')}}" target="_self" class="hide-text" title="首页">慕课网</a></div>
-=======
-            <div id="logo" class="logo"><a href="index" target="_self" class="hide-text" title="首页">慕课网</a></div>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 
 
             <button type="button" class="navbar-toggle visible-xs-block js-show-menu" >
@@ -93,11 +88,7 @@
                     <a href="charge_index" target="_self">实战</a>
                 </li>
                 <li><a href="wenda_index" class="active" target="_self">猿问</a></li>
-<<<<<<< HEAD
-                <li><a href="article_index"  target="_self">手记</a></li>
-=======
                 <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 
             </ul>
             <div id="login-area">
@@ -110,7 +101,7 @@
                         </a>
                         <div class="my-cart" id="js-my-cart"></div>
                     </li>
-<<<<<<< HEAD
+
                     @if(\Session::get('login_id') == 0)
                         <li class="header-signin">
                             <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>/ 
@@ -194,16 +185,8 @@
                 }
             );
         </script>
-=======
-                    <li class="header-signin">
-                        <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>
-                    </li>
-                    <li class="header-signup">
-                        <a href="login_register" id="js-signup-btn">注册</a>
-                    </li>
-                </ul>
-            </div>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+
+                   
             <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
                 <div class="pa searchTags" >
                     <a href="http://class.imooc.com/sc/20" target="_blank">前端入门</a>
