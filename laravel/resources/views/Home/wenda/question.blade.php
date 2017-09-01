@@ -21,7 +21,7 @@
 
 <div class="container clearfix">
 <form action="{{url('question_add')}}" method="post" enctype="multipart/form-data">
-    
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="l wenda-main">
       <div class="sucesspage">
         <h2 class="new-save-title">提问</h2>

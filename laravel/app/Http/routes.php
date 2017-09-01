@@ -45,6 +45,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
+        Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
+        Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
