@@ -35,6 +35,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('article_info/{id}','ArticleController@article_info');
         Route::get('article_comment_add','ArticleController@comment_add');
         Route::get('article_reply_add','ArticleController@reply_add');
+        Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
         Route::get("issue",['uses'=>'WendaController@Issue']);

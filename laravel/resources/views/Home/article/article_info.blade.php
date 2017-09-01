@@ -376,15 +376,15 @@
 
     //评论添加
     $('#js-submit').click(function(){
+        //获取评论内容 评论文章ID
         var content = $('#comment-ipt').val();
         var art_id = $(this).data('id');
-
+        //ajax请求添加评论
         $.ajax({
             url:"{{url('article_comment_add')}}",
             data:{content:content,art_id:art_id},
             success:function(res){
                 if(res == 1) {
-
                     var str = '<div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a href="/u/2467824/articles"><img src="http://img.mukewang.com/592d44280001ccab02000200-100-100.jpg" width="48"></a><a class="nick" href="/u/2467824/articles" target="_blank">Kian_</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>'+content+'</p><p></p><div class="comment-footer clearfix"><span class="agree-with l" data-commentid="39052" data-uid="2467824" data-username="Kian_"><b class="imv2-thumb_up" title="赞同"></b><em>0</em></span><span class="reply-btn" data-commentid="39052" data-uid="2467824" data-username="Kian_">回复</span><span class="feed-list-times r"> 刚刚</span></div></div></div><div class="reply-box"></div><div class="release-reply"><a href="/u/2346866/articles" class="user-head"><img src="http://img.mukewang.com/55f4ef3800018d1101000100-100-100.jpg" alt="qq_墨_27"></a><a href="/u/2346866/articles" class="nick">qq_墨_27</a><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div data-comment-uid="2467824" class="release-reply-btn">回复</div></div></div></div></div></div>'
                     $('#js-feedback-list').prepend(str);
                 }
