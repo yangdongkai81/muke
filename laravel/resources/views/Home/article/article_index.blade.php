@@ -83,7 +83,10 @@
 	
 	<h3 class="item-title">
 		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-			</h3>
+		@if($article->is_original == 1)
+			<span class="original">原创</span>
+		@endif	
+		</h3>
 	<!-- text -->
 	<div class="item-txt">
 		<div class="item-img l">
