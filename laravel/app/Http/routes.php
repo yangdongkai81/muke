@@ -65,6 +65,14 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/course_index',['uses'=>'CourseController@course_index']);
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
+         //积分商城前台路由设置
+        Route::any('integral_index', 'IntegralController@integral_index');
+        Route::any('fictitious', 'IntegralController@fictitious');
+        Route::any('entity', 'IntegralController@entity');
+        Route::any('details/{id}', 'IntegralController@details');
+        Route::any('exchange/{id}', 'IntegralController@exchange');
+        Route::any('exchange_do/{id}', 'IntegralController@exchange_do');
+        Route::any('order', 'IntegralController@order');
     });
 });
 
@@ -90,7 +98,13 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::get('/mold_void',['uses'=>'Admin_courseController@mold_void']);
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
-        
+        //积分商城后台路由设置
+      Route::any('/admin_integral/admin_add', 'Admin_integralController@admin_add');
+      Route::any('add_do', 'Admin_integralController@add_do');
+      Route::any('show', 'Admin_integralController@show');
+      Route::any('del', 'Admin_integralController@del');
+      Route::any('up', 'Admin_integralController@up');
+      Route::any('update', 'Admin_integralController@update');
     });
 });
 
@@ -98,6 +112,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+   
 });
 
 
