@@ -182,7 +182,10 @@ window._bd_share_config = {
             <div id="js-qa-comment-input" class="detail-comment-input js-msg-context clearfix">
                 <h3 class="answer-add-tip">添加回答</h3>
     <form action="{{url('answer_add')}}" method="post" enctype="multipart/form-data">         
+<<<<<<< HEAD
+=======
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
     <input type="hidden" name="questions_id" value="{{$data['id']}}">
     <div id='txtDiv' style='border:1px solid #cccccc; height:240px;'>
         <p>请输入内容...</p>
@@ -229,7 +232,10 @@ window._bd_share_config = {
             <!-- 回答数 -->
                                                 <div class="ans_num">8回答</div>
                                         <!-- 回答回复 start -->
+<<<<<<< HEAD
+=======
                             @foreach($arr as $val)
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
                             <div class="ques-answer ques-new-answer clearfix">
                     <!-- 已采纳标志 -->
                                     
@@ -248,7 +254,11 @@ window._bd_share_config = {
                         </div>
 
                         
+<<<<<<< HEAD
+                        <div class="answer-content rich-text aimgPreview"><p><br />网管，网管，网管</p></div>
+=======
                         <div class="answer-content rich-text aimgPreview"><p><br />{{$val['answer_content']}}</p></div>
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
                                                 <div class="ctrl-bar js-msg-context clearfix js-reply-tool hide">
                             <div class="detail-editor-btns r">
                                 <span class="qa-tips"></span>
@@ -259,9 +269,15 @@ window._bd_share_config = {
                         
                         <div class="ctrl-bar clearfix js-wenda-tool">
                         
+<<<<<<< HEAD
+                            <span class="agree-with " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em>11</em></span>
+
+                            <span class="oppose " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em>反对</em></span>
+=======
                             <span class="agree-with dianzan" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em class="emzan"></em></span>
 
                             <span class="oppose fandui" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em class="emfan">反对</em></span>
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
                             
                             
                                                                                         
@@ -300,7 +316,11 @@ window._bd_share_config = {
                     </div><!--.reply-con end-->
                     
                 </div>
+<<<<<<< HEAD
+            
+=======
             @endforeach
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
             <!-- 回答回复 end -->
             <div class="qa-comment-page">
                         </div>
@@ -397,6 +417,9 @@ window._bd_share_config = {
 
 @section('footer')
 @parent
+<<<<<<< HEAD
+@stop
+=======
 @stop
 <script type="text/javascript" src="../jquery.min.js"></script>
 <script type="text/javascript">
@@ -435,3 +458,4 @@ window._bd_share_config = {
         })
     })
 </script>
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af

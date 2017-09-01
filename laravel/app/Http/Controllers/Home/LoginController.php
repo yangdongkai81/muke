@@ -34,7 +34,12 @@ class LoginController extends Controller
             $user_pwd=DB::table('users')->where('email','=',$name,'and','pwd','=',$password)->first();
             if ($user_pwd) {
                 DB::table('users')->where('id',$user_pwd->id)->update(['add_time' => date("Y-m-d H:i:s")]);
+<<<<<<< HEAD
+                $res->session()->put(['login_id'=>$user_pwd->id,'email'=>$user_pwd->email]);
+                return redirect('index_index');
+=======
                 return redirect('charge_index');
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
             }else{
                 return view('pc.index.jump')->with([
                     'message'=>'密码错误',
@@ -68,7 +73,12 @@ class LoginController extends Controller
                          'end_time' => date('Y-m-d H:i:s'));
             $id = DB::table('users')->insertGetId($arr);
             if ($id) {
+<<<<<<< HEAD
+                $obj->session()->put(['login_id'=>$id,'email'=>$obj->email]);
+                return redirect('index_index');
+=======
                 return redirect('charge_index');
+>>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
             }else{
                 return view('pc.index.jump')->with([
                     'message'=>'注册失败',

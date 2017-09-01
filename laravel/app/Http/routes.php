@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,12 +29,14 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
         //手记模块
+
         Route::get('article_add','ArticleController@article_add');
         Route::post('article_insert','ArticleController@article_insert');
         Route::get('article_info/{id}','ArticleController@article_info');
         Route::get('article_comment_add','ArticleController@comment_add');
         Route::get('article_reply_add','ArticleController@reply_add');
         Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+
 
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
@@ -45,6 +46,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
+
         Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
         Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
 
@@ -66,11 +68,17 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
         Route::get('login_qq','LoginController@qqlogin');
+
+        //个人中心
+        Route::get('user_index/{login_id}','UserController@index');
+
+
         // Route::get('index','LoginController@qqlogin');
         //课程
         Route::get('/course_index',['uses'=>'CourseController@course_index']);
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
+
     });
 });
 
