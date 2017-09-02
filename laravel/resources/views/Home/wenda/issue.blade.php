@@ -21,12 +21,9 @@
                 <a class="js-quiz" href="{{url('wenda/question')}}">我要提问</a>
             </div>
             <div class="nav">
-<<<<<<< HEAD
                 <a href="/wenda">推荐</a>
-=======
                 <a href="{{url('wenda_index')}}">推荐</a>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
-                <a href="/wenda/new">最新</a>
+s                <a href="/wenda/new">最新</a>
                 <a href="/wenda/waitreply">等待回答</a>
                 <a href="/wenda/issue" class="active">话题</a>
 

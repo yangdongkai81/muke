@@ -1,21 +1,17 @@
 @extends('layouts/layouts')
 
 @section('header')
-<<<<<<< HEAD
 	@parent
 	<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
 	@section('title','手记')
-=======
     @parent
     <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
     @section('title','手记')
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 @stop
 
 
 @section('content')
 <div class="top-bg-warp">
-<<<<<<< HEAD
 	<div class="top-bg clearfix">
 		<div class="top-bg-left l">
 		 					  	<!-- 面包屑 -->
@@ -63,7 +59,6 @@
 				</div>
 						</div>
     	<div class="top-bg-right r">
-=======
     <div class="top-bg clearfix">
         <div class="top-bg-left l">
                                 <!-- 面包屑 -->
@@ -111,7 +106,6 @@
                 </div>
                         </div>
         <div class="top-bg-right r">
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
     <div class="detail-right"><!-- 右侧start -->
         <div class="recommend-info">
               <!-- 作者信息 -->
@@ -183,11 +177,8 @@
                 <!-- 手记目录end -->
     </div><!-- 右侧end -->
 </div>
-<<<<<<< HEAD
 	</div>
-=======
     </div>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 </div>
 
 <div class="opus-wrap clearfix" style="">
@@ -281,13 +272,10 @@
                 
             </div>
                 <div class="df-bottom clearfix">
-<<<<<<< HEAD
                     <input type="text" id="comment" placeholder="请输入..." style="width:440px;" class="ipt">
                     <button id="js-submit" class="btn btn-green r">评论</button>
-=======
                     <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
                 </div>
             </div>
 
@@ -305,9 +293,7 @@
         <div class="df-title" id="all_comments"><span class="comment-num"><i>1</i>条</span>评论</div>
         <div id="js-feedback-list-wrap" class="feedback-list">
             
-<<<<<<< HEAD
         <div id="js-feedback-list"><div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a href="/u/2467824/articles"><img src="http://img.mukewang.com/592d44280001ccab02000200-100-100.jpg" width="48"></a><a class="nick" href="/u/2467824/articles" target="_blank">Kian_</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>说句估计挨喷的话，w3c的编程练习明明是从freeCodeCamp上直接搬下来的</p><p></p><div class="comment-footer clearfix"><span class="agree-with l" data-commentid="39052" data-uid="2467824" data-username="Kian_"><b class="imv2-thumb_up" title="赞同"></b><em>0</em></span><span class="reply-btn" data-commentid="39052" data-uid="2467824" data-username="Kian_">回复</span><span class="feed-list-times r"> 17小时前</span></div></div></div><div class="reply-box"></div><div class="release-reply"><a href="/u/2346866/articles" class="user-head"><img src="http://img.mukewang.com/55f4ef3800018d1101000100-100-100.jpg" alt="qq_墨_27"></a><a href="/u/2346866/articles" class="nick">qq_墨_27</a><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div data-comment-uid="2467824" class="release-reply-btn">回复</div></div></div></div></div></div></div></div>
-=======
         <div id="js-feedback-list">
         @foreach($comments as $comment)
         <div class="comment-box">
@@ -375,7 +361,6 @@
         </div>
         @endforeach
         </div></div>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
         <!-- 分页页码  -->
         <div class="qa-comment-page" style="display: none;"></div>
     </div>
@@ -390,7 +375,6 @@
 @stop
 
 @section('footer')
-<<<<<<< HEAD
 	@parent
 <script src="../../js/jquery.min.js"></script>
 <script>
@@ -403,7 +387,6 @@
                 //d指的是window
                 (function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(window.sharetitle),'&appkey=2924220432','&pic=',e(window.shareUrl)].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent);
             }
-=======
     @parent
 <script src="../../js/jquery.min.js"></script>
 <script>
@@ -484,6 +467,5 @@
         (function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(window.sharetitle),'&appkey=2924220432','&pic=',e(window.shareUrl)].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent);
     }
 
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
 </script>
 @stop

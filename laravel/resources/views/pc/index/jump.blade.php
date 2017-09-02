@@ -9,7 +9,7 @@
         <style type="text/css">
             body{ margin:0; padding:0; background:#efefef; font-family:Georgia, Times, Verdana, Geneva, Arial, Helvetica, sans-serif; }
             div#mother{ margin:0 auto; width:943px; height:572px; position:relative; }
-            div#errorBox{ background: url(images/404_bg.png) no-repeat top left; width:943px; height:572px; margin:auto; }
+            div#errorBox{ background: url(/public/images/404_bg.png) no-repeat top left; width:943px; height:572px; margin:auto; }
             div#errorText{ color:#39351e; padding:146px 0 0 446px }
             div#errorText p{ width:303px; font-size:14px; line-height:26px; }
             div.link{ /*background:#f90;*/ height:50px; width:145px; float:left; }
@@ -34,7 +34,7 @@
                     </p>
 
                     <p>
-                        火星不太安全，我可以免费送你回地球
+                       <a href="{{url('order')}}">点击查看订单</a>
                     </p>
                 </div>
                 <a href="{{$url}}" title="首页">
@@ -49,7 +49,7 @@
                
        
 
-<script src="jquery.js"></script>
+<script src="/public/js/jquery.js"></script>
  <script type="text/javascript">
         $(function(){
             var url = "{{$url}}"

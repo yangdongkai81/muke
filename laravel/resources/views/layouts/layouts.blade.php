@@ -82,12 +82,12 @@
                 <li class="set-btn visible-xs-block"><a href="login_index" target="_self">登录</a> / <a href="login_register" target="_self">注册</a></li>
 
                 <li>
-                    <a href="course_index"  target="_self">课程</a>
+                    <a href="{{url('course_index')}}"  target="_self">课程</a>
                 </li>
                 <li>
-                    <a href="charge_index" target="_self">实战</a>
+                    <a href="{{url('charge_index')}}" target="_self">实战</a>
                 </li>
-                <li><a href="wenda_index" class="active" target="_self">猿问</a></li>
+                <li><a href="{{url('wenda_index')}}" class="active" target="_self">猿问</a></li>
                 <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
 
             </ul>
@@ -97,27 +97,27 @@
                         <a href="cart_index" class="shop-cart-icon" target="_blank">
                             <span class="icon-shopping-cart js-endcart"></span>
                             <span class="shopping_icon js-cart-num" data-ordernum="0"  data-cartnum="0" style='display: none'>0</span>
-                            <span>购物车</span>
+                            <span>购物</span>
                         </a>
                         <div class="my-cart" id="js-my-cart"></div>
                     </li>
 
                     @if(\Session::get('login_id') == 0)
+
                         <li class="header-signin">
-                            <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>/ 
-                            <a href="{{url('login_register')}}" id="js-signup-btn">注册</a> 
+                            <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>
                         </li>
                         </ul>
                     @else
                          <li class="header-signin">
                             <div class="item" style="width:300px;">
-                    <img src="images/404_bg.png" width="50px" height="50px"><span style="color:white;">邮箱:{{\Session::get('email')}}</span>
+                    <img src="/public/images/404_bg.png" width="50px" height="50px"><span style="color:white;">邮箱:{{\Session::get('email')}}</span>
                                     <div class="cent" >
                                         <div id="div1" class="cs" style="display:none;" style="height:300px; width:300px;">
                                             <div class="card-inner" style="height:300px; width:300px;">
                                                 <div class="card-top clearfix">
                                                        <a href="#" class="l">
-                                                            <img src="images/404_bg.png" width="100px" height="100px" alt="qq_腹黑_0">
+                                                            <img src="/public/images/404_bg.png" width="100px" height="100px" alt="qq_腹黑_0">
                                                        </a>
                                                        <div class="card-top-right-box l">
                                                               <br/>
@@ -174,7 +174,7 @@
                             
         </div>
         
-        <script src="jquery.js"></script>
+        <script src="/public/jquery.js"></script>
         <script type="text/javascript">         
             $(".item").hover(
                 function(){

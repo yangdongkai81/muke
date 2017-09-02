@@ -23,11 +23,8 @@
                 <a href="/wenda" class="active">推荐</a>
                 <a href="/wenda/new" >最新</a>
                 <a href="/wenda/waitreply" >等待回答</a>
-<<<<<<< HEAD
                 <a href="{{url('wenda/issue')}}" >话题</a>
-=======
                 <a href="{{url('issue')}}" >话题</a>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
                             </div><!--.nav end-->
 
             
@@ -335,7 +332,6 @@
         <a href="{{url('question_one')}}/{{$val['id']}}" class="ques-con-content" title="&amp;#24819;&amp;#33258;&amp;#23398;java&amp;#65292;&amp;#25214;&amp;#24037;&amp;#20316;&amp;#65292;&amp;#33021;&amp;#25214;&amp;#21040;&amp;#21527;&amp;#65292;&amp;#27714;&amp;#22823;&amp;#31070;&amp;#25351;&amp;#25945;">{{$val['questions_title']}}</a>
         
     </div>
-<<<<<<< HEAD
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
         <div class="user">
             
@@ -346,7 +342,6 @@
         <div class="ctrl-bar clearfix">
             <span class="agree-with " data-ques-id="356895" data-answer-id="259287" data-hasop=""><b>赞同</b><em>14</em></span>
             <span class="oppose " data-ques-id="356895" data-answer-id="259287" data-hasop=""><em>反对</em></span>
-=======
         @foreach ($newData as $v)
     @if($v['questions_id'] == $val['id'])
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
@@ -359,7 +354,6 @@
         <div class="ctrl-bar clearfix">
             <span class="agree-with dianzan" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><b>赞同</b><em class="emzan"></em></span>
             <span class="oppose fandui" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><em class="emfan">反对</em></span>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
             
             <div class="share-box clearfix">
                 <div class="show-btn">分享</div>
@@ -375,12 +369,9 @@
             <span class="shrink">收起</span>
         </div><!--.ctrl-bar end-->
     </div><!--.answer-con end-->
-<<<<<<< HEAD
-=======
     @endif
 
     @endforeach
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>
@@ -1027,9 +1018,7 @@
 
 @section('header')
 @parent
-<<<<<<< HEAD
 @stop
-=======
 @stop
 
 <script type="text/javascript" src="./jquery.min.js"></script>
@@ -1069,4 +1058,3 @@
         })
     })
 </script>
->>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
