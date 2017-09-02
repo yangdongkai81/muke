@@ -147,7 +147,7 @@ var _cart_num = 0;
 										        	    <i id="js-usercard-coupon-icon" style="display: none;"></i>
 										        	  </li>
 										        	     <li class="l">
-										        	       <a href="/mall/index" target="_blank">
+										        	       <a href="{{url('integral_index')}}" target="_blank">
 										        	      <span class="user-center-icon icon-score_shop"></span>积分商城
 										        	      </a>
 										        	     </li>
