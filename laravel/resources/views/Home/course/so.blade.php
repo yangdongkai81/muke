@@ -25,7 +25,11 @@
                             
                                                                                                         <li class="course-nav-item ">
                                    
-                                        <a href="{{url('course_so')}}/{{$v->id}}" data-ct="fe">{{$v->aspect_name}}</a>
+                                        <a href="{{url('course_so')}}/{{$v->id}}" data-ct="fe"><?php if ($v->id==$pid) {
+                                         echo "<span style='color:red'>".$v->aspect_name."</span>";
+                                        }else{
+                                         echo $v->aspect_name;   
+                                            }  ?></a>
                                     </li>
                                 <?php } ?>
                                    
@@ -45,7 +49,11 @@
                                 <?php foreach ($fen as $key => $v) {?> 
                                                                
                                 <li class="course-nav-item ">
-                                                            <a href="{{url('course_sofen')}}/{{$v->id}}">{{$v->aspect_name}}</a>
+                                                            <a href="{{url('course_sofen')}}/{{$v->id}}"><?php if ($v->id==$fid) {
+                                                               echo "<span style='color:red'>".$v->aspect_name."</span>";
+                                                            }else{
+                                                               echo $v->aspect_name;    
+                                                                } ?></a>
                                                         </li>
                                                 
                                <?php } ?>                                        
@@ -71,7 +79,11 @@
                                 </li>
                                 <?php foreach ($le as $key => $v) {?>
                                                               <li class="course-nav-item ">
-                                        <a href="{{url('course_sole')}}/{{$v->id}}">{{$v->mold_name}}</a>
+                                        <a href="{{url('course_sole')}}/{{$v->id}}"><?php  if ($v->id==$lx) {
+                                             echo "<span style='color:red'>".$v->mold_name."</span>";
+                                        }else{
+                                             echo $v->mold_name;   
+                                             } ?></a>
                                     </li>
                                 <?php  } ?> 
                                 

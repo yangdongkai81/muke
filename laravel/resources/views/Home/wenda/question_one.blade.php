@@ -181,7 +181,8 @@ window._bd_share_config = {
 
             <div id="js-qa-comment-input" class="detail-comment-input js-msg-context clearfix">
                 <h3 class="answer-add-tip">添加回答</h3>
-    <form action="{{url('answer_add')}}" method="post" enctype="multipart/form-data">         
+    <form action="{{url('answer_add')}}" method="post" enctype="multipart/form-data">   
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">      
     <input type="hidden" name="questions_id" value="{{$data['id']}}">
     <div id='txtDiv' style='border:1px solid #cccccc; height:240px;'>
         <p>请输入内容...</p>

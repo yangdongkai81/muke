@@ -100,9 +100,11 @@ class Admin_courseController extends Controller
      $row['direction'] = $arr[1];//方向
      $row['type'] = $res->type;
      $row['img'] = $path;
+     $row['price'] = $res->price;//价钱
+     $row['is_show'] = $res->is_show;//是否收费
      $in=DB::table('free_course')->insert($row);
      if ($in) {
-          echo "<script>alert('添加成功！');location.href=''</script>";
+          echo "<script>alert('添加成功！');location.href='mold_course'</script>";
        }
    }
   //生成章节页面
@@ -141,11 +143,15 @@ class Admin_courseController extends Controller
   }
   //视频添加
   public function add_void(request $res)
-  {
+  {  
+
+     $file = $res->file('upfile');
+     $exname=strtolower(substr($_FILES['upfile']['name'],(strrpos($_FILES['upfile']['name'],'.')+1)));
+     $voidurl = $this->getname($exname,$file);
      $row['title'] = $res->title;
      $row['chapter_id'] = $res->cid;
      $row['sort'] = $res->sort;
-     $row['video_path'] = '12313.mp4';
+     $row['video_path'] = $voidurl;
      $in = DB::table('free_attr')->insert($row);
      if ($in) {
           echo "<script>alert('添加成功！');location.href='mold_void'</script>";
@@ -168,6 +174,21 @@ class Admin_courseController extends Controller
    }
 
 
+  //视频上传
+   public function getname($exname,$file){
+       $dir = "uploads/";
+       $i=date("Y-m-d").rand(1000,9999);
+
+       if(!is_file($dir.$i.".".$exname)){
+            $name=$i.".".$exname;
+            
+          }
+
+       $uploadfile = $dir.$name;
+       $file->move($dir, $uploadfile);
+
+    return $name;
+  }
 
 
 

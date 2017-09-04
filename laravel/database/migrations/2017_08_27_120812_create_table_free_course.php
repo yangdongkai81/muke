@@ -24,6 +24,8 @@ class CreateTableFreeCourse extends Migration
             $table->integer('direction');
             $table->integer('type');
             $table->string('img',100);
+            $table->integer('price');
+            $table->integer('is_show');
         });
     }
 

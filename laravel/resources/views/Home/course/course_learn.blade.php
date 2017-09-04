@@ -30,8 +30,8 @@
         <div class="statics clearfix">
             
                         <div class="moco-btn l learn-btn green-btn red-btn"> 
-                <a href="http://www.imooc.com/code/49" class="J-learn-course">开始学习</a>
-                <em></em>
+
+               程序人生！
                 <i class="follow-action js-follow-action icon-star_outline" data-cid="9" data-cmd="follow" title="收藏"></i>
             </div>
                         
@@ -120,8 +120,7 @@
 	<ul class="course-menu clearfix">
 		<li><a class="ui-tabs-active active" id="learnOn" href="http://www.imooc.com/learn/9"><span>章节</span></a></li>
 		<li><a id="commentOn" class="" href="http://www.imooc.com/comment/9"><span>评论</span></a></li>
-		<li><a id="qaOn" class="" href="http://www.imooc.com/qa/9/t/1?page=1"><span>问答</span></a></li>
-		<li><a id="noteOn" class="" href="http://www.imooc.com/note/9?sort=last&amp;page=1"><span>笔记</span></a></li>
+		
 	    <!--
         <li><a id="wikiOn" class="" href="/wiki/9">WIKI</a></li>
         -->
@@ -218,7 +217,7 @@
                 success: function(msg){
                   str='';
                   $(msg).each(function(k,v){
-                       str+='<li><a href="id='+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
+                       str+='<li><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
                   })
                 $(".video"+id).html(str)
                 }

@@ -65,6 +65,10 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/course_index',['uses'=>'CourseController@course_index']);
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
+        Route::get('/course_bo/{id?}',['uses'=>'CourseController@course_bo']);
+        Route::get('/course_so/{id?}',['uses'=>'CourseController@course_so']);
+        Route::get('/course_sofen/{id?}',['uses'=>'CourseController@course_sofen']);
+        Route::get('/course_sole/{id?}',['uses'=>'CourseController@course_sole']);
     });
 });
 

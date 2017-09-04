@@ -53,7 +53,7 @@ class WendaController extends Controller
 		$wenda->questions_statrt = 0;
 		$info = $wenda->save();
 		if ($info) {
-			echo "添加成功";	
+			return redirect("wenda_index");	
 		} else { 
 			echo "添加失败";
 		}
@@ -88,7 +88,7 @@ class WendaController extends Controller
         $answer->answer_img = $path;
        	$info =  $answer->save();
         if ($info) {
-			echo "添加成功";	
+			return redirect("wenda_index");	
 		} else { 
 			echo "添加失败";
 		}
