@@ -48,6 +48,10 @@
             <li><a href="admin_charge_type" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
             <li><a href="admin_charge_direction" target="right"><span class="icon-caret-right"></span>课程方向管理</a></li>
         </ul> 
+  <h2><span class="icon-pencil-square-o"></span>手记管理</h2>
+        <ul>
+            <li><a href="{{ url('article_manage') }}" target="right"><span class="icon-caret-right"></span>手记文章管理</a></li>
+        </ul> 
 </div>
 <script type="text/javascript">
 $(function(){
