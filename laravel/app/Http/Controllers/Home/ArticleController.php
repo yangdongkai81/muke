@@ -101,14 +101,6 @@ class ArticleController extends Controller
      */
     public function article_info($id)
     {
-
-    	$article = new Article;
-    	$info = $article->where('id',$id)->first();
-    	$tags = explode(',',$info['tag_id']);
-    	$tags_name = Article_tags::whereIn('id',$tags)->lists('tag_name', 'id');
-    	
-    	return view('Home.article.article_info',['info'=>$info,'tags'=>$tags_name]);
-
         $article = new Article;
         $comment = new Article_comment;
         //获取文章详情
@@ -123,6 +115,7 @@ class ArticleController extends Controller
 
         $c_id = array_column($comments_arr, 'id');
         $comments_arr = array_combine($c_id, $comments_arr);
+
         //获取回复内容
         $replies = Article_replies::whereIn('comment_id',$c_id)->get();
         $replies_arr = $replies->toArray();
