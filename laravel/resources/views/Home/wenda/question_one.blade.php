@@ -403,7 +403,6 @@ window._bd_share_config = {
 @section('footer')
 @parent
 @stop
-@stop
 <script type="text/javascript" src="../jquery.min.js"></script>
 <script type="text/javascript">
     $(document).on("click",".dianzan",function(){

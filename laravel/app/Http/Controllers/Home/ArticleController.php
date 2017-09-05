@@ -112,14 +112,12 @@ class ArticleController extends Controller
         //获取评论信息
         $comments = $comment->where('art_id',$id)->get();
         $comments_arr = $comments->toArray();
-
+        
         $c_id = array_column($comments_arr, 'id');
         $comments_arr = array_combine($c_id, $comments_arr);
-
         //获取回复内容
         $replies = Article_replies::whereIn('comment_id',$c_id)->get();
         $replies_arr = $replies->toArray();
-        
         // dd($replies_arr); return ;
         foreach ($replies_arr as $key => $value) {
             foreach ($comments_arr as $k => $v) {

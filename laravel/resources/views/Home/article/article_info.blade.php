@@ -1,9 +1,9 @@
 @extends('layouts/layouts')
 
 @section('header')
-	@parent
-	<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
-	@section('title','手记')
+    @parent
+    <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
+    @section('title','手记')
 @stop
 
 
@@ -324,6 +324,19 @@
 
 @section('footer')
 	@parent
+<script src="../../js/jquery.min.js"></script>
+<script>
+	$('#blog').click(function(){
+                window.sharetitle = "#{{ $info->title }}#";//标题
+                window.shareUrl = '';//缩略图
+                share();
+            });
+            function share(){
+                //d指的是window
+                (function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(window.sharetitle),'&appkey=2924220432','&pic=',e(window.shareUrl)].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent);
+            }
+    @parent
+<script src="../../js/jquery.min.js"></script>
 <script>
     var reply_type = 0;
     //点击回复

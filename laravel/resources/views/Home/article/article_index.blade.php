@@ -24,7 +24,6 @@
 </div>
 <div class="article-ad-wrap clearfix">
 <div class="article-ad-img l">
-
 <a href="{{url('article_info/9')}}" class="article-ad-info" data-ast="wenzhangindex_1_261" target="_blank"></a>													
 <a class="article-ad-txt" title="二分查找--那个隐藏了10年的Java Bug" data-ast="wenzhangindex_1_261" href="{{url('article_info/9')}}" target="_blank">
 
@@ -98,13 +97,12 @@
 	
 	<h3 class="item-title">
 		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-
-			</h3>
-
-		@if($article->is_original == 1)
+@if($article->is_original == 1)
 			<span class="original">原创</span>
 		@endif	
-		</h3>
+			</h3>
+
+		
 
 	<!-- text -->
 	<div class="item-txt">
@@ -167,7 +165,6 @@
 </li>
 </ul>
 </div>
-
 <div class="tag-vane">
 <h2 class="panel-hd tag-hd">标签风向标</h2>
 <div class="tag-bd" id="tag-vane">

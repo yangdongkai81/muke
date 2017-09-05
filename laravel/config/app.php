@@ -126,6 +126,7 @@ return [
          * Laravel Framework Service Providers...
          */
         //第三方
+       
         SocialiteProviders\Manager\ServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -203,6 +204,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+       
 
     ],
 

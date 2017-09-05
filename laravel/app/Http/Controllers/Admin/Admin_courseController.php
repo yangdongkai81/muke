@@ -102,7 +102,7 @@ class Admin_courseController extends Controller
      $row['img'] = $path;
      $in=DB::table('free_course')->insert($row);
      if ($in) {
-          echo "<script>alert('添加成功！');location.href=''</script>";
+          echo "<script>alert('添加成功！');location.href='mold_course'</script>";
        }
    }
   //生成章节页面

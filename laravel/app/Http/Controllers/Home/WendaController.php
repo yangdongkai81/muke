@@ -24,7 +24,8 @@ class WendaController extends Controller
 			$res = $aspect->where('id',$ser)->firstOrFail();
 			$value['questions_type'] = $res['aspect_name'];
 		}
-		return view("home.wenda.index",['data'=>$data]);
+		//return view("home.wenda.index",['data'=>$data]);
+		$newData = [];
 		$arr = $answer->get();
 		foreach ($arr as $key => $value) {
 			foreach ($data as $k => $v) {
@@ -33,6 +34,7 @@ class WendaController extends Controller
 				}
 			}
 		}
+		//dd($newData);die;
 		return view("home.wenda.index",['data'=>$data,'newData' => $newData]);
 	}
 	public function Issue()
@@ -81,7 +83,6 @@ class WendaController extends Controller
 	{
 		$wenda = new Wenda;
 		$data = $wenda->where('id', $request->id)->firstOrFail();
-		return view('home.wenda.question_one',['data'=>$data]);
 		$answer = new Answer;
 		$data = $wenda->where('id', $request->id)->first();
 		$arr = $answer->where('questions_id',$data['id'])->get();
@@ -107,11 +108,12 @@ class WendaController extends Controller
        	$info =  $answer->save();
         if ($info) {
 			echo "添加成功";	
-        $wenda->where('id','=',$request->questions_id)->update(['questions_statrt' => 1]);
-        if ($info) {
-			return redirect("wenda_index");	
-		} else { 
-			echo "添加失败";
+	        $wenda->where('id','=',$request->questions_id)->update(['questions_statrt' => 1]);
+	        if ($info) {
+				return redirect("wenda_index");	
+			} else { 
+				echo "添加失败";
+			}
 		}
 	}
 	public function Answer_Zan(Request $request)
@@ -186,4 +188,5 @@ class WendaController extends Controller
 			echo "0";
 		}
 	}
+
 }
