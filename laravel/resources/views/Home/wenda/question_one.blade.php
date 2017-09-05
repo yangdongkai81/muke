@@ -259,10 +259,6 @@ window._bd_share_config = {
                         </div>
                         
                         <div class="ctrl-bar clearfix js-wenda-tool">
-                        
-                            <span class="agree-with " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em>11</em></span>
-
-                            <span class="oppose " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em>反对</em></span>
                             <span class="agree-with dianzan" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em class="emzan"></em></span>
 
                             <span class="oppose fandui" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em class="emfan">反对</em></span>
@@ -402,7 +398,6 @@ window._bd_share_config = {
 
 @section('footer')
 @parent
-@stop
 @stop
 <script type="text/javascript" src="../jquery.min.js"></script>
 <script type="text/javascript">

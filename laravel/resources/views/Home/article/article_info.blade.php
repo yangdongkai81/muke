@@ -4,62 +4,12 @@
 	@parent
 	<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
 	@section('title','手记')
-    @parent
-    <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
-    @section('title','手记')
 @stop
 
 
 @section('content')
 <div class="top-bg-warp">
 	<div class="top-bg clearfix">
-		<div class="top-bg-left l">
-		 					  	<!-- 面包屑 -->
-			    <div class="detail-path">
-			        <a href="/article">手记</a> \ <span>{{ $info->title }}</span>
-			    </div>
-			    <!-- 面包屑end -->
-		 		   
-			    <div class="detail-title-wrap">
-			        <h1 class="detail-title">
-			        <span class="d-t">{{ $info->title }}</span>
-			        			        </h1>
-			        <div class="dc-addon clearfix">
-			            <div class="dc-profile clearfix">
-			                <span class="spacer l">{{ date('Y-m-d H:s:i',$info->add_time) }}</span>
-			                <span class="spacer l spacer-2">{{ $info->browser }}浏览</span>
-			                <a class="spacer l" href="#comment">1评论</a>
-			                <div class="share-list l">
-			                	<span class="shareto">分享到</span>
-	                            <div class="share-icon-list bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1504062771088">
-	                               
-	                                <div class="icon-warp">
-	                                    <a id="blog" class="bds_tsina icon-nav icon-share-weibo share-icon" data-cmd="tsina" title="分享到新浪微博"></a>
-	                                </div>             
-	                            </div>
-                                
-			                </div>
-							<div class="r rinfo">
-												                    
-				                        				                				                <div class="font-info">			                	
-					                <a class="font-warp">
-					                	<span class="size-show">小字号</span>
-					                	<span class="op-icon icon-drop_down"></span>
-					                	<ul class="hide font-box-s clearfix">
-					                		<li data-size-f="big-size-f" class="b-z">大字</li>
-					                		<li data-size-f="md-size-f" class="m-z">中字</li>
-					                		<li data-size-f="sm-size-f" class="s-z">小字</li>
-					                	</ul>
-					                </a>
-				                </div>
-							</div>			              
-			                
-			            </div>
-			        </div>
-				</div>
-						</div>
-    	<div class="top-bg-right r">
-    <div class="top-bg clearfix">
         <div class="top-bg-left l">
                                 <!-- 面包屑 -->
                 <div class="detail-path">
@@ -272,8 +222,6 @@
                 
             </div>
                 <div class="df-bottom clearfix">
-                    <input type="text" id="comment" placeholder="请输入..." style="width:440px;" class="ipt">
-                    <button id="js-submit" class="btn btn-green r">评论</button>
                     <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
                 </div>
@@ -376,19 +324,6 @@
 
 @section('footer')
 	@parent
-<script src="../../js/jquery.min.js"></script>
-<script>
-	$('#blog').click(function(){
-                window.sharetitle = "#{{ $info->title }}#";//标题
-                window.shareUrl = '';//缩略图
-                share();
-            });
-            function share(){
-                //d指的是window
-                (function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(window.sharetitle),'&appkey=2924220432','&pic=',e(window.shareUrl)].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent);
-            }
-    @parent
-<script src="../../js/jquery.min.js"></script>
 <script>
     var reply_type = 0;
     //点击回复

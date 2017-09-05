@@ -64,6 +64,7 @@
 	    </div>
 	</div>
       <!-- 选择标签 -->
+      @if(isset($tags))
       <div class="form-group tag-selector">
           <span class="needed">*</span>
           <div class="tag-selector-wrap">
@@ -77,7 +78,7 @@
 			<p class="form-ipt-error"></p>
           </div><!-- tag-selector-wrap end -->
       </div><!-- tag-selector end -->
-
+      @endif
 
         <!-- 发布 -->
         <div class="form-group form-bottom" style="margin-bottom:50px;">

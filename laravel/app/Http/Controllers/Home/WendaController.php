@@ -8,6 +8,7 @@ use App\Models\Aspect;
 use App\Models\Answer;
 use App\Models\Answer_Zan;
 use App\Models\Answer_Fan;
+use App\Models\Answer_Attitude;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -81,7 +82,7 @@ class WendaController extends Controller
 	{
 		$wenda = new Wenda;
 		$data = $wenda->where('id', $request->id)->firstOrFail();
-		return view('home.wenda.question_one',['data'=>$data]);
+		//return view('home.wenda.question_one',['data'=>$data]);
 		$answer = new Answer;
 		$data = $wenda->where('id', $request->id)->first();
 		$arr = $answer->where('questions_id',$data['id'])->get();
