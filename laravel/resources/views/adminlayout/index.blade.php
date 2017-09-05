@@ -1,3 +1,12 @@
+
+
+
+@section('content')
+    <center>
+        <h2 style="color:red">欢迎来到后台！！！</h2>
+    </center>
+@endsection
+
 @section('top')
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -18,7 +27,6 @@
   </div>
   <div class="head-l"><a class="button button-little bg-green" href="" target="_blank"><span class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span> 清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="login.html"><span class="icon-power-off"></span> 退出登录</a> </div>
 </div>
-
 <div class="leftnav">
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
   <h2><span class="icon-user"></span>基本设置</h2>
@@ -64,6 +72,7 @@ $(function(){
   <div scrolling="auto" rameborder="0" src="" name="right" width="100%" height="100%">
 @show
 @yield('content') 
+
 @section('foot')
   </div>
 </div>
@@ -71,3 +80,5 @@ $(function(){
 </body>
 </html>
 @show
+
+

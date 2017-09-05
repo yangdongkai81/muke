@@ -24,6 +24,7 @@
                 <a href="/wenda/new" >最新</a>
                 <a href="/wenda/waitreply" >等待回答</a>
                 <a href="{{url('wenda/issue')}}" >话题</a>
+                <a href="{{url('issue')}}" >话题</a>
                             </div><!--.nav end-->
 
             
@@ -331,16 +332,18 @@
         <a href="{{url('question_one')}}/{{$val['id']}}" class="ques-con-content" title="&amp;#24819;&amp;#33258;&amp;#23398;java&amp;#65292;&amp;#25214;&amp;#24037;&amp;#20316;&amp;#65292;&amp;#33021;&amp;#25214;&amp;#21040;&amp;#21527;&amp;#65292;&amp;#27714;&amp;#22823;&amp;#31070;&amp;#25351;&amp;#25945;">{{$val['questions_title']}}</a>
         
     </div>
+        @foreach ($newData as $v)
+    @if($v['questions_id'] == $val['id'])
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
         <div class="user">
             
-                        <a href="/u/2231782/bbs" target="_blank">胜利女神在微笑</a><span class="signature">回答：</span>
+                        <a href="/u/2231782/bbs" target="_blank">{{$v['answer_user_id']}}</a><span class="signature">回答：</span>
         </div>
-        <div class="answer-content">能,主要看你跟面试官聊得如何,聊得好要50K,聊得不好要5K,切记!</div>
+        <div class="answer-content">{{$v['answer_content']}}</div>
         <div class="answer-content-all rich-text aimgPreview"><p>能,主要看你跟面试官聊得如何,聊得好要50K,聊得不好要5K,切记!</p></div>
         <div class="ctrl-bar clearfix">
-            <span class="agree-with " data-ques-id="356895" data-answer-id="259287" data-hasop=""><b>赞同</b><em>14</em></span>
-            <span class="oppose " data-ques-id="356895" data-answer-id="259287" data-hasop=""><em>反对</em></span>
+            <span class="agree-with dianzan" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><b>赞同</b><em class="emzan"></em></span>
+            <span class="oppose fandui" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><em class="emfan">反对</em></span>
             
             <div class="share-box clearfix">
                 <div class="show-btn">分享</div>
@@ -353,9 +356,14 @@
                 </div>
             </div>
 
+
             <span class="shrink">收起</span>
         </div><!--.ctrl-bar end-->
     </div><!--.answer-con end-->
+    @endif
+
+
+    @endforeach
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>
@@ -374,6 +382,7 @@
                 <div class="reply-content">显示本次终端运行路线，或者其他命令可以做我送来的数据，在地图上显示本次终端运行路线，或者其他命令可以做我需要在安卓终端上做个软件。</div>
                 <div class="reply-btn">回复</div>
             </li>-->
+
 
         </ul><!--.reply-list end-->
         <!--<div class="more-reply">点击展开后面<span>2</span>条评论</div>-->
@@ -1003,3 +1012,42 @@
 @section('header')
 @parent
 @stop
+
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).on("click",".dianzan",function(){
+        var id = $(this).prop('id');
+        var obj = $(this);
+        //alert(id);return false;
+        $.ajax({
+            url:"{{url('answer_zan')}}",
+            data:{id:id},
+            dataType:"json",
+            type:'get',
+            success:function(msg){
+                //alert(msg);
+                obj.find('.emzan').html(msg);
+            }
+        })
+    })
+    $(document).on("click",".fandui",function(){
+        var id = $(this).prop('id');
+        var obj = $(this);
+        //alert(id);return false;
+        $.ajax({
+            url:"{{url('answer_fan')}}",
+            data:{id:id},
+            dataType:"json",
+            type:'get',
+            success:function(msg){
+                if (msg == 1) {
+                    obj.find('.emfan').html("已反对");
+                } else if(msg == 0) {
+                    obj.find('.emfan').html("反对");
+                } else {
+                    alert('系统错误');
+                }
+            }
+        })
+    })
+</script>

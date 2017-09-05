@@ -12,6 +12,21 @@ class IndexController extends Controller
 {
 	public function index()
 	{
-		return view('index/index');
+
+		if(Session::get('login_id')){
+			$login_id = Session::get('login_id');
+			//通过session获取login_id查users表所对应的用户信息
+			$users = DB::table('users')->where('id','=',$login_id)->first();
+			return view('index/index')->with([
+				'id'=>$login_id,
+				'email'=>$users->email,
+				]);
+		}else{
+			return view('index/index')->with([
+				'id'=>0,
+				]);
+		}
+
+
 	}
 }

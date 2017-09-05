@@ -3,6 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style type="text/css">
+	.cent{
+		 position:absolute;
+		z-index:20;
+		background-color:white;
+		border:3px dashed #000;
+	}
+</style>
+
 <meta charset="utf-8">
 <title>慕课网-程序员的梦工厂</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -93,11 +103,97 @@ var _cart_num = 0;
                     </a>
                     <div class="my-cart" id="js-my-cart"></div>
                 </li>
-                                <li class="header-signin">
-                    <a href="{{url('login_index')}}" id="js-signin-btn">登录</a> / <a href="{{url('login_register')}}" id="js-signup-btn">注册</a>
-                </li>
-                            </ul>
+
+                               
+					@if($id == 0)
+						<li class="header-signin">
+		                    <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>/ 
+		                    <a href="{{url('login_register')}}" id="js-signup-btn">注册</a> 
+	                    </li>
+	                    </ul>
+                    @else
+                    	 <li class="header-signin">
+                    	 	<div class="item">
+	                    		<img src="images/404_bg.png" width="50px" height="50px">                   		
+	                    		邮箱<a href="#" style="" id="js-signup-btn">{{$email}}</a> 
+									<div class="cent">
+		                                <div id="div1" class="cs" style="display:none;">
+								        	<div class="card-inner">
+										        <div class="card-top clearfix">
+										        	   <a href="#" class="l">
+										        	    	<img src="images/404_bg.png" width="100px" height="100px" alt="qq_腹黑_0">
+										        	   </a>
+											           <div class="card-top-right-box l">
+												        	  <br/>
+												        	  <div class="meta">
+												        	  	  <a href="/u/5506882"><span class="name text-ellipsis">{{$email}}</span></a>
+												        	  	  <br/>
+													        	  <a href="/u/5506882/experience">经验<b id="js-user-mp">240</b></a> 
+													        	  <a href="/u/5506882/credit">积分<b id="js-user-credit">0</b></a>
+												        	  </div> 
+											           </div>
+										        </div>
+										        <div class="user-center-box">
+										        	<ul class="clearfix">
+										        	  <li class="l">
+										        	   	<a href="/u/5506882/courses" target="_blank">
+										        	   	  <span class="user-center-icon icon-tick"></span>我的课程
+										        	   	</a>
+										        	  </li>
+										        	  <li class="l"> 
+										        	    <a href="http://order.imooc.com/myorder" target="_blank">
+										        	      <span class="user-center-icon icon-receipt"></span>订单中心
+										        	    </a>
+										        	    <i id="js-usercard-coupon-icon" style="display: none;"></i>
+										        	  </li>
+										        	     <li class="l">
+										        	       <a href="{{url('integral_index')}}" target="_blank">
+										        	      <span class="user-center-icon icon-score_shop"></span>积分商城
+										        	      </a>
+										        	     </li>
+										        	  <li class="l">
+										        	      <a href="/user/setbindsns" target="_blank">
+										        	      <span class="user-center-icon icon-set"></span>个人设置
+										        	      </a></li> 
+										        	 </ul>                        
+										        </div>
+										        <div class="card-history">
+											        <span class="history-item">
+											        <span class="tit text-ellipsis" style="color:green">性能优化之MySQL优化</span>
+										        	   <span class="media-name text-ellipsis" style="color:green">3-3索引维护的方法</span>
+										        	   <i class="icon-clock"></i> <a href="http://www.imooc.com/video/3999" class="continue" title="索引维护的方法3-3索引维护的方法">继续</a>
+														</span></div>
+														<div class="card-sets clearfix">
+														<a href="/passport/user/logout?referer=http://www.imooc.com" class="r">安全退出</a>
+														</div>                    
+											</div>
+							        	</div> 
+							        </div>
+					        </div> 
+                    		
+                    		        		
+	                    </li>
+						</ul>
+
+                    @endif
+
+               
+                            
+                            
         </div>
+        
+        <script src="jquery.js"></script>
+        <script type="text/javascript">       	
+        	$(".item").hover(
+				function(){
+					$("#div1").show("fast");			
+				},
+				function(){
+					$("#div1").hide("fast");
+				}
+			);
+        </script>
+
                 <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
                             <div class="pa searchTags" >
                                     <a href="http://class.imooc.com/sc/20" target="_blank">前端入门</a>
