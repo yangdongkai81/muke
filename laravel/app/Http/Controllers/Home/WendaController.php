@@ -24,7 +24,7 @@ class WendaController extends Controller
 			$res = $aspect->where('id',$ser)->firstOrFail();
 			$value['questions_type'] = $res['aspect_name'];
 		}
-		return view("home.wenda.index",['data'=>$data]);
+		//return view("home.wenda.index",['data'=>$data]);
 		$arr = $answer->get();
 		foreach ($arr as $key => $value) {
 			foreach ($data as $k => $v) {
@@ -107,11 +107,12 @@ class WendaController extends Controller
        	$info =  $answer->save();
         if ($info) {
 			echo "添加成功";	
-        $wenda->where('id','=',$request->questions_id)->update(['questions_statrt' => 1]);
-        if ($info) {
-			return redirect("wenda_index");	
-		} else { 
-			echo "添加失败";
+	        $wenda->where('id','=',$request->questions_id)->update(['questions_statrt' => 1]);
+	        if ($info) {
+				return redirect("wenda_index");	
+			} else { 
+				echo "添加失败";
+			}
 		}
 	}
 	public function Answer_Zan(Request $request)
