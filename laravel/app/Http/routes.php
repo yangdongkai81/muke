@@ -124,6 +124,7 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('del', 'Admin_integralController@del');
       Route::any('up', 'Admin_integralController@up');
       Route::any('update', 'Admin_integralController@update');
+
      //后台登录
       Route::any('admin_index', 'Admin_loginController@admin_index');
       Route::any('login_do', 'Admin_loginController@login_do');
@@ -138,6 +139,7 @@ Route::group(['namespace' => 'Admin'], function(){
         return response($builder->output())->header('Content-type','image/jpeg');
          
       });
+
       //手记文章后台管理
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');

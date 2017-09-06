@@ -25,8 +25,13 @@ class WendaController extends Controller
 			$res = $aspect->where('id',$ser)->firstOrFail();
 			$value['questions_type'] = $res['aspect_name'];
 		}
+<<<<<<< HEAD
+		//dd($data);die;
+=======
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
 		//return view("home.wenda.index",['data'=>$data]);
 		$arr = $answer->get();
+		// print_r($arr);die;
 		foreach ($arr as $key => $value) {
 			foreach ($data as $k => $v) {
 				if ($value['questions_id'] == $v['id']) {
@@ -34,6 +39,7 @@ class WendaController extends Controller
 				}
 			}
 		}
+		//print_r($newData);die;
 		return view("home.wenda.index",['data'=>$data,'newData' => $newData]);
 	}
 	public function Issue()
