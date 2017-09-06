@@ -20,6 +20,7 @@ class CreateTableFreeComment extends Migration
             $table->integer('add_time');
             $table->integer('status');
             $table->integer('is_name');
+            $table->integer('zhang_id');
         });
     }
 

@@ -111,8 +111,10 @@
     <ul><li><a href="http://www.imooc.com/article/20170?block_id=tuijian_wz" target="_blank">PHP核心技术与最佳实践  - PHP 面向对象思想的理解</a></li><li><a href="http://www.imooc.com/article/20167?block_id=tuijian_wz" target="_blank">PHP不使用phpexcel导出</a></li><li><a href="http://www.imooc.com/article/20166?block_id=tuijian_wz" target="_blank">sqlmap的使用（检测SQL注入的漏洞）以及防护SQL注入</a></li><li><a href="http://www.imooc.com/article/20165?block_id=tuijian_wz" target="_blank">二十二章 PHP超链接（RBAC）</a></li><li><a href="http://www.imooc.com/article/20158?block_id=tuijian_wz" target="_blank">MONGODB的运用场景！！</a></li></ul>
   </div>  </div>
 </div>
+<script src="/public/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
 
-
+</script>
 
 
 @endsection

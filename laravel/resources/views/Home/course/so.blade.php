@@ -21,10 +21,7 @@
                                     <a href="{{url('course_index')}}">全部</a>
                                 </li>
                                 <?php foreach ($fang as $k => $v) {?>
-                                 
-                            
-                                                                                                        <li class="course-nav-item ">
-                                   
+                        
                                         <a href="{{url('course_so')}}/{{$v->id}}" data-ct="fe"><?php if ($v->id==$pid) {
                                          echo "<span style='color:red'>".$v->aspect_name."</span>";
                                         }else{

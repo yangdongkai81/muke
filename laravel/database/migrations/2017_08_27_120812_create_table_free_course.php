@@ -14,7 +14,7 @@ class CreateTableFreeCourse extends Migration
     {
         Schema::create('free_course', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('course_name',30);
+            $table->string('course_name',30)->comment('课程名字');
             $table->integer('study');
             $table->float('score');
             $table->integer('admin_id');

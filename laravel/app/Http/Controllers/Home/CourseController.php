@@ -30,6 +30,10 @@ class CourseController extends Controller
      	$row['ke'] = DB::table('free_course')->get();
      	
         $row['zhang'] = DB::table('free_chapter')->where('curriculum_id',$id)->get();
+
+        $row['kid'] = $id;
+
+        $row['arr'] = DB::table('free_comment')->where('curriculum_id',$id)->get();
      
      	return view('Home.course.course_learn',$row);
      }
@@ -86,6 +90,21 @@ class CourseController extends Controller
         return view('Home.course.so',$row);
 
 
+     }
+     //2级页面发表评论
+     public function course_fa(request $res)
+     {
+        $row['curriculum_id'] = $res->kid;//课程ID
+        $row['user_desc'] = $res->content;
+        $row['add_time'] = time();
+        $row['user_id'] = 1;//模拟用户ID
+        $in = DB::table('free_comment')->insert($row);
+        if ($in) {
+            $arr = DB::select('SELECT  FROM_UNIXTIME(add_time, "%Y-%c-%d %h:%i:%s" ) as add_time,id,user_id,curriculum_id,user_desc,zhang_id,is_name,status  FROM  free_comment order by id desc');
+           echo json_encode($arr);
+        }else{
+            echo 2;
+        }
      }
 
 }

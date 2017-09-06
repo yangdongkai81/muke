@@ -69,6 +69,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/course_so/{id?}',['uses'=>'CourseController@course_so']);
         Route::get('/course_sofen/{id?}',['uses'=>'CourseController@course_sofen']);
         Route::get('/course_sole/{id?}',['uses'=>'CourseController@course_sole']);
+        Route::post('/course_fa',['uses'=>'CourseController@course_fa']);
+
     });
 });
 

@@ -8,6 +8,7 @@
 
 
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,course/common-less.css,course/view-less.css,course/learn-less.css,u/dynamic/home-less.css?v=201708281028" type="text/css" />
+
 @stop
 
 @section('content')
@@ -118,20 +119,20 @@
             <!-- 课程简介 end -->
             <div class="mod-tab-menu ">
 	<ul class="course-menu clearfix">
-		<li><a class="ui-tabs-active active" id="learnOn" href="http://www.imooc.com/learn/9"><span>章节</span></a></li>
-		<li><a id="commentOn" class="" href="http://www.imooc.com/comment/9"><span>评论</span></a></li>
+		<li><a class="ui-tabs-active active" id="learnOn" href="javascript:void(0)" ><span id="zhang">章节</span></a></li>
+		<li><a id="commentOn" class="" href="javascript:void(0)" ><span id="ping">评论</span></a></li>
 		
 	    <!--
         <li><a id="wikiOn" class="" href="/wiki/9">WIKI</a></li>
         -->
 	</ul>
-	
+	<input type="hidden" value="{{$kid}}" id="kid">
 </div><!-- 课程面板 -->
-     
+     <div id="sh" >
      <?php foreach ($zhang as $key => $v) {?>
 
             <!-- 课程章节 --> 
-            <div class="mod-chapters">
+            <div class="mod-chapters" >
                                         <div class="chapter chapter-active">
                     <!-- 章节标题 -->
        
@@ -163,6 +164,54 @@
                                     </div> 
      <?php } ?>   
             <!-- 课程章节 end -->
+     </div>
+    <!-- 评论开始   --> 
+     <div style="display:none" id="pi">
+            <div class="publish-wrap publish-wrap-pl">
+                <div class="pl-input-wrap clearfix">
+                 
+                    <div id="js-pl-input-fake" class="pl-input-inner l">
+                       <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"  style="width:800px;height:100px; border:solid 1px #00AA00; resize:none;"></textarea>
+                      
+                    </div>
+                    <div class="pl-input-btm input-btm clearfix">
+                        <div class="verify-code l"></div>
+                      
+             <button style="width: 140px; cursor: pointer;
+line-height: 38px;
+text-align: center;
+font-weight: bold;
+color: #00000;
+text-shadow:1px 1px 1px #3333;
+border-radius: 5px;
+margin:0 20px 20px 0;
+position: relative;
+overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
+                    </div>
+                </div>
+
+            </div>
+       <br/>
+        <div id="plLoadListData">
+           <div class="pl-container">
+              <ul id="yan"> 
+            <?php foreach ($arr as $key => $v) {?>  
+           
+                   <li class="pl-list clearfix" style=" border-bottom:2px #DDDDDD solid;">
+                        <div class="pl-list-main"> 
+                                 <a href="#" target="_blank" ><?=$v->user_id?></a>
+                                 <div class="pl-list-content"><?=$v->user_desc?></div>  
+                                 <div class="pl-list-btm clearfix">
+                                      <span class="pl-list-time l">时间:<?=$v->add_time?></span>
+                                 </div> 
+                        </div> 
+                   </li> 
+            <?php  } ?>
+              </ul>
+           </div>
+        </div>
+    </div>
+    <!-- 评论结束 -->
         </div><!--content end-->
         <div class="aside r">
             <div class="bd">
@@ -223,4 +272,51 @@
                 }
         });
     })
+
+ $("#zhang").live('click',function(){
+    $("#sh").show();
+    $("#pi").hide();
+ })
+
+ $("#ping").live('click',function(){
+    $("#pi").show();
+    $("#sh").hide();
+ })
+ $("#fa").live('click',function(){
+    var html = $("#js-pl-textarea").val();
+    var kid = $("#kid").val();
+    var _token=$("input[name='_token']").val();
+        $.ajax({
+                type: "POST",
+                url: "{{url('course_fa')}}",
+                data: "content="+html+"&kid="+kid+"&_token="+_token,
+                dataType:"json",
+                success: function(msg){
+                    if (msg==2) {
+                        alert('发表失败！');
+                    }else{
+                        str='';
+                        $.each(msg,function(k,v){
+                           str+='<li class="pl-list clearfix" style=" border-bottom:2px #DDDDDD solid;">';
+                           str+='<div class="pl-list-main"><a href="#" target="_blank" >发言者：'+v.user_id+'</a>';
+                           str+='<div class="pl-list-content">'+v.user_desc+'</div>';
+                           str+='<div class="pl-list-btm clearfix"><span class="pl-list-time l">时间：'+v.add_time+'</span>';
+                           str+='</div></div></li>';
+                        })
+                        $('#yan').html(str);
+                        $("#js-pl-textarea").val('');
+                    }
+                }
+        });
+
+ })
 </script>
+
+                         
+                                 
+                                   
+                                 
+                                      
+                                 
+                         
+                    
