@@ -24,7 +24,7 @@ class CreateArticleTable extends Migration
             $table->tinyInteger('tag_id')->comment('标签ID');
             $table->integer('browser')->default(0)->comment('浏览量');
             $table->integer('add_time')->comment('发布时间');
-            $table->integer('comment_num')->default(0)->comment('评论数');
+            $table->integer('comments_num')->default(0)->comment('评论数');
             $table->integer('collection_num')->default(0)->comment('推荐数');
             $table->tinyInteger('is_original')->comment('是否原创 0非原创 1原创');
             $table->tinyInteger('status')->comment('发布状态 0后台审核中 1审核通过 2审核不通过');

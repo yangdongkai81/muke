@@ -23,8 +23,8 @@
                 <a href="/wenda" class="active">推荐</a>
                 <a href="/wenda/new" >最新</a>
                 <a href="/wenda/waitreply" >等待回答</a>
-                <a href="{{url('wenda/issue')}}" >话题</a>
-                <a href="{{url('issue')}}" >话题</a>
+                <!-- <a href="{{url('wenda/issue')}}" >话题</a>
+                <a href="{{url('issue')}}" >话题</a> -->
                             </div><!--.nav end-->
 
             
@@ -41,283 +41,6 @@
 
             <!--左侧列表内容-->
             <div class="wenda-list">
-                <script>
-    window._bd_share_config = {
-        share : [
-                                    {
-                "tag" : 'share_356895',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356895',
-                "bdText":'[慕课猿问：自学能找到工作吗？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259287',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259287',
-                        "bdText":'[慕课猿问：自学能找到工作吗？ 回答者:胜利女神在微笑 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356939',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356939',
-                "bdText":'[慕课猿问：学会linux，主要从事什么工作？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_356929',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356929',
-                "bdText":'[慕课猿问：for(var i=0;i&amp;lt;5;i++)和for(i=0;i&amp;lt;5;i++)有什么区别？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259371',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259371',
-                        "bdText":'[慕课猿问：for(var i=0;i&amp;lt;5;i++)和for(i=0;i&amp;lt;5;i++)有什么区别？ 回答者:qq_安安_17 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356918',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356918',
-                "bdText":'[慕课猿问：求解救小猿。。。。 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259361',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259361',
-                        "bdText":'[慕课猿问：求解救小猿。。。。 回答者:weibo_刚毅坚卓12_0 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356916',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356916',
-                "bdText":'[慕课猿问：else(0&amp;lt;age&amp;lt;18)这儿出现异常 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259342',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259342',
-                        "bdText":'[慕课猿问：else(0&amp;lt;age&amp;lt;18)这儿出现异常 回答者:望远 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356905',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356905',
-                "bdText":'[慕课猿问：public void log(){}函数是什么作用呢 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259374',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259374',
-                        "bdText":'[慕课猿问：public void log(){}函数是什么作用呢 回答者:qq_旖岚Elan_0 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356934',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356934',
-                "bdText":'[慕课猿问：强制转换问题 谢谢了! (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259372',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259372',
-                        "bdText":'[慕课猿问：强制转换问题 谢谢了! 回答者:望远 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356909',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356909',
-                "bdText":'[慕课猿问：课程中给的jdk的网站全英文版的看不懂，jdk如何下载啊？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259321',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259321',
-                        "bdText":'[慕课猿问：课程中给的jdk的网站全英文版的看不懂，jdk如何下载啊？ 回答者:JurminHong (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356942',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356942',
-                "bdText":'[慕课猿问：为什么sum的值为1 (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_356933',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356933',
-                "bdText":'[慕课猿问：JS问题 谢谢回答!!! (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_356910',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356910',
-                "bdText":'[慕课猿问：this关键字 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259323',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259323',
-                        "bdText":'[慕课猿问：this关键字 回答者:胜利女神在微笑 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356931',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356931',
-                "bdText":'[慕课猿问：http发送到收到数据的时间不稳定！ (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_356908',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356908',
-                "bdText":'[慕课猿问：微信小程序怎么开发，用微信工具模版吗，都支持什么语言 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259329',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259329',
-                        "bdText":'[慕课猿问：微信小程序怎么开发，用微信工具模版吗，都支持什么语言 回答者:哇妙012 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356938',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356938',
-                "bdText":'[慕课猿问：平面设计和网页设计差异在哪？  (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259384',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259384',
-                        "bdText":'[慕课猿问：平面设计和网页设计差异在哪？  回答者:胜利女神在微笑 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356937',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356937',
-                "bdText":'[慕课猿问：Java自学可以吗?  (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_356926',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356926',
-                "bdText":'[慕课猿问：页面重构怎么操作？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259383',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259383',
-                        "bdText":'[慕课猿问：页面重构怎么操作？ 回答者:lovely丶小羽 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_320982',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/320982',
-                "bdText":'[慕课猿问：刷分零容忍！关于刷分用户的处罚公告 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_173959',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/173959',
-                        "bdText":'[慕课猿问：刷分零容忍！关于刷分用户的处罚公告 回答者:爱生活爱胖胖 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_321340',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/321340',
-                "bdText":'[慕课猿问：腾讯游戏大牛在线，有问题尽管来 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_175008',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/175008',
-                        "bdText":'[慕课猿问：腾讯游戏大牛在线，有问题尽管来 回答者:xiemioc (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356890',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356890',
-                "bdText":'[慕课猿问：插入轮播代码后页面部分消失 (分享自@慕课网)#慕课爱分享#'
-            }
-                                        ,            {
-                "tag" : 'share_344091',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/344091',
-                "bdText":'[慕课猿问：各位猿或者媛，一般几点睡啊。有时忍住头痛看java到很晚，第二天就头痛一整天 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_231626',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/231626',
-                        "bdText":'[慕课猿问：各位猿或者媛，一般几点睡啊。有时忍住头痛看java到很晚，第二天就头痛一整天 回答者:肖申克de救赎 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_328864',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/328864',
-                "bdText":'[慕课猿问：本人13岁，现在学还来得及吗？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_194427',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/194427',
-                        "bdText":'[慕课猿问：本人13岁，现在学还来得及吗？ 回答者:慕粉3905628 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356900',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356900',
-                "bdText":'[慕课猿问：网页链接跳转求解 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259295',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259295',
-                        "bdText":'[慕课猿问：网页链接跳转求解 回答者:huiwenS (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_325341',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/325341',
-                "bdText":'[慕课猿问：遇见好答案，Android开发问答专场 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_185072',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/185072',
-                        "bdText":'[慕课猿问：遇见好答案，Android开发问答专场 回答者:beijiyaya恋雨心声 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_338299',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/338299',
-                "bdText":'[慕课猿问：java好学吗.??pp (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_217545',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/217545',
-                        "bdText":'[慕课猿问：java好学吗.??pp 回答者:时光_冰释 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_332686',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/332686',
-                "bdText":'[慕课猿问：话说，大家想编程的最初初衷是什么 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_204239',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/204239',
-                        "bdText":'[慕课猿问：话说，大家想编程的最初初衷是什么 回答者:JustWannaHugU (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356883',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356883',
-                "bdText":'[慕课猿问：若我把c学完了，接下来学什么，为什么 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259225',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259225',
-                        "bdText":'[慕课猿问：若我把c学完了，接下来学什么，为什么 回答者:卡鲁布鲁兹 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356881',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356881',
-                "bdText":'[慕课猿问：积分商城兑换了一个“慕烟花”，现在感觉自己是个s13 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259207',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259207',
-                        "bdText":'[慕课猿问：积分商城兑换了一个“慕烟花”，现在感觉自己是个s13 回答者:o卖女孩的小火柴o (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_329082',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/329082',
-                "bdText":'[慕课猿问：【问答专场】实力派--Linux大棚来了，更有linux图书免费送 (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_195095',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/195095',
-                        "bdText":'[慕课猿问：【问答专场】实力派--Linux大棚来了，更有linux图书免费送 回答者:time_is_everything (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_318331',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/318331',
-                "bdText":'[慕课猿问：前端一起学，一起奋斗，一起有个学习的圈子！！！ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_169066',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/169066',
-                        "bdText":'[慕课猿问：前端一起学，一起奋斗，一起有个学习的圈子！！！ 回答者:慕女神 (分享自@慕课网)#慕课爱分享#'
-                    }
-                                                        ,            {
-                "tag" : 'share_356857',
-                "bdUrl" : 'http://www.imooc.com/wenda/detail/356857',
-                "bdText":'[慕课猿问：快来看看啊 震惊！！ 这么简单的问题 竟然不会？？？ (分享自@慕课网)#慕课爱分享#'
-            }
-                                                    ,{
-                        "tag" : 'share_answer_259154',
-                        "bdUrl" : 'http://www.imooc.com/wenda/wdanswer/259154',
-                        "bdText":'[慕课猿问：快来看看啊 震惊！！ 这么简单的问题 竟然不会？？？ 回答者:Imcainiao (分享自@慕课网)#慕课爱分享#'
-                    }
-                                            
-        ]
-    };
-</script>
 @foreach ($data as $val)
 <div class="ques-answer">
     <div class="tag-img">
@@ -333,11 +56,8 @@
         
     </div>
         @foreach ($newData as $v)
-<<<<<<< HEAD
+
     @if($v['questions_id'] == $val['id'])
-=======
-            @if($v['questions_id'] == $val['id'])
->>>>>>> 944e6948917f1c754a4b0a4c9be71c213dd99b0e
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
         <div class="user">
             
@@ -348,46 +68,14 @@
         <div class="ctrl-bar clearfix">
             <span class="agree-with dianzan" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><b>赞同</b><em class="emzan"></em></span>
             <span class="oppose fandui" id="{{$v['id']}}" data-ques-id="356895" data-answer-id="259287" data-hasop=""><em class="emfan">反对</em></span>
-            
-            <div class="share-box clearfix">
-                <div class="show-btn">分享</div>
-                <div class="share-box-con">
-                    <div class="bdsharebuttonbox" data-tag="share_answer_259287" data-quesid="356895">
-                        <a class="bds_weixin icon-share-weichat" data-cmd="weixin"></a>
-                        <a class="bds_tsina icon-share-weibo" data-cmd="tsina"></a>
-                        <a class="bds_qzone icon-share-qq" data-cmd="qzone" href="#"></a>
-                    </div>
-                </div>
-            </div>
-<<<<<<< HEAD
-        
-        
-=======
+           
 
-
-<<<<<<< HEAD
 
             <span class="shrink">收起</span>
         </div><!--.ctrl-bar end-->
     </div><!--.answer-con end-->
     @endif
-
-
     @endforeach
-=======
->>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
-            <span class="shrink">收起</span>
-        </div>.ctrl-bar end
-            </div>
-            @endif
-
-
-<<<<<<< HEAD
-   @endforeach
-=======
-    @endforeach
->>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
->>>>>>> 944e6948917f1c754a4b0a4c9be71c213dd99b0e
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>
@@ -489,9 +177,7 @@
 </div><!--.recommend-class end-->
 
 <div class="advertisement">
-        <a href="http://www.imooc.com/wenda/issuedetail/15" data-ast="yuanwenindexright_1_871" >
-        <img src="http://img.mukewang.com/59a379310001929602800100.jpg" alt="【花式填坑第17期】"/>
-    </a>
+        
     </div><!--.advertisement end-->
 <div class="hot-ques">
     <h3 class="title">热门问题</h3>

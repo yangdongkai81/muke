@@ -8,6 +8,7 @@ use App\Models\Aspect;
 use App\Models\Answer;
 use App\Models\Answer_Zan;
 use App\Models\Answer_Fan;
+use App\Models\Reply;
 use App\Models\Answer_Attitude;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,6 @@ class WendaController extends Controller
 
 		//return view("home.wenda.index",['data'=>$data]);
 		$arr = $answer->get();
-		// print_r($arr);die;
 		foreach ($arr as $key => $value) {
 			foreach ($data as $k => $v) {
 				if ($value['questions_id'] == $v['id']) {
@@ -36,8 +36,6 @@ class WendaController extends Controller
 				}
 			}
 		}
-
-		//print_r($newData);die;
 		return view("home.wenda.index",['data'=>$data,'newData' => $newData]);
 	}
 	public function Issue()
@@ -85,12 +83,23 @@ class WendaController extends Controller
 	public function Question_One(Request $request)
 	{
 		$wenda = new Wenda;
-		$data = $wenda->where('id', $request->id)->firstOrFail();
-		//return view('home.wenda.question_one',['data'=>$data]);
 		$answer = new Answer;
+		$reply = new reply;
+		$data = $wenda->where('id', $request->id)->firstOrFail();
 		$data = $wenda->where('id', $request->id)->first();
 		$arr = $answer->where('questions_id',$data['id'])->get();
-		return view('home.wenda.question_one',['data'=>$data,'arr'=>$arr]);
+		$ser = $reply->get();
+		//dd($arr);
+		//dd($ser);
+		//echo "<pre>";
+		foreach ($arr as $key => $value) {
+			foreach ($ser as $k => $v) {
+				if ($value['id'] == $v['answer_id']) {
+					$res = $reply->where('answer_id',$value['id'])->get();	
+				}
+			}
+		}
+		return view('home.wenda.question_one',['data'=>$data,'arr'=>$arr,'res'=>$res]);
 	}
 	public function Answer_Add(Request $request)
 	{
@@ -191,5 +200,28 @@ class WendaController extends Controller
 		} else {
 			echo "0";
 		}
+	}
+
+	public function Reply(Request $request)
+	{
+		$text = $request->text;
+		$id = $request->id;
+
+		$answer = new Answer;
+		$reply = new Reply;
+		$res = $answer->where("id",$id)->first();
+		if ($res['answer_start'] == 0) {
+			$res = $answer->where("id",$id)->update(['answer_start'=>1]);
+		}
+		$reply->answer_id = $id;
+		$reply->answer_user_id = $res["answer_user_id"];
+		$reply->reply_user_id = 4;
+		$reply->reply_content = $text;
+		$reply->reply_time = time();
+		$reply->save();
+
+		$data = $reply->where("answer_id",$id)->get();
+
+		echo json_encode($data);
 	}
 }

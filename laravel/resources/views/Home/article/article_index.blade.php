@@ -25,7 +25,6 @@
 <div class="article-ad-wrap clearfix">
 <div class="article-ad-img l">
 
-
 <a href="{{url('article_info/9')}}" class="article-ad-info" data-ast="wenzhangindex_1_261" target="_blank"></a>													
 <a class="article-ad-txt" title="二分查找--那个隐藏了10年的Java Bug" data-ast="wenzhangindex_1_261" href="{{url('article_info/9')}}" target="_blank">
 
@@ -38,7 +37,6 @@
 		<li>
 			<div class="ad-r-warp ">
 				<h2>
-
 					<a href="{{url('article_info/9')}}" title="找工作的季节之简历及找工作的分享" data-ast="wenzhangindex_1_263" target="_blank">找工作的季节之简历及找工作的分享</a>
 
 				</h2>
@@ -73,7 +71,6 @@
 
 </div>
 </div> -->
-
 @if(!empty($tags))
 <div class="article-tab clearfix">
 @foreach($tags['show'] as $tag)
@@ -104,7 +101,6 @@
 	
 	<h3 class="item-title">
 		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-
 		@if($article->is_original == 1)
 			<span class="original">原创</span>
 		@endif

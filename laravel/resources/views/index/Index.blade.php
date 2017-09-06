@@ -1,7 +1,11 @@
 
+<<<<<<< HEAD
 <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
  <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
 <a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu'></a>
+=======
+
+>>>>>>> 2017-09-05-wenda-wang
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,6 +187,10 @@ var _cart_num = 0;
                             
                             
         </div>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 2017-09-05-wenda-wang
         <script src="jquery.js"></script>
         <script type="text/javascript">       	
         	$(".item").hover(

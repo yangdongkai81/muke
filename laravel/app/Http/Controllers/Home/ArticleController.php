@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\Home;
-
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -16,12 +14,12 @@ use App\Models\Article_replies;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-
 class ArticleController extends Controller
 {
     public function article_index()
     {
         $article = new Article;
+
         $articles = $article->all();
 
         // $article_chunk = $articles->chunk(5)->toArray();
@@ -49,8 +47,8 @@ class ArticleController extends Controller
             'articles' => $articles,
             'tags' => $tags_arr,
         ]);
-    }
 
+    }
 
     /**
      * 手记文章添加
@@ -68,7 +66,6 @@ class ArticleController extends Controller
         return view('Home.article.article_add',['tags'=>$tags]);
     }
 
-
     public function article_insert(Request $request)
     {
         //验证登录状态
@@ -76,6 +73,7 @@ class ArticleController extends Controller
         if ($check == 3) {
             return Redirect::to('/login_index');
         }
+
         $article = new Article;
         $article->title = $request->input('title');
         $tags = $request->input('tags');
@@ -91,15 +89,15 @@ class ArticleController extends Controller
                 $filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
 
                 $file->move($dir, $filename);
-                
+
                 $article->img_path = $filename;
             }
         }
         $article->tag_id = $tags;
         $article->content = $request->input('content');
-
         $article->user_id = \Session::get('login_id');
         $article->add_time = time();
+
         //文章数据入库
         $res = $article->save();
         //处理标签数据 并修改标签表num字段
@@ -114,7 +112,6 @@ class ArticleController extends Controller
         }
     }
 
-
     /**
      * 手记文章详情页
      */
@@ -122,7 +119,6 @@ class ArticleController extends Controller
     {
         $article = new Article;
         $comment = new Article_comment;
-
         $user = new User;
         $collection = new Article_collections;
         //获取文章详情
@@ -223,7 +219,6 @@ class ArticleController extends Controller
     
     public function reply_add(Request $request)
     {
-
         // return $request->all();\
         //验证登录状态
         $check = $this ->check_login();
@@ -285,6 +280,7 @@ class ArticleController extends Controller
     public function tag_article($tag_id)
     {
         return view('Home.article.');
+
     }
 
     /**

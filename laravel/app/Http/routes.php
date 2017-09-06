@@ -1,5 +1,4 @@
 <?php
-
 //使用laravel里面验证码包
 use Gregwar\Captcha\CaptchaBuilder;
 //使用session前必须引入session类文件
@@ -43,6 +42,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('article/tag/{tag_id}','ArticleController@tag_article');
         Route::get('article_collection','ArticleController@collection_add');
 
+
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
         Route::get("issue",['uses'=>'WendaController@Issue']);
@@ -51,7 +51,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
-
+        Route::any("reply",['uses'=>'WendaController@Reply']);
         Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
         Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
 
@@ -140,15 +140,18 @@ Route::group(['namespace' => 'Admin'], function(){
         return response($builder->output())->header('Content-type','image/jpeg');
          
       });
-
       //手记文章后台管理
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');
       Route::get('article_del','Admin_articleController@article_del');
+    
+      //猿问
+      Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
+      Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
+      Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
     });
-   });
 });
-
+});
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 

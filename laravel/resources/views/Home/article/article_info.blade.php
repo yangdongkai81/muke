@@ -180,6 +180,7 @@
         <!-- 评论 -->
         <div class="df-title" id="all_comments"><span class="comment-num"><i>{{ $info->comment_num }}</i>条</span>评论</div>
         <div id="js-feedback-list-wrap" class="feedback-list">
+        
         <div id="js-feedback-list">
         @foreach($comments as $comment)
         <div class="comment-box">
@@ -253,7 +254,6 @@
 
 @section('footer')
     @parent
-    <script src="./js/jquery.min.js" type="text/javascript"></script>
 <script>
     var reply_type = 0;
     var from_user_id = 0;
@@ -336,7 +336,6 @@
                     alert('请先登录');
                 }
             }
-
         })
     })
     $('#blog').click(function(){
