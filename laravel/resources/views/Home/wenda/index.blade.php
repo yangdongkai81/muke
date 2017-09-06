@@ -333,7 +333,7 @@
         
     </div>
         @foreach ($newData as $v)
-    @if($v['questions_id'] == $val['id'])
+            @if($v['questions_id'] == $val['id'])
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
         <div class="user">
             
@@ -355,15 +355,15 @@
                     </div>
                 </div>
             </div>
-
-
+        
+        
             <span class="shrink">收起</span>
-        </div><!--.ctrl-bar end-->
-    </div><!--.answer-con end-->
-    @endif
+        </div>.ctrl-bar end
+            </div>
+            @endif
 
 
-    @endforeach
+   @endforeach
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>
