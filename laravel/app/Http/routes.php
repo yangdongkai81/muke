@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('article_comment_add','ArticleController@comment_add');
         Route::get('article_reply_add','ArticleController@reply_add');
         Route::get('article/tag/{tag_id}','ArticleController@tag_article');
-
+        Route::get('article_collection','ArticleController@collection_add');
 
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);

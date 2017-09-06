@@ -101,21 +101,20 @@
 	
 	<h3 class="item-title">
 		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-
-			</h3>
-
 		@if($article->is_original == 1)
 			<span class="original">原创</span>
-		@endif	
-		</h3>
+		@endif
+	</h3>
 
 	<!-- text -->
 	<div class="item-txt">
+	@if(!empty($article->img_path))
 		<div class="item-img l">
-				<a href="article_info/{{ $article->id }}" target="_blank">
-					<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
-				</a>
-			</div>
+			<a href="article_info/{{ $article->id }}" target="_blank">
+				<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
+			</a>
+		</div>
+	@endif
 		<p class="item-bd">{{ $article->content }}...</p>
 		<div class="item-btm clearfix">
 			<ul class="l left-info" data-fuid="260194"><li class="hd-pic"><a class="publisher-name" title="永恒战士" href="/u/260194/articles" target="_blank">永恒战士</a></li>
@@ -130,7 +129,7 @@
 </div>
 @endforeach
 <!-- 分页 -->
-<div id="pagenation" class="pagenation">
+<!-- <div id="pagenation" class="pagenation">
 <div class="page">
 <span class="disabled_page">首页</span>
 <span class="disabled_page">上一页</span>
@@ -139,7 +138,7 @@
 <a href="/article/new/2">下一页</a>
 <a href="/article/new/716">尾页</a>
 </div>
-</div>
+</div> -->
 </div>
 <div class="article-right r">
 <div class="new-ques">
@@ -177,7 +176,6 @@
 @foreach($tags['order'] as $tag)
 <a href="{{ url('/article/tag/'.$tag['id'])}}" class="tag-detail">{{ $tag['tag_name']}}<span class="chapters">{{ $tag['tag_num']}}篇</span></a>
 @endforeach
-
 </div>
 </div>
 @endif
