@@ -355,15 +355,24 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         
         
+=======
+
+
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
             <span class="shrink">收起</span>
         </div>.ctrl-bar end
             </div>
             @endif
 
 
+<<<<<<< HEAD
    @endforeach
+=======
+    @endforeach
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>

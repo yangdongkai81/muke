@@ -25,7 +25,10 @@ class WendaController extends Controller
 			$res = $aspect->where('id',$ser)->firstOrFail();
 			$value['questions_type'] = $res['aspect_name'];
 		}
+<<<<<<< HEAD
 		//dd($data);die;
+=======
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
 		//return view("home.wenda.index",['data'=>$data]);
 		$arr = $answer->get();
 		// print_r($arr);die;

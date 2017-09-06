@@ -1,4 +1,8 @@
 <?php
+//使用laravel里面验证码包
+use Gregwar\Captcha\CaptchaBuilder;
+//使用session前必须引入session类文件
+use Symfony\Component\HttpFoundation\Session\Session;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -93,6 +97,7 @@ Route::group(['namespace' => 'Home'], function(){
 
 //后台
 Route::group(['namespace' => 'Admin'], function(){
+   Route::group(['middleware' => ['web']], function(){  
     Route::group(['prefix' => ''], function(){
         Route::any('admin_index', ['uses'=>'AdminController@index']);
         Route::any('admin_charge_index', ['uses'=>'Admin_chargeController@index']);
@@ -120,11 +125,27 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('up', 'Admin_integralController@up');
       Route::any('update', 'Admin_integralController@update');
 
+     //后台登录
+      Route::any('admin_index', 'Admin_loginController@admin_index');
+      Route::any('login_do', 'Admin_loginController@login_do');
+            //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
+      Route::get('captcha',function(Request $res){
+        $builder = new CaptchaBuilder;
+        $builder->build();
+        $captch=$builder->getPhrase();
+        $session = new Session;
+        $session->set("session",$captch);
+
+        return response($builder->output())->header('Content-type','image/jpeg');
+         
+      });
+
       //手记文章后台管理
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');
       Route::get('article_del','Admin_articleController@article_del');
     });
+   });
 });
 
 Route::group(['middleware' => 'web'], function () {
