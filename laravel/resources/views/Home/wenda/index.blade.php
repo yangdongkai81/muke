@@ -333,7 +333,11 @@
         
     </div>
         @foreach ($newData as $v)
+<<<<<<< HEAD
     @if($v['questions_id'] == $val['id'])
+=======
+            @if($v['questions_id'] == $val['id'])
+>>>>>>> 944e6948917f1c754a4b0a4c9be71c213dd99b0e
         <div class="answer-con first" data-answer-id="259287" id="answer-con">
         <div class="user">
             
@@ -355,7 +359,13 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+        
+        
+=======
 
+
+<<<<<<< HEAD
 
             <span class="shrink">收起</span>
         </div><!--.ctrl-bar end-->
@@ -364,6 +374,20 @@
 
 
     @endforeach
+=======
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
+            <span class="shrink">收起</span>
+        </div>.ctrl-bar end
+            </div>
+            @endif
+
+
+<<<<<<< HEAD
+   @endforeach
+=======
+    @endforeach
+>>>>>>> 15728c01658db735e05f7027a18912a72c922fcb
+>>>>>>> 944e6948917f1c754a4b0a4c9be71c213dd99b0e
     <div class="reply-con">
         <ul class="reply-list">
             <!--<li>
