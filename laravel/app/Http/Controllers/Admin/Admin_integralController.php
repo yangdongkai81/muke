@@ -45,7 +45,7 @@ class Admin_integralController extends Controller
       // foreach ($users as $key => $value) {
       //    print_r($value->id);die;
       // }
-      return view('Admin.admin_integral.show_blade',['data'=>$users]);
+      return view('Admin.admin_integral.show',['data'=>$users]);
    }
 //执行删除
    public function del()

@@ -18,7 +18,7 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="add_void">  
+    <form method="post" class="form-x" action="add_void" enctype="multipart/form-data">  
       <div class="form-group">
         <div class="label">
           <label>视频标题：</label>
@@ -33,7 +33,7 @@
           <label>视频：</label>
         </div>
         <div class="field">
-          <input type="file" id="url1" name="img" />
+          <input type="file" id="url1" name="upfile" />
    
         </div>
       </div>     

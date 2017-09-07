@@ -18,11 +18,16 @@ class CreateUsersTable extends Migration
             $table->char('pwd',32);
             $table->tinyInteger('status')->default(0);
 <<<<<<< HEAD
+            $table->string('add_time',30);
+=======
+<<<<<<< HEAD
             $table->string('addtime',30);
 =======
             $table->string('add_time',30);
 >>>>>>> b1c5c8df491d197e2ebe8c93de103ca3a83ca3af
+>>>>>>> 23b794239b3c7abe346565a912689f079dd1b059
             $table->string('end_time',30);
+            $table->string('integral',30);
             $table->rememberToken();
             $table->timestamps();
         });
