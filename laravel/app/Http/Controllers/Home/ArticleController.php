@@ -18,10 +18,19 @@ class ArticleController extends Controller
 {
     public function article_index()
     {
-    	$article = new Article;
+        $article = new Article;
+        $collection = new Article_collections;
+        $comment = new Article_comment;
 
-    	$articles = $article->all();
-
+        $login_id = \Session::get('login_id');
+        $articles = $article->paginate(3);
+        
+        $login_info = [];
+        //获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+        if ($login_id) {
+            $login_info = $this->get_userinfo($login_id);
+        }
+        
         // $article_chunk = $articles->chunk(5)->toArray();
         
         //获取标签信息
@@ -42,10 +51,10 @@ class ArticleController extends Controller
             }
         }
         
-        // var_dump($articles);return;
-    	return view('Home.article.article_index',[
+        return view('Home.article.article_index',[
             'articles' => $articles,
             'tags' => $tags_arr,
+            'login_info' => $login_info
         ]);
 
     }
@@ -61,9 +70,9 @@ class ArticleController extends Controller
             return Redirect::to('/login_index');
         }
 
-    	$tags = Article_tags::all();
+        $tags = Article_tags::all();
 
-    	return view('Home.article.article_add',['tags'=>$tags]);
+        return view('Home.article.article_add',['tags'=>$tags]);
     }
 
     public function article_insert(Request $request)
@@ -74,42 +83,42 @@ class ArticleController extends Controller
             return Redirect::to('/login_index');
         }
 
-    	$article = new Article;
-    	$article->title = $request->input('title');
-    	$tags = $request->input('tags');
-    	$file = $request->file('file');
+        $article = new Article;
+        $article->title = $request->input('title');
+        $tags = $request->input('tags');
+        $file = $request->file('file');
 
-    	if(!is_null($request->input('original'))){
-    		$article->is_original = 1;
-    	}
-    	//图片上传
-        if (isset($file)) {
-        	if ($file->isValid()) {
-        		$dir = './uploads';
-        		$filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
-
-        		$file->move($dir, $filename);
-
-        		$article->img_path = $filename;
-        	}
+        if(!is_null($request->input('original'))){
+            $article->is_original = 1;
         }
-    	$article->tag_id = $tags;
-    	$article->content = $request->input('content');
-    	$article->user_id = \Session::get('login_id');
-    	$article->add_time = time();
+        //图片上传
+        if (isset($file)) {
+            if ($file->isValid()) {
+                $dir = './uploads';
+                $filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
 
-    	//文章数据入库
-    	$res = $article->save();
-    	//处理标签数据 并修改标签表num字段
-    	$tags_arr = explode(',', $tags);
-    	foreach ($tags_arr as $key => $value) {
-    		DB::table('article_tags')->where('id',$value)->increment('tag_num');
-    	}
-    	if ($res) {
-    		return Redirect::to('article_index');
-    	} else {
-    		return '发布失败';
-    	}
+                $file->move($dir, $filename);
+
+                $article->img_path = $filename;
+            }
+        }
+        $article->tag_id = $tags;
+        $article->content = $request->input('content');
+        $article->user_id = \Session::get('login_id');
+        $article->add_time = time();
+
+        //文章数据入库
+        $res = $article->save();
+        //处理标签数据 并修改标签表num字段
+        $tags_arr = explode(',', $tags);
+        foreach ($tags_arr as $key => $value) {
+            DB::table('article_tags')->where('id',$value)->increment('tag_num');
+        }
+        if ($res) {
+            return Redirect::to('article_index');
+        } else {
+            return '发布失败';
+        }
     }
 
     /**
@@ -121,8 +130,23 @@ class ArticleController extends Controller
         $comment = new Article_comment;
         $user = new User;
         $collection = new Article_collections;
+        $login_id = \Session::get('login_id');
+
+        //浏览量增加
+        $article->where('id', $id)->increment('browser');
+
+        //获取当前用户信息
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+        ];
+
         //获取文章详情
         $info = $article->where('id', $id)->first();
+        //获取用户是否推荐
+        $collection_info = $collection->where('article_id', $id)->where('user_id', $login_id)->first();
+        $is_collection = $collection_info ? 1 : 0;
+        //获取作者信息
         $userinfo = $user->where('id', $info['user_id'])->first()->toArray();
         $info['userinfo'] = $userinfo;
         //获取作者热门文章
@@ -176,11 +200,14 @@ class ArticleController extends Controller
                 $comments_arr[$key]['userinfo'] = $users[$value['user_id']];
             }
         }
+
         return view('Home.article.article_info',[
             'info' => $info,
             'tags' => $tags_name,
             'comments' => $comments_arr,
             'hot' => $hot_articles,
+            'is_collection' => $is_collection,
+            'login_info' => $login_info,
         ]);
     }
 
@@ -237,11 +264,8 @@ class ArticleController extends Controller
         $reply->add_time = time();
 
         $res = $reply->save();
-        if($res) {
-            return 1;
-        } else {
-            return 0;
-        }
+
+        return  $res ? '1' : '0' ;
     }
 
     /**
@@ -306,5 +330,30 @@ class ArticleController extends Controller
            return 3;
         }
         
+    }
+
+    /**
+     * 获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+     * @param login_id
+     * @return [array]
+     */
+    protected function get_userinfo($login_id)
+    {
+        //获取当前用户 发布手记数量
+        $article_num = Article::where('user_id', $login_id)->count();
+        //获取当前用户 推荐数
+        $collection_num = Article_collections::where('user_id', $login_id)->count();
+        //获取当前用户 评论数
+        $comment_num = Article_comment::where('user_id', $login_id)->count();
+        
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+            'article_num' => $article_num,
+            'collection_num' => $collection_num,
+            'comment_num' => $comment_num
+        ];
+
+        return $login_info;
     }
 }
