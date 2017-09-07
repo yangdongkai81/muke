@@ -1,5 +1,8 @@
 <?php
-
+//使用laravel里面验证码包
+use Gregwar\Captcha\CaptchaBuilder;
+//使用session前必须引入session类文件
+use Symfony\Component\HttpFoundation\Session\Session;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,9 +33,16 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
         //手记模块
-		Route::get('article_add','ArticleController@article_add');
-		Route::post('article_insert','ArticleController@article_insert');
-		Route::get('article_info/{id}','ArticleController@article_info');
+
+        Route::get('article_add','ArticleController@article_add');
+        Route::post('article_insert','ArticleController@article_insert');
+        Route::get('article_info/{id}','ArticleController@article_info');
+        Route::get('article_comment_add','ArticleController@comment_add');
+        Route::get('article_reply_add','ArticleController@reply_add');
+        Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+        Route::get('article_collection','ArticleController@collection_add');
+
+
         //猿问模块
         Route::get("wenda_index",['uses'=>'WendaController@Index']);
         Route::get("issue",['uses'=>'WendaController@Issue']);
@@ -41,6 +51,9 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get("question_show",['uses'=>'WendaController@Question_Show']);
         Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
         Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
+        Route::any("reply",['uses'=>'WendaController@Reply']);
+        Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
+        Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
@@ -60,16 +73,33 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
         Route::get('login_qq','LoginController@qqlogin');
+
+        //个人中心
+        Route::get('user_index/{login_id}','UserController@index');
+
+
         // Route::get('index','LoginController@qqlogin');
         //课程
         Route::get('/course_index',['uses'=>'CourseController@course_index']);
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
+
         Route::get('/course_bo/{id?}',['uses'=>'CourseController@course_bo']);
         Route::get('/course_so/{id?}',['uses'=>'CourseController@course_so']);
         Route::get('/course_sofen/{id?}',['uses'=>'CourseController@course_sofen']);
         Route::get('/course_sole/{id?}',['uses'=>'CourseController@course_sole']);
         Route::post('/course_fa',['uses'=>'CourseController@course_fa']);
+
+
+
+         //积分商城前台路由设置
+        Route::any('integral_index', 'IntegralController@integral_index');
+        Route::any('fictitious', 'IntegralController@fictitious');
+        Route::any('entity', 'IntegralController@entity');
+        Route::any('details/{id}', 'IntegralController@details');
+        Route::any('exchange/{id}', 'IntegralController@exchange');
+        Route::any('exchange_do/{id}', 'IntegralController@exchange_do');
+        Route::any('order', 'IntegralController@order');
 
     });
 });
@@ -77,6 +107,7 @@ Route::group(['namespace' => 'Home'], function(){
 
 //后台
 Route::group(['namespace' => 'Admin'], function(){
+   Route::group(['middleware' => ['web']], function(){  
     Route::group(['prefix' => ''], function(){
         Route::any('admin_index', ['uses'=>'AdminController@index']);
         Route::any('admin_charge_index', ['uses'=>'Admin_chargeController@index']);
@@ -96,14 +127,45 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::get('/mold_void',['uses'=>'Admin_courseController@mold_void']);
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
-        
+        //积分商城后台路由设置
+      Route::any('admin_add', 'Admin_integralController@admin_add');
+      Route::any('add_do', 'Admin_integralController@add_do');
+      Route::any('show', 'Admin_integralController@show');
+      Route::any('del', 'Admin_integralController@del');
+      Route::any('up', 'Admin_integralController@up');
+      Route::any('update', 'Admin_integralController@update');
+
+     //后台登录
+      Route::any('admin_index', 'Admin_loginController@admin_index');
+      Route::any('login_do', 'Admin_loginController@login_do');
+            //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
+      Route::get('captcha',function(Request $res){
+        $builder = new CaptchaBuilder;
+        $builder->build();
+        $captch=$builder->getPhrase();
+        $session = new Session;
+        $session->set("session",$captch);
+
+        return response($builder->output())->header('Content-type','image/jpeg');
+         
+      });
+      //手记文章后台管理
+      Route::get('article_manage','Admin_articleController@article_list');
+      Route::get('article_check','Admin_articleController@article_check');
+      Route::get('article_del','Admin_articleController@article_del');
+    
+      //猿问
+      Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
+      Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
+      Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
     });
 });
-
+});
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+   
 });
 
 

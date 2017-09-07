@@ -1,8 +1,22 @@
 @section('header')
+<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
+ <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
+<a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu'></a>
 
     <!DOCTYPE html>
     <html>
     <head>
+
+    <style type="text/css">
+    .cent{
+         position:absolute;
+        z-index:20;
+        background-color:white;
+        border:3px dashed #000;
+    }
+</style>
+
+
         <meta charset="utf-8">
         <title>@yield('title')</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -61,7 +75,7 @@
 
     <div id="header">
         <div class="page-container" id="nav"  >
-            <div id="logo" class="logo"><a href="index" target="_self" class="hide-text" title="首页">慕课网</a></div>
+            <div id="logo" class="logo"><a href="{{url('index_index')}}" target="_self" class="hide-text" title="首页">慕课网</a></div>
 
 
             <button type="button" class="navbar-toggle visible-xs-block js-show-menu" >
@@ -86,18 +100,96 @@
                         <a href="cart_index" class="shop-cart-icon" target="_blank">
                             <span class="icon-shopping-cart js-endcart"></span>
                             <span class="shopping_icon js-cart-num" data-ordernum="0"  data-cartnum="0" style='display: none'>0</span>
-                            <span>购物车</span>
+                            <span>购物</span>
                         </a>
                         <div class="my-cart" id="js-my-cart"></div>
                     </li>
-                    <li class="header-signin">
-                        <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>
-                    </li>
-                    <li class="header-signup">
-                        <a href="login_register" id="js-signup-btn">注册</a>
-                    </li>
-                </ul>
-            </div>
+
+                    @if(\Session::get('login_id') == 0)
+
+                        <li class="header-signin">
+                            <a href="{{url('login_index')}}" id="js-signin-btn">登录</a>
+                        </li>
+                        </ul>
+                    @else
+                         <li class="header-signin">
+                            <div class="item" style="width:300px;">
+                    <img src="/public/images/404_bg.png" width="50px" height="50px"><span style="color:white;">邮箱:{{\Session::get('email')}}</span>
+                                    <div class="cent" >
+                                        <div id="div1" class="cs" style="display:none;" style="height:300px; width:300px;">
+                                            <div class="card-inner" style="height:300px; width:300px;">
+                                                <div class="card-top clearfix">
+                                                       <a href="#" class="l">
+                                                            <img src="/public/images/404_bg.png" width="100px" height="100px" alt="qq_腹黑_0">
+                                                       </a>
+                                                       <div class="card-top-right-box l">
+                                                              <br/>
+                                                              <div class="meta" style="width:60px;height:90px;">
+                                                                 
+                                                              </div> 
+                                                       </div>
+                                                </div>
+                                                <div class="user-center-box">
+                                                    <ul>
+                                                      <li>
+                                                        <a href="/u/5506882/courses" target="_blank" style="width:80px;">
+                                                          <span class="user-center-icon icon-tick"></span>我的课程
+                                                        </a>
+                                                      
+                                                        <a href="http://order.imooc.com/myorder" target="_blank" style="width:80px;">
+                                                          <span class="user-center-icon icon-receipt"></span>订单中心
+                                                        </a>
+                                                      
+                                                      </li>
+                                                         <li class="l">
+                                                           <a href="{{url('integral_index')}}" target="_blank" style="width:80px;">
+                                                          <span class="user-center-icon icon-score_shop"></span>积分商城
+                                                          </a>
+                                        
+                                                          <a href="{{url('user_index')}}/<?php echo \Session::get('login_id');?>" target="_blank" style="width:80px;">
+                                                          <span class="user-center-icon icon-set"></span>个人设置
+                                                          </a>
+                                                          </li> 
+                                                     </ul>                        
+                                                </div>
+                                                <div class="card-history">
+                                                    <span class="history-item">
+                                                    <span class="tit text-ellipsis" style="color:green">性能优化之MySQL优化</span>
+                                                       <span class="media-name text-ellipsis" style="color:green">3-3索引维护的方法</span>
+                                                       <i class="icon-clock"></i> <a href="http://www.imooc.com/video/3999" class="continue" title="索引维护的方法3-3索引维护的方法">继续</a>
+                                                        </span></div>
+                                                        <div class="card-sets clearfix">
+                                                        <a href="/passport/user/logout?referer=http://www.imooc.com" class="r">安全退出</a>
+                                                        </div>                    
+                                            </div>
+                                        </div> 
+                                    </div>
+                            </div> 
+                            
+                                            
+                        </li>
+                        </ul>
+
+                    @endif
+
+               
+                            
+                            
+        </div>
+        
+        <script src="/public/jquery.js"></script>
+        <script type="text/javascript">         
+            $(".item").hover(
+                function(){
+                    $("#div1").show("fast");            
+                },
+                function(){
+                    $("#div1").hide("fast");
+                }
+            );
+        </script>
+
+                   
             <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
                 <div class="pa searchTags" >
                     <a href="http://class.imooc.com/sc/20" target="_blank">前端入门</a>

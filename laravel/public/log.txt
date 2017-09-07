@@ -243,3 +243,45 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <statusMsg>发送号码为空</statusMsg>
 </Response>
 
+request body = <TemplateSMS>
+                    <to></to> 
+                    <appId>8a216da85e0e48b2015e2b8e63c00938</appId>
+                    <templateId>1</templateId>
+                    <datas><data>5415</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da85e0e48b2015e2b8e62220933/SMS/TemplateSMS?sig=4E91193265374D2ACC4CFD72F3EBF45B
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>160044</statusCode>
+    <statusMsg>发送号码为空</statusMsg>
+</Response>
+
+request body = <TemplateSMS>
+                    <to></to> 
+                    <appId>8a216da85e0e48b2015e2b8e63c00938</appId>
+                    <templateId>1</templateId>
+                    <datas><data>3338</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da85e0e48b2015e2b8e62220933/SMS/TemplateSMS?sig=D0B1B0ABDE6DF5F5FBEF3B197C28AFEA
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>160044</statusCode>
+    <statusMsg>发送号码为空</statusMsg>
+</Response>
+
+request body = <TemplateSMS>
+                    <to>15835577669</to> 
+                    <appId>8a216da85e0e48b2015e2b8e63c00938</appId>
+                    <templateId>1</templateId>
+                    <datas><data>4181</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da85e0e48b2015e2b8e62220933/SMS/TemplateSMS?sig=5C415AF15BCEE3F238DD7FDF8F0EBF54
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>47d770bc1b86495fb1287372495c82ae</smsMessageSid>
+        <dateCreated>20170831171438</dateCreated>
+    </TemplateSMS>
+</Response>
+

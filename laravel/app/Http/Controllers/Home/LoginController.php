@@ -34,6 +34,10 @@ class LoginController extends Controller
             $user_pwd=DB::table('users')->where('email','=',$name,'and','pwd','=',$password)->first();
             if ($user_pwd) {
                 DB::table('users')->where('id',$user_pwd->id)->update(['add_time' => date("Y-m-d H:i:s")]);
+
+                $res->session()->put(['login_id'=>$user_pwd->id,'email'=>$user_pwd->email]);
+                return redirect('index_index');
+
                 return redirect('charge_index');
             }else{
                 return view('pc.index.jump')->with([
@@ -68,6 +72,8 @@ class LoginController extends Controller
                          'end_time' => date('Y-m-d H:i:s'));
             $id = DB::table('users')->insertGetId($arr);
             if ($id) {
+                $obj->session()->put(['login_id'=>$id,'email'=>$obj->email]);
+                return redirect('index_index');
                 return redirect('charge_index');
             }else{
                 return view('pc.index.jump')->with([

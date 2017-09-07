@@ -181,8 +181,8 @@ window._bd_share_config = {
 
             <div id="js-qa-comment-input" class="detail-comment-input js-msg-context clearfix">
                 <h3 class="answer-add-tip">添加回答</h3>
-    <form action="{{url('answer_add')}}" method="post" enctype="multipart/form-data">   
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">      
+    <form action="{{url('answer_add')}}" method="post" enctype="multipart/form-data">         
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="questions_id" value="{{$data['id']}}">
     <div id='txtDiv' style='border:1px solid #cccccc; height:240px;'>
         <p>请输入内容...</p>
@@ -229,7 +229,10 @@ window._bd_share_config = {
             <!-- 回答数 -->
                                                 <div class="ans_num">8回答</div>
                                         <!-- 回答回复 start -->
-                            <div class="ques-answer ques-new-answer clearfix">
+
+                            
+                            @foreach($arr as $val)
+                            <div class="ques-answer ques-new-answer clearfix divhf" id="">
                     <!-- 已采纳标志 -->
                                     
                     <div class="edit-title">编辑回答</div>
@@ -248,6 +251,7 @@ window._bd_share_config = {
 
                         
                         <div class="answer-content rich-text aimgPreview"><p><br />网管，网管，网管</p></div>
+                        <div class="answer-content rich-text aimgPreview"><p><br />{{$val['answer_content']}}</p></div>
                                                 <div class="ctrl-bar js-msg-context clearfix js-reply-tool hide">
                             <div class="detail-editor-btns r">
                                 <span class="qa-tips"></span>
@@ -257,14 +261,12 @@ window._bd_share_config = {
                         </div>
                         
                         <div class="ctrl-bar clearfix js-wenda-tool">
-                        
-                            <span class="agree-with " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em>11</em></span>
+                            <span class="agree-with dianzan" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em class="emzan"></em></span>
 
-                            <span class="oppose " data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em>反对</em></span>
+                            <span class="oppose fandui" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em class="emfan">反对</em></span>
                             
-                            
-                                                                                        
-                            <span class="reply" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952"><em>0</em>个回复</span>
+                                                                                    
+                            <span class="reply huifu" id="{{$val['id']}}" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952">回复</span>
 
                                                         
                              <span class="time r">1天前</span>
@@ -274,10 +276,33 @@ window._bd_share_config = {
                         
                     </div><!--.answer-con end-->
 
-                    <div class="reply-con">
+
+                    <div class="reply-con" data-id="1">
+                    
                         <ul class="reply-list">
-                            
-                        </ul><!--.reply-list end-->
+                        
+                        @foreach($res as $v)
+                    @if($v['answer_id'] == $val['id'])
+                        <li class="clearfix">
+                            <div class="user-pic">
+                                <a target="_blank" href="/u/4754213/bbs">
+                                    <img alt="qq_夜尽天明_15" src="http://static.mukewang.com/img/user/587d76680001503401000100-40-40.jpg">
+                                </a>
+                            </div>
+                            <div class="user-info clearfix">
+                                <em>提问者</em>
+                                <a class="from-user" href="/u/4754213/bbs">{{$val['answer_user_id']}}</a>
+                                <span class="r floor">#1</span>
+                            </div>
+                            <div class="reply-content">{{$v['reply_content']}}</div>
+                            <div class="reply-btn l twohu" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>
+                            <span class="time r">4小时前</span>
+                        </li>
+                        
+                        @endif
+                        @endforeach
+                        </ul>
+                        
                         <div class="release-reply-con clearfix">
                                                         <div class="user-pic ">
                                 <a href="/u/5528284/bbs" target="_blank">
@@ -288,18 +313,22 @@ window._bd_share_config = {
                             
 
                             <div class="textarea-con">
-                                                                <textarea name="release-reply" id="release-reply" placeholder="写下你的回复"></textarea>
+
+                                                                <textarea name="release-reply" class="huifunr" id="release-reply" placeholder="写下你的回复"></textarea>
                                                             </div>
                             <p class="err-tip"></p>
                             <div class="userCtrl clearfix">
                                 <div class="verify-code"></div>
-                                <div class="do-reply-btn" data-answer-id="259391" data-ques-uid="3722952">回复</div>
+
+                                <div class="do-reply-btn qvxiao" data-answer-id="259391" data-ques-uid="3722952">取消</div>
+                                <div class="do-reply-btn hdhf" data-answer-id="259391" data-ques-uid="3722952">回复</div>
                             </div>
                         </div><!--.release-reply-con end-->
                     </div><!--.reply-con end-->
                     
                 </div>
             
+            @endforeach
             <!-- 回答回复 end -->
             <div class="qa-comment-page">
                         </div>
@@ -334,7 +363,8 @@ window._bd_share_config = {
                         <!-- 广告 -->
                                             <div class="advertisement">
                     <a href="http://www.imooc.com/wenda/issuedetail/15" data-ast="yuanwendetailright_1_1055" target="_blank">
-                        <img src="http://img.mukewang.com/59a379480001929602800100.jpg" title="花17"/>
+
+
                     </a>
                 </div><!--.advertisement end-->
                                                                         <div class="recommend-class">
@@ -397,3 +427,78 @@ window._bd_share_config = {
 @section('footer')
 @parent
 @stop
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).on("click",".dianzan",function(){
+        var id = $(this).prop('id');
+        var obj = $(this);
+        //alert(id);return false;
+        $.ajax({
+            url:"{{url('answer_zan')}}",
+            data:{id:id},
+            dataType:"json",
+            type:'get',
+            success:function(msg){
+                obj.find('.emzan').html(msg);
+            }
+        })
+    })
+    $(document).on("click",".fandui",function(){
+        var id = $(this).prop('id');
+        var obj = $(this);
+        //alert(id);return false;
+        $.ajax({
+            url:"{{url('answer_fan')}}",
+            data:{id:id},
+            dataType:"json",
+            type:'get',
+            success:function(msg){
+                if (msg == 1) {
+                    obj.find('.emfan').html("已反对");
+                } else if(msg == 0) {
+                    obj.find('.emfan').html("反对");
+                } else {
+                    alert('系统错误');
+                }
+            }
+        })
+    })
+    $(document).on("click",".huifu",function(){
+        $(this).parents('.divhf').find('.reply-con').css('display','block');
+    })
+    $(document).on("click",".qvxiao",function(){
+        $(this).parents('.divhf').find('.reply-con').css('display','none');
+    })
+    $(document).on("click",".hdhf",function(){
+        var text = $(".huifunr").val();
+        var id = $(".huifu").prop('id');
+        $.ajax({
+            url:"{{url('reply')}}",
+            type:"get",
+            data:{text:text,id:id},
+            dataType:"json",
+            success:function(msg){
+                var ser ="";
+                for (var i=0; i<msg.length; i++) 
+                {
+                    ser += '<li class="clearfix">\
+                            <div class="user-pic">\
+                                <a target="_blank" href="/u/4754213/bbs">\
+                                    <img alt="qq_夜尽天明_15" src="http://static.mukewang.com/img/user/587d76680001503401000100-40-40.jpg">\
+                                </a>\
+                            </div>\
+                            <div class="user-info clearfix">\
+                                <em>提问者</em>\
+                                <a class="from-user" href="/u/4754213/bbs">'+msg[i].answer_user_id+'</a>\
+                                <span class="r floor">#1</span>\
+                            </div>\
+                            <div class="reply-content">'+msg[i].reply_content+'</div>\
+                            <div class="reply-btn l twohu" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>\
+                            <span class="time r">4小时前</span>\
+                        </li>';
+                }
+                $(".huifu").parents('.divhf').find('.reply-list').html(ser);
+            }
+        })
+    })
+</script>
