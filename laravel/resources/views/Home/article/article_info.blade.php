@@ -1,15 +1,15 @@
 @extends('layouts/layouts')
 
 @section('header')
-	@parent
-	<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
-	@section('title','手记')
+    @parent
+    <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
+    @section('title','手记')
 @stop
 
 
 @section('content')
 <div class="top-bg-warp">
-	<div class="top-bg clearfix">
+    <div class="top-bg clearfix">
         <div class="top-bg-left l">
                                 <!-- 面包屑 -->
                 <div class="detail-path">
@@ -103,7 +103,7 @@
                 <!-- 手记目录end -->
     </div><!-- 右侧end -->
 </div>
-	</div>
+    </div>
     </div>
 </div>
 
@@ -128,10 +128,13 @@
         <!-- 推荐 --> 
         <div class="praise-box">
             <button id="js-praise">
-            <span class="icon-thumb_o" data-id="{{$info->id}}"></span>
+            @if($is_collection == 0)
+            <span class="icon-thumb_o"  data-id="{{$info->id}}"></span>
+            @else
+            <span class="icon-thumb_o" style="color: rgb(183, 187, 191); transform: scale3d(1, 1, 1);"  data-id="{{$info->id}}"></span>
+            @endif
             </button>
         </div>
-                
         <div class="show-praise-wrap">
             <div class="show-praise-user clearfix">
                 <div class="praise-num">
@@ -161,6 +164,9 @@
         <!-- 评论框 -->
         <div class="df-ipt-wrap" id="comment" style="">
                     <h4 class="add-com-tip">添加评论</h4>
+                <div class="feeds-author" style="margin-bottom:10px; ">
+                <span id="email">{{ $login_info['email'] }}  :</span>
+                </div>
                 <div class="df-bottom clearfix">
                     <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
@@ -186,7 +192,7 @@
         <div class="comment-box">
             <div class="comment clearfix">
                 <div class="feed-author l">
-                    <a class="nick" href="javascript:;" target="_blank">用户{{ $comment['userinfo'] }}</a>
+                    <a class="nick" href="javascript:;" target="_blank">用户{{ $comment['userinfo'] }}  :</a>
                     <span class="com-floor r">{{ $comment['id'] }}F</span>
                 </div>
                 <div class="feed-list-content">
@@ -194,9 +200,9 @@
                     <p>{{ $comment['content'] }}</p>
                     <p></p>
                     <div class="comment-footer clearfix">
-                        <span class="agree-with l" data-commentid="39052" data-uid="2467824" data-username="Kian_"><b class="imv2-thumb_up" title="赞同"></b>
+                        <!-- <span class="agree-with l"><b class="imv2-thumb_up" title="赞同"></b>
                             <em>0</em>
-                        </span>
+                        </span> -->
                         <span class="reply-btn" data-fromid="{{ $comment['user_id'] }}" data-commentid="39052" data-uid="2467824" data-username="Kian_">回复</span>
                         <span class="feed-list-times r"> {{ date('Y-m-d H:i:s',$comment['add_time']) }}</span>
                     </div>
@@ -213,7 +219,7 @@
                          回复 <a href="/u/4663260/articles" class="to-user">{{ $reply['to_user'] }}</a>
                          ：<p>{{ $reply['content'] }}</p>
                          <div class="comment-footer clearfix">
-                            <span class="reply-btn reply-btns" data-fromid="{{ $reply['from_user_id'] }}" data-commentid="38790" data-uid="3184671" data-username="无尽未来">回复</span>
+                            <span class="reply-btn reply-btns" data-fromid="{{ $reply['from_user_id'] }}">回复</span>
                             <span class="feed-list-time r"> {{ date('Y-m-d H:i:s',$reply['add_time']) }}</span>
                          </div>
                      </div>
@@ -253,7 +259,7 @@
 @stop
 
 @section('footer')
-	@parent
+    @parent
 <script>
     var reply_type = 0;
     var from_user_id = 0;
@@ -322,14 +328,14 @@
         var content = $('#comment-ipt').val();
         var art_id = $(this).data('id');
         var count = parseInt($('.comment-num').find('i').text());
-
+        var email = $('#email').text();
         //ajax请求添加评论
         $.ajax({
             url:"{{url('article_comment_add')}}",
             data:{content:content,art_id:art_id},
             success:function(res){
                 if(res == 1) {
-                    var str = '<div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a class="nick" href="/u/2467824/articles" target="_blank">Kian_</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>'+content+'</p><p></p><div class="comment-footer clearfix"><span class="agree-with l" data-commentid="39052" data-uid="2467824" data-username="Kian_"><b class="imv2-thumb_up" title="赞同"></b><em>0</em></span><span class="reply-btn" data-commentid="39052" data-uid="2467824" data-username="Kian_">回复</span><span class="feed-list-times r"> 刚刚</span></div></div></div><div class="reply-box"></div><div class="release-reply"><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div data-comment-uid="2467824" class="release-reply-btn">回复</div></div></div></div></div></div>'
+                    var str = '<div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a class="nick" href="/u/2467824/articles" target="_blank">用户'+email+'</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>'+content+'</p><p></p><div class="comment-footer clearfix"><span class="agree-with l"><b class="imv2-thumb_up" title="赞同"></b><em>0</em></span><span class="reply-btn">回复</span><span class="feed-list-times r"> 刚刚</span></div></div></div><div class="reply-box"></div><div class="release-reply"><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div class="release-reply-btn">回复</div></div></div></div></div></div>'
                     $('#js-feedback-list').prepend(str);
                     $('.comment-num').find('i').text(count+1);
                 } else if (res == 3) {
