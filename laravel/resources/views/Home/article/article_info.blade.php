@@ -1,15 +1,15 @@
 @extends('layouts/layouts')
 
 @section('header')
-    @parent
-    <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
-    @section('title','手记')
+	@parent
+	<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
+	@section('title','手记')
 @stop
 
 
 @section('content')
 <div class="top-bg-warp">
-    <div class="top-bg clearfix">
+	<div class="top-bg clearfix">
         <div class="top-bg-left l">
                                 <!-- 面包屑 -->
                 <div class="detail-path">
@@ -103,7 +103,7 @@
                 <!-- 手记目录end -->
     </div><!-- 右侧end -->
 </div>
-    </div>
+	</div>
     </div>
 </div>
 
@@ -162,7 +162,7 @@
         <div class="df-ipt-wrap" id="comment" style="">
                     <h4 class="add-com-tip">添加评论</h4>
                 <div class="df-bottom clearfix">
-                    <input type="text" style="height:40px; width:440px;" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
+                    <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
                 </div>
             </div>
@@ -253,7 +253,7 @@
 @stop
 
 @section('footer')
-    @parent
+	@parent
 <script>
     var reply_type = 0;
     var from_user_id = 0;

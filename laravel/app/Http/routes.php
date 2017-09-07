@@ -84,6 +84,14 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/course_learn/{id?}',['uses'=>'CourseController@course_learn']);
         Route::post('/course_ajax',['uses'=>'CourseController@course_ajax']);
 
+        Route::get('/course_bo/{id?}',['uses'=>'CourseController@course_bo']);
+        Route::get('/course_so/{id?}',['uses'=>'CourseController@course_so']);
+        Route::get('/course_sofen/{id?}',['uses'=>'CourseController@course_sofen']);
+        Route::get('/course_sole/{id?}',['uses'=>'CourseController@course_sole']);
+        Route::post('/course_fa',['uses'=>'CourseController@course_fa']);
+
+
+
          //积分商城前台路由设置
         Route::any('integral_index', 'IntegralController@integral_index');
         Route::any('fictitious', 'IntegralController@fictitious');
@@ -92,6 +100,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('exchange/{id}', 'IntegralController@exchange');
         Route::any('exchange_do/{id}', 'IntegralController@exchange_do');
         Route::any('order', 'IntegralController@order');
+
     });
 });
 

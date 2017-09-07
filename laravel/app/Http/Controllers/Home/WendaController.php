@@ -99,7 +99,12 @@ class WendaController extends Controller
 				}
 			}
 		}
-		return view('home.wenda.question_one',['data'=>$data,'arr'=>$arr,'res'=>$res]);
+
+		return view('home.wenda.question_one',[
+			'data'=>$data,
+			'arr'=>$arr,
+			'res'=>$res
+		]);
 	}
 	public function Answer_Add(Request $request)
 	{
@@ -195,11 +200,8 @@ class WendaController extends Controller
 						  ->where('user_id',1)
 						  ->first();
 		}
-		if ($res) {
-			echo "1";
-		} else {
-			echo "0";
-		}
+
+		return $res ? '1' : '0';
 	}
 
 	public function Reply(Request $request)
