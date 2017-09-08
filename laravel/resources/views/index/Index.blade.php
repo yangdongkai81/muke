@@ -165,7 +165,7 @@ var _cart_num = 0;
 
 		                               <section class="boss-cta-area" id="boss-cta">
                                             <div class="container">
-                                                <div class="row" id="row">
+                                                <div class="row" id="row" style="display:none">
                                                     <div class="col-md-4 col-sm-12 text-center" style="width:23.33333333%;">
                                                         <div class="boss-button wow fadeInRight">
                                                             <a href="{{url('integral_index')}}" class="boss-about-button btn btn-default">积分商城</a>
