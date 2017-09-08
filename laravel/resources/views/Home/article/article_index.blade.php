@@ -2,13 +2,14 @@
 
 @section('header')
 	@parent
-<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/article-index-less.css?v=201708281028" type="text/css" />
 
 	@section('title','手记')
 @stop
 
 
 @section('content')
+<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/article-index-less.css?v=201708281028" type="text/css" />
+
 <div id="main">
 
 <div class="container clearfix">
