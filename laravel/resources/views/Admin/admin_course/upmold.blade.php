@@ -89,6 +89,25 @@
           <div class="tips"></div>
         </div>
       </div>
+      <div class="form-group">
+        <div class="label">
+          <label>是否收费：</label>
+        </div>
+        <div class="field">
+          是<input type="radio"   value="1"  name="is_show" />
+          否<input type="radio"   value="0"  name="is_show" checked />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>价格：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="price"    />
+          <div class="tips"></div>
+        </div>
+      </div>
       {{csrf_field()}} 
       <div class="form-group">
         <div class="label">

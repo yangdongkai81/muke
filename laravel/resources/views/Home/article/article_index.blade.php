@@ -2,7 +2,14 @@
 
 @section('header')
 	@parent
+<<<<<<< HEAD
 
+=======
+<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/article-index-less.css?v=201708281028" type="text/css" />
+<style>
+.pagination li{list-style:none;float:left;}
+</style>
+>>>>>>> 7fa364d8ee711769c2b9e804f514b4125838ab35
 	@section('title','手记')
 @stop
 
@@ -102,36 +109,35 @@
 	
 	<h3 class="item-title">
 		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-
-			</h3>
-
 		@if($article->is_original == 1)
 			<span class="original">原创</span>
-		@endif	
-		</h3>
+		@endif
+	</h3>
 
 	<!-- text -->
 	<div class="item-txt">
+	@if(!empty($article->img_path))
 		<div class="item-img l">
-				<a href="article_info/{{ $article->id }}" target="_blank">
-					<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
-				</a>
-			</div>
+			<a href="article_info/{{ $article->id }}" target="_blank">
+				<img src="./uploads/{{ $article->img_path }}" width="210" height="130">
+			</a>
+		</div>
+	@endif
 		<p class="item-bd">{{ $article->content }}...</p>
 		<div class="item-btm clearfix">
 			<ul class="l left-info" data-fuid="260194"><li class="hd-pic"><a class="publisher-name" title="永恒战士" href="/u/260194/articles" target="_blank">永恒战士</a></li>
 			<li class="pass-time">{{ date('Y-m-d H:i:s',$article->add_time) }}</li>							</ul>
 			<div class="r right-info">
 				<span class="looked">{{ $article->browser }}浏览</span>
-				<span class="recom">0推荐</span>
-				<span class="judge">0评论</span>
+				<span class="recom">{{ $article->collection_num }}推荐</span>
+				<span class="judge">{{ $article->comment_num }}评论</span>
 			</div>
 		</div>
 	</div>
 </div>
 @endforeach
 <!-- 分页 -->
-<div id="pagenation" class="pagenation">
+<!-- <div id="pagenation" class="pagenation">
 <div class="page">
 <span class="disabled_page">首页</span>
 <span class="disabled_page">上一页</span>
@@ -140,14 +146,29 @@
 <a href="/article/new/2">下一页</a>
 <a href="/article/new/716">尾页</a>
 </div>
-</div>
+</div> -->
+{!! $articles->links() !!}
 </div>
 <div class="article-right r">
 <div class="new-ques">
 <a href="article_add" class="write-ques">创建手记</a>
-<div class="ques-wrap" id="ques-wrap"><div class="ques-info clearfix"><a href="/u/2346866/articles" class="sharer-head" target="_blank" title=""><img src="http://img.mukewang.com/55f4ef3800018d1101000100-100-100.jpg" alt="" width="40" height="40"></a><div class="right-uinfo"><h3><a href="/u/2346866/articles" target="_blank" title="" class="sharer-name ">qq_墨_27  </a></h3></div></div><ul class="num-info"><li><a href="/u/2346866/articles" target="_blank">手记<span>0</span></a></li><li><a href="/u/2346866/articles?type=comment" target="_blank">评论<span>0</span></a></li><li><a href="/u/2346866/articles?type=praise" target="_blank">推荐<span>3</span></a></li><li><a href="/u/2346866/articles?type=collect" target="_blank">收藏<span>1</span></a></li></ul>
+@if(isset($login_info['login_id']))
+<div class="ques-wrap" id="ques-wrap">
+	<div class="ques-info clearfix">
+		<div class="right-uinfo">
+			<h3>
+				<a href="javascript:;" target="_blank" title="" class="sharer-name ">{{$login_info['email']}}</a>
+			</h3>
+		</div>
+	</div>
+		<ul class="num-info">
+			<li><a href="/u/2346866/articles" target="_blank">手记<span>{{$login_info['article_num']}}</span></a></li>
+			<li><a href="/u/2346866/articles?type=comment" target="_blank">评论<span>{{$login_info['comment_num']}}</span></a></li>
+			<li><a href="/u/2346866/articles?type=praise" target="_blank">推荐<span>{{$login_info['collection_num']}}</span></a></li>
+			<li><a href="/u/2346866/articles?type=collect" target="_blank">收藏<span>1</span></a></li>
+		</ul>
 </div>
-
+@endif
 </div>
 
 <div class="remon-sharer">
@@ -178,7 +199,6 @@
 @foreach($tags['order'] as $tag)
 <a href="{{ url('/article/tag/'.$tag['id'])}}" class="tag-detail">{{ $tag['tag_name']}}<span class="chapters">{{ $tag['tag_num']}}篇</span></a>
 @endforeach
-
 </div>
 </div>
 @endif
@@ -210,8 +230,10 @@
 		var display = $('#tagPop').css('display');
 		if( display == 'none') {
 			$('#tagPop').css('display','block');
+			$(this).find('.icon-drop_down').removeClass('icon-drop_down').addClass('icon-drop_up');
 		} else {
 			$('#tagPop').css('display','none');
+			$(this).find('.icon-drop_up').removeClass('icon-drop_up').addClass('icon-drop_down');
 		}
 	})
 	</script>

@@ -1,32 +1,37 @@
 <?php
 
-
 namespace App\Http\Controllers\Home;
-
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
-
 use Session,Redirect;
-use App\Models\Article_tags;
+use App\Models\User;
 use App\Models\Article;
-
-
+use App\Models\Article_tags;
 use App\Models\Article_comment;
+use App\Models\Article_collections;
 use App\Models\Article_replies;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 
 class ArticleController extends Controller
 {
     public function article_index()
     {
         $article = new Article;
+        $collection = new Article_collections;
+        $comment = new Article_comment;
 
-
-        $articles = $article->all();
+        $login_id = \Session::get('login_id');
+        $articles = $article->paginate(3);
+        
+        $login_info = [];
+        //获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+        if ($login_id) {
+            $login_info = $this->get_userinfo($login_id);
+        }
+        
+        // $article_chunk = $articles->chunk(5)->toArray();
         
         //获取标签信息
         $tags_arr = [];
@@ -45,36 +50,43 @@ class ArticleController extends Controller
                 $tags_arr['order'][] = $tags_order[$i];
             }
         }
-        // dd($tags_arr);return ;
-        // var_dump($articles);return;
+        
         return view('Home.article.article_index',[
             'articles' => $articles,
             'tags' => $tags_arr,
+            'login_info' => $login_info
         ]);
 
-
     }
-
 
     /**
      * 手记文章添加
      */
     public function article_add()
     {
-        $tags = Article_tags::all();
+        //验证登录状态
+        $check = $this ->check_login();
+        if ($check == 3) {
+            return Redirect::to('/login_index');
+        }
 
+        $tags = Article_tags::all();
 
         return view('Home.article.article_add',['tags'=>$tags]);
     }
 
-
     public function article_insert(Request $request)
     {
+        //验证登录状态
+        $check = $this ->check_login();
+        if ($check == 3) {
+            return Redirect::to('/login_index');
+        }
+
         $article = new Article;
         $article->title = $request->input('title');
         $tags = $request->input('tags');
         $file = $request->file('file');
-
 
         if(!is_null($request->input('original'))){
             $article->is_original = 1;
@@ -85,18 +97,15 @@ class ArticleController extends Controller
                 $dir = './uploads';
                 $filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
 
-
                 $file->move($dir, $filename);
-
 
                 $article->img_path = $filename;
             }
         }
         $article->tag_id = $tags;
         $article->content = $request->input('content');
-        $article->user_id = 1;
+        $article->user_id = \Session::get('login_id');
         $article->add_time = time();
-
 
         //文章数据入库
         $res = $article->save();
@@ -112,7 +121,6 @@ class ArticleController extends Controller
         }
     }
 
-
     /**
      * 手记文章详情页
      */
@@ -120,42 +128,88 @@ class ArticleController extends Controller
     {
         $article = new Article;
         $comment = new Article_comment;
-        //获取文章详情
-        $info = $article->where('id',$id)->first();
-        //处理标签信息
-        $tags = explode(',',$info['tag_id']);
-        $tags_name = Article_tags::whereIn('id',$tags)->lists('tag_name', 'id');
+        $user = new User;
+        $collection = new Article_collections;
+        $login_id = \Session::get('login_id');
 
+        //浏览量增加
+        $article->where('id', $id)->increment('browser');
+
+        //获取当前用户信息
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+        ];
+
+        //获取文章详情
+        $info = $article->where('id', $id)->first();
+        //获取用户是否推荐
+        $collection_info = $collection->where('article_id', $id)->where('user_id', $login_id)->first();
+        $is_collection = $collection_info ? 1 : 0;
+        //获取作者信息
+        $userinfo = $user->where('id', $info['user_id'])->first()->toArray();
+        $info['userinfo'] = $userinfo;
+        //获取作者热门文章
+        $hot_articles = $article->where('user_id', $info['user_id'])->orderBy('collection_num', 'desc')->limit(3)->get();
+
+        $info['article_num'] = $article->where('user_id', $info['user_id'])->count();
+
+        //处理标签信息
+        $tags = explode(',', $info['tag_id']);
+        $tags_name = Article_tags::whereIn('id', $tags)->lists('tag_name', 'id');
 
         //获取评论信息
+        $comments_arr = [];
         $comments = $comment->where('art_id',$id)->get();
+
         $comments_arr = $comments->toArray();
+        if (!empty($comments_arr)) {
+            $c_id = array_column($comments_arr, 'id');
+            //获取评论人ID
+            $comment_user_id = array_column($comments_arr, 'user_id');
+            
+            $comments_arr = array_combine($c_id, $comments_arr);
+            // dd($comments_arr);return;
+            //获取回复内容
+            $replies = Article_replies::whereIn('comment_id', $c_id)->get();
 
+            $replies_arr = $replies->toArray();
 
-        $c_id = array_column($comments_arr, 'id');
-        $comments_arr = array_combine($c_id, $comments_arr);
+            $reply_from_user_id = array_column($replies_arr, 'from_user_id');
 
+            $reply_to_user_id = array_column($replies_arr, 'to_user_id');
 
-        //获取回复内容
-        $replies = Article_replies::whereIn('comment_id',$c_id)->get();
-        $replies_arr = $replies->toArray();
-        
-        // dd($replies_arr); return ;
-        foreach ($replies_arr as $key => $value) {
-            foreach ($comments_arr as $k => $v) {
-                if ($value['comment_id'] == $k) {
-                    $comments_arr[$k]['reply'][] = $value;
+            $user_id = $this->unique(array_merge($comment_user_id, $reply_from_user_id, $reply_to_user_id));
+            
+            //获取评论人信息
+            $users = $user->whereIn('id', $user_id)->lists('email','id')->toArray();
+
+            foreach ($replies_arr as $key => $value) {
+                $replies_arr[$key]['from_user'] = $users[$replies_arr[$key]['from_user_id']];
+                $replies_arr[$key]['to_user'] = $users[$replies_arr[$key]['to_user_id']];
+            }
+            foreach ($replies_arr as $key => $value) {
+                foreach ($comments_arr as $k => $v) {
+                    if ($value['comment_id'] == $k) {
+                        $comments_arr[$k]['reply'][] = $value;
+                    }
                 }
             }
+
+            foreach ($comments_arr as $key => $value) {
+                $comments_arr[$key]['userinfo'] = $users[$value['user_id']];
+            }
         }
-        
+
         return view('Home.article.article_info',[
             'info' => $info,
             'tags' => $tags_name,
             'comments' => $comments_arr,
+            'hot' => $hot_articles,
+            'is_collection' => $is_collection,
+            'login_info' => $login_info,
         ]);
     }
-
 
     /**
      * 手记评论添加
@@ -164,23 +218,27 @@ class ArticleController extends Controller
     public function comment_add(Request $request)
     {
         // return $request->all();
+        //验证登录状态
+        $check =  $this->check_login();
+        if ($check == 3) {
+            return $check;
+        }
         $comment = new Article_comment;
+        $article = new Article;
 
-
-        $comment->user_id = 1;
+        $comment->user_id = \Session::get('login_id');
         $comment->art_id = $request->art_id;
         $comment->content = $request->content;
         $comment->add_time = time();
 
-
         $res = $comment->save();
         if($res) {
+            $article->where('id', $request->art_id)->increment('comment_num');
             return 1;
         } else {
             return 0;
         }
     }
-
 
     /**
      * 手记评论回复内容添加
@@ -188,32 +246,114 @@ class ArticleController extends Controller
     
     public function reply_add(Request $request)
     {
-        // return $request->all();
+        // return $request->all();\
+        //验证登录状态
+        $check = $this ->check_login();
+        if ($check == 3) {
+            return $check;
+        }
         $reply = new Article_replies;
-
-
+        if (\Session::get('login_id') == $request->from_user_id) {
+            return 2;
+        }
         $reply->comment_id = $request->comment_id;
-        $reply->user_id = 1;
+        $reply->from_user_id = \Session::get('login_id');
+        $reply->to_user_id = $request->from_user_id;
         $reply->reply_type = $request->reply_type;
         $reply->content = $request->content;
         $reply->add_time = time();
 
-
         $res = $reply->save();
-        if($res) {
-            return 1;
-        } else {
-            return 0;
-        }
+
+        return  $res ? '1' : '0' ;
     }
 
+    /**
+     * 文章推荐
+     * @return int  0推荐失败 1成功推荐 2不能重复推荐 3未登录
+     */
+    public function collection_add(Request $res)
+    {
+        $check = $this ->check_login();
+        if ($check == 3) {
+            return $check;
+        }
+        $collection = new Article_collections;
+        $article = new Article;
+        $id = $res->id;
+        $user_id = \Session::get('login_id');
 
+        $info = $collection->where('user_id', '=', $user_id)
+                    ->where('article_id', '=', $id)
+                    ->first();
+        if (empty($info)) {
+            $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
+            if ($result) {
+                $article->where('id', '=', $id)->increment('collection_num');
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        return 2;
+
+
+    }
 
 
     public function tag_article($tag_id)
     {
         return view('Home.article.');
 
+    }
 
+    /**
+     * 去重方法
+     * @param  [array] $arr 
+     * @return [array] 
+     */
+    protected function unique($arr)
+    {
+        $arr = array_flip($arr);
+        return array_flip($arr);
+    }
+
+    /**
+     * 验证是否登录
+     * @return url
+     */
+    protected function check_login()
+    {
+        $user_id = \Session::get('login_id');
+        
+        if (empty($user_id)) {
+           return 3;
+        }
+        
+    }
+
+    /**
+     * 获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+     * @param login_id
+     * @return [array]
+     */
+    protected function get_userinfo($login_id)
+    {
+        //获取当前用户 发布手记数量
+        $article_num = Article::where('user_id', $login_id)->count();
+        //获取当前用户 推荐数
+        $collection_num = Article_collections::where('user_id', $login_id)->count();
+        //获取当前用户 评论数
+        $comment_num = Article_comment::where('user_id', $login_id)->count();
+        
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+            'article_num' => $article_num,
+            'collection_num' => $collection_num,
+            'comment_num' => $comment_num
+        ];
+
+        return $login_info;
     }
 }
