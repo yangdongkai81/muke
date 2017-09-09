@@ -3,6 +3,7 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/detail-less.css?v=201708281028" type="text/css" />
+
     @section('title','手记')
 @stop
 
@@ -114,14 +115,17 @@
     <div class="detail-content-wrap">
         
         <div class="detail-content ">
-            {{ $info->content }}
+            <?php echo $info->content; ?>
         </div>
        
         <!-- 标签 -->
         
                 <div class="cat-box">
             <div class="cat-wrap clearfix">
-                <span class="l ori-span">相关标签：@foreach($tags as $tag) {{ $tag }} @endforeach</span>
+                <span class="l ori-span">相关标签：
+                @foreach($tags as $key => $tag)
+                 <a href="{{url('article_tag').'/'.$key }}" target="_blank" class="ad-tag">{{ $tag }}</a>&nbsp;&nbsp;
+                 @endforeach</span>
          </div>
         </div>
             
@@ -164,11 +168,13 @@
         <!-- 评论框 -->
         <div class="df-ipt-wrap" id="comment" style="">
                     <h4 class="add-com-tip">添加评论</h4>
+                @if(isset($login_info['email']))
                 <div class="feeds-author" style="margin-bottom:10px; ">
                 <span id="email">{{ $login_info['email'] }}  :</span>
                 </div>
+                @endif
                 <div class="df-bottom clearfix">
-                    <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px;" class="ipt">
+                    <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px; height:40px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
                 </div>
             </div>
@@ -195,7 +201,7 @@
                     <a class="nick" href="javascript:;" target="_blank">用户{{ $comment['userinfo'] }}  :</a>
                     <span class="com-floor r">{{ $comment['id'] }}F</span>
                 </div>
-                <div class="feed-list-content">
+                <div class="feed-list-content" style="margin-left:50px;">
                     <p></p>
                     <p>{{ $comment['content'] }}</p>
                     <p></p>
@@ -214,7 +220,7 @@
                 @foreach($comment['reply'] as $reply)
                 <div class="comment clearfix">
                     
-                    <div class="feed-list-content">
+                    <div class="feed-list-content"  style="margin-left:30px;">
                         <a href="/u/3184671/articles" class="from-user">{{ $reply['from_user'] }}</a>
                          回复 <a href="/u/4663260/articles" class="to-user">{{ $reply['to_user'] }}</a>
                          ：<p>{{ $reply['content'] }}</p>

@@ -31,7 +31,7 @@ Route::group(['namespace' => 'Home'], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
-        Route::get('article_index','ArticleController@article_index');
+        Route::get('article_index/{page?}','ArticleController@article_index');
         //手记模块
 
         Route::get('article_add','ArticleController@article_add');
@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('article_info/{id}','ArticleController@article_info');
         Route::get('article_comment_add','ArticleController@comment_add');
         Route::get('article_reply_add','ArticleController@reply_add');
-        Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+        Route::get('article_tag/{tag_id}-{page?}','ArticleController@tag_article');
         Route::get('article_collection','ArticleController@collection_add');
 
 
