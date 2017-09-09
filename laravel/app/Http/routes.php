@@ -73,6 +73,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
         Route::get('login_qq','LoginController@qqlogin');
+        //清楚session
+        Route::get('login_clearSession','LoginController@clearSession');
 
         //个人中心
         Route::get('user_index/{login_id}','UserController@index');
