@@ -65,27 +65,27 @@
 
 
         <!-- ===============    animation core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/animate.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/animate.min.css" media="all" />
         <!-- ===============    icon-moon core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/icon-moon.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/icon-moon.css" media="all" />
         <!-- ===============    Bootstrap core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/bootstrap.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/bootstrap.min.css" media="all" />
         <!-- ===============    owl-carousel core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/owl.carousel.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/owl.carousel.css" media="all" />
         <!-- ===============    reset core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/reset.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/reset.css" media="all" />
         <!-- ===============    theme core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/theme.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme.css" media="all" />
         <!-- ===============    os core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/theme-style/os-style.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme-style/os-style.css" media="all" />
         <!-- ===============    dark core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/theme-style/dark.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme-style/dark.css" media="all" />
         <!-- ===============    extra core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/extra.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/extra.css" media="all" />
         <!-- ===============    content color core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/content-color/green.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/content-color/green.css" media="all" />
         <!-- ===============    responsive core CSS     =============== -->
-        <link rel="stylesheet" type="text/css" href="csss/responsive.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="/public/csss/responsive.css" media="all" />
 
  
         <!-- ===============    Google fonts CSS     =============== -->

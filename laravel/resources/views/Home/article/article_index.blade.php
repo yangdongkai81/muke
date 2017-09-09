@@ -2,14 +2,10 @@
 
 @section('header')
 	@parent
-<<<<<<< HEAD
-
-=======
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/article-index-less.css?v=201708281028" type="text/css" />
 <style>
 .pagination li{list-style:none;float:left;}
 </style>
->>>>>>> 7fa364d8ee711769c2b9e804f514b4125838ab35
 	@section('title','手记')
 @stop
 
