@@ -16,7 +16,7 @@
 
 <div class="container clearfix">
 
- <div class="article-left l">
+<div class="article-left l">
    
 
 <div class="article-tool-bar clearfix">
@@ -79,7 +79,7 @@
 		@endif
 	@endfor
 @elseif ($page >= $page_total - 2)
-	@for($i = $page_total - 4; $i <= $page_total; $i++)
+	@for($i = ($page_total - 4 <= 0 ? 1 : $page_total - 4); $i <= $page_total; $i++)
 		@if($page == $i)
 			<a class="active text-page-tag" href="{{ url('article_tag').'/'.$tag_id.'-'.$i }}">{{$i}}</a>
 		@else

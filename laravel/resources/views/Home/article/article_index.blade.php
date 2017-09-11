@@ -11,8 +11,6 @@
 
 
 @section('content')
-<link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,article/article-index-less.css?v=201708281028" type="text/css" />
-
 <div id="main">
 
 <div class="container clearfix">
@@ -45,7 +43,7 @@
 				</h2>
 			<p class="ad-tags-list">
 			@foreach($article['tags'] as $key => $val)
-			<a href="{{url('article_info/tag').'/'.$key }}" target="_blank" class="ad-tag">{{ $val }}</a>&nbsp;&nbsp;
+			<a href="{{ url('article_tag/'.$key)}}" target="_blank" class="ad-tag">{{ $val }}</a>&nbsp;&nbsp;
 			@endforeach
 			</p>	
 			</div>					    	
@@ -94,7 +92,7 @@
 <div class="article-lwrap ">
 	
 	<h3 class="item-title">
-		<a href="article_info/{{ $article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
+		<a href="{{ url('article_info').'/'.$article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
 		@if($article->is_original == 1)
 			<span class="original">原创</span>
 		@endif
@@ -104,7 +102,7 @@
 	<div class="item-txt">
 	@if(!empty($article->img_path))
 		<div class="item-img l">
-			<a href="article_info/{{ $article->id }}" target="_blank">
+			<a href="{{ url('article_info').'/'.$article->id }}" target="_blank">
 				<img src="{{$prefix}}./uploads/{{ $article->img_path }}" width="210" height="130">
 			</a>
 		</div>
@@ -142,7 +140,7 @@
 		@endif
 	@endfor
 @elseif ($page >= $page_total - 2)
-	@for($i = $page_total - 4; $i <= $page_total; $i++)
+	@for($i = ($page_total - 4 <= 0 ? 1 : $page_total - 4); $i <= $page_total; $i++)
 		@if($page == $i)
 			<a class="active text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
 		@else

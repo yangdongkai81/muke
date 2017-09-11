@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
 use Session,Redirect;
 use App\Models\User;
 use App\Models\Article;
@@ -11,6 +12,7 @@ use App\Models\Article_tags;
 use App\Models\Article_comment;
 use App\Models\Article_collections;
 use App\Models\Article_replies;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -36,7 +38,7 @@ class ArticleController extends Controller
             $prefix = '.';
         }
         $articles = $article->where('status', 1)->get();
-        $limit = 3;
+        $limit = 1;
         $page_total = ceil(count($articles)/$limit);
 
         $page = $page > $page_total ? $page_total : $page;
