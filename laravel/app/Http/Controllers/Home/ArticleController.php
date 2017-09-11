@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
 use Session,Redirect;
 use App\Models\User;
 use App\Models\Article;
@@ -11,18 +12,48 @@ use App\Models\Article_tags;
 use App\Models\Article_comment;
 use App\Models\Article_collections;
 use App\Models\Article_replies;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-    public function article_index()
+    public function article_index($page = '')
     {
-    	$article = new Article;
+        $article = new Article;
+        $collection = new Article_collections;
+        $comment = new Article_comment;
 
-    	$articles = $article->all();
+        $login_id = \Session::get('login_id');
+        //获取所有审核通过的手记文章
+        $article_all = $article->where('status', '>', 0)->get()->groupBy('status');
+        //获取创建手记所有用户信息
+        $articles_userinfo = $this->get_info();
 
-        // $article_chunk = $articles->chunk(5)->toArray();
+        //首页手记分页
+        if (empty($page)) {
+            $page = 1;
+            $prefix = '';
+        } else {
+            $prefix = '.';
+        }
+        $articles = $article->where('status', 1)->get();
+        $limit = 1;
+        $page_total = ceil(count($articles)/$limit);
+
+        $page = $page > $page_total ? $page_total : $page;
+        $page = $page < 1 ? 1 : $page;
+        
+        $articles_page = $articles->forPage($page, $limit)->all();
+        //获取置顶手记
+        $article_top = $article_all['3']->first();
+        //获取置顶侧边手记
+        $article_right = $article_all['4']->toArray();
+        $login_info = [];
+        //获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+        if ($login_id) {
+            $login_info = $this->get_userinfo($login_id);
+        }
         
         //获取标签信息
         $tags_arr = [];
@@ -30,6 +61,17 @@ class ArticleController extends Controller
         $tags_order = Article_tags::orderBy('tag_num','desc')->get()->toArray();
         //所有标签
         $tags = Article_tags::all()->toArray();
+        $new_tags = array_combine(array_column($tags, 'id'), $tags);
+        foreach ($article_right as $k => $v) {
+            $tag_id = explode(',', $v['tag_id']);
+            foreach ($tag_id as $key => $value) {
+                $article_right[$k]['tags'][$value] = $new_tags[$value]['tag_name'];
+            }
+        }
+
+        //获取月度热门手记
+        // $hot_articles = $this ->get_hot_articles('all');
+
         $count = count($tags);
         for ($i=0; $i < $count; $i++) {
             if($i < 9){
@@ -41,17 +83,23 @@ class ArticleController extends Controller
                 $tags_arr['order'][] = $tags_order[$i];
             }
         }
-        
-        // var_dump($articles);return;
-    	return view('Home.article.article_index',[
-            'articles' => $articles,
+        // dd($articles_page);return;
+        return view('Home.article.article_index',[
+            'articles' => $articles_page,
+            'page' => $page,
+            'prefix' => $prefix,
+            'page_total' => $page_total,
             'tags' => $tags_arr,
+            'login_info' => $login_info,
+            'userinfo' => $articles_userinfo,
+            'article_top' => $article_top,
+            'article_right' => $article_right,
         ]);
 
     }
 
     /**
-     * 手记文章添加
+     * 手记文章添加方法
      */
     public function article_add()
     {
@@ -61,11 +109,15 @@ class ArticleController extends Controller
             return Redirect::to('/login_index');
         }
 
-    	$tags = Article_tags::all();
+        $tags = Article_tags::all();
 
-    	return view('Home.article.article_add',['tags'=>$tags]);
+        return view('Home.article.article_add',['tags'=>$tags]);
     }
 
+    /**
+     * 手记文章添加执行
+     * @param  Request $request 
+     */
     public function article_insert(Request $request)
     {
         //验证登录状态
@@ -74,42 +126,48 @@ class ArticleController extends Controller
             return Redirect::to('/login_index');
         }
 
-    	$article = new Article;
-    	$article->title = $request->input('title');
-    	$tags = $request->input('tags');
-    	$file = $request->file('file');
+        $article = new Article;
+        $article->title = $request->input('title');
+        $tags = $request->input('tags');
+        $file = $request->file('file');
 
-    	if(!is_null($request->input('original'))){
-    		$article->is_original = 1;
-    	}
-    	//图片上传
-        if (isset($file)) {
-        	if ($file->isValid()) {
-        		$dir = './uploads';
-        		$filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
-
-        		$file->move($dir, $filename);
-
-        		$article->img_path = $filename;
-        	}
+        if(!is_null($request->input('original'))){
+            $article->is_original = 1;
         }
-    	$article->tag_id = $tags;
-    	$article->content = $request->input('content');
-    	$article->user_id = \Session::get('login_id');
-    	$article->add_time = time();
+        //图片上传
+        if (isset($file)) {
+            if ($file->isValid()) {
+                $dir = './uploads';
+                $filename = time() . mt_rand(1000,9999) . '.' . $file->getClientOriginalExtension();
 
-    	//文章数据入库
-    	$res = $article->save();
-    	//处理标签数据 并修改标签表num字段
-    	$tags_arr = explode(',', $tags);
-    	foreach ($tags_arr as $key => $value) {
-    		DB::table('article_tags')->where('id',$value)->increment('tag_num');
-    	}
-    	if ($res) {
-    		return Redirect::to('article_index');
-    	} else {
-    		return '发布失败';
-    	}
+                $file->move($dir, $filename);
+
+                $article->img_path = $filename;
+            }
+        }
+        $article->tag_id = $tags;
+        $article->content = $request->input('content');
+        $article->user_id = \Session::get('login_id');
+        $article->add_time = time();
+
+        //事务处理
+        DB::beginTransaction();
+        try{
+            //文章数据入库
+            $res = $article->save();
+            //处理标签数据 并修改标签表num字段
+            $tags_arr = explode(',', $tags);
+            Article_tags::whereIn('id',$tags_arr)->increment('tag_num');
+            DB::commit();
+        }catch (\Exception $e){
+            //回滚
+            DB::rollBack();
+        }
+        if ($res) {
+            return Redirect::to('article_index');
+        } else {
+            return '发布失败';
+        }
     }
 
     /**
@@ -121,8 +179,23 @@ class ArticleController extends Controller
         $comment = new Article_comment;
         $user = new User;
         $collection = new Article_collections;
+        $login_id = \Session::get('login_id');
+
+        //浏览量增加
+        $article->where('id', $id)->increment('browser');
+
+        //获取当前用户信息
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+        ];
+
         //获取文章详情
         $info = $article->where('id', $id)->first();
+        //获取用户是否推荐
+        $collection_info = $collection->where('article_id', $id)->where('user_id', $login_id)->first();
+        $is_collection = $collection_info ? 1 : 0;
+        //获取作者信息
         $userinfo = $user->where('id', $info['user_id'])->first()->toArray();
         $info['userinfo'] = $userinfo;
         //获取作者热门文章
@@ -176,11 +249,14 @@ class ArticleController extends Controller
                 $comments_arr[$key]['userinfo'] = $users[$value['user_id']];
             }
         }
+
         return view('Home.article.article_info',[
             'info' => $info,
             'tags' => $tags_name,
             'comments' => $comments_arr,
             'hot' => $hot_articles,
+            'is_collection' => $is_collection,
+            'login_info' => $login_info,
         ]);
     }
 
@@ -237,11 +313,8 @@ class ArticleController extends Controller
         $reply->add_time = time();
 
         $res = $reply->save();
-        if($res) {
-            return 1;
-        } else {
-            return 0;
-        }
+
+        return  $res ? '1' : '0' ;
     }
 
     /**
@@ -271,16 +344,45 @@ class ArticleController extends Controller
                 return 0;
             }
         }
+        
         return 2;
-
-
     }
 
-
-    public function tag_article($tag_id)
+    /**
+     * 手记标签页
+     */
+    public function tag_article($tag_id, $page = '')
     {
-        return view('Home.article.');
+        $article = new Article;
+        $articles = $article->where('status', '>', 0)->where('tag_id', 'like', "%$tag_id%")->get()->toArray();
+        //获取所有用户信息
+        $user_id = $this->unique(array_column($articles, 'user_id'));
+        $userinfo = $this->get_info($user_id);
 
+        $str = array("\r\n","\n","\r","\t",'<p>','</p>');
+        foreach ($articles as $key => $value) {
+            $articles[$key]['email'] = $userinfo[$value['user_id']];
+            $articles[$key]['content'] = str_replace($str, ' ', $value['content']);
+        }
+
+        $tag_name = Article_tags::where('id', $tag_id)->lists('tag_name', 'id')->first();
+
+        $limit = 3;
+        $page_total = ceil(count($articles)/$limit);
+
+        $page = $page > $page_total ? $page_total : $page;
+        $page = $page < 1 ? 1 : $page;
+        
+        $articles_page = collect($articles)->forPage($page, $limit)->all();
+
+        return view('Home.article.article_tag',[
+            'articles' => $articles_page,
+            'page' => $page,
+            'prefix' => '.',
+            'page_total' => $page_total,
+            'tag_id' => $tag_id,
+            'tag_name' => $tag_name,
+        ]);
     }
 
     /**
@@ -306,5 +408,58 @@ class ArticleController extends Controller
            return 3;
         }
         
+    }
+
+    /**
+     * 获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
+     * @param login_id 当前用户登录ID
+     * @return array
+     */
+    protected function get_userinfo($login_id)
+    {
+        //获取当前用户 发布手记数量
+        $article_num = Article::where('user_id', $login_id)->count();
+        //获取当前用户 推荐数
+        $collection_num = Article_collections::where('user_id', $login_id)->count();
+        //获取当前用户 评论数
+        $comment_num = Article_comment::where('user_id', $login_id)->count();
+        
+        $login_info = [
+            'login_id' => $login_id,
+            'email' => \Session::get('email'),
+            'article_num' => $article_num,
+            'collection_num' => $collection_num,
+            'comment_num' => $comment_num
+        ];
+
+        return $login_info;
+    }
+
+    /**
+     * 获取文章表中所有用户信息
+     * @return array
+     */
+    protected function get_info($user_id = '')
+    {
+        if ($user_id) {
+            $userinfo = User::whereIn('id', $user_id)->lists('email', 'id')->toArray();
+        } else {
+            $articles_user = $this->unique(Article::where('status', 1)->lists('user_id')->toArray());
+            $userinfo = User::lists('email', 'id')->toArray();
+        }
+        return $userinfo;
+    }
+
+    /**
+     * 获取热门手记
+     * @param  string $type 热门类别 all 所有手记热门 tag 单个种类热门
+     * @return array 
+     */
+    protected function get_hot_articles($type, $tag = ''){
+        if ($type == 'all') {
+            $start_time = strtotime(date('Y m d'));
+            // $end_time = strtotime
+            // Article::where();
+        }
     }
 }

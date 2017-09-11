@@ -31,14 +31,14 @@ Route::group(['namespace' => 'Home'], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
-        Route::get('article_index','ArticleController@article_index');
+        Route::get('article_index/{page?}','ArticleController@article_index');
         //手记模块
         Route::get('article_add','ArticleController@article_add');
         Route::post('article_insert','ArticleController@article_insert');
         Route::get('article_info/{id}','ArticleController@article_info');
         Route::get('article_comment_add','ArticleController@comment_add');
         Route::get('article_reply_add','ArticleController@reply_add');
-        Route::get('article/tag/{tag_id}','ArticleController@tag_article');
+        Route::get('article_tag/{tag_id}-{page?}','ArticleController@tag_article');
         Route::get('article_collection','ArticleController@collection_add');
 
 
@@ -72,6 +72,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
         Route::get('login_qq','LoginController@qqlogin');
+        //清楚session
+        Route::get('login_clearSession','LoginController@clearSession');
 
         //个人中心
         Route::get('user_index/{login_id}','UserController@index');

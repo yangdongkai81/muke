@@ -11,7 +11,7 @@
       <th width="15%">标题</th>
       <th width="15%">添加时间</th>
       <th width="15%">审核状态</th>
-      <th width="10%">操作</th>
+      <th width="20%">操作</th>
     </tr>
 @foreach($articles as $k => $article)
     <tr>
@@ -30,6 +30,8 @@
       </td>
       <td>
         <div class="button-group">
+          <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
+          <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
           <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
           <a class="button border-red" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-trash-o"></span> 删除</a>
         </div>
