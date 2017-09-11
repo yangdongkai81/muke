@@ -11,7 +11,7 @@
       <th width="15%">标题</th>
       <th width="15%">添加时间</th>
       <th width="15%">审核状态</th>
-      <th width="20%">操作</th>
+      <th width="25%">操作</th>
     </tr>
 @foreach($articles as $k => $article)
     <tr>
@@ -30,9 +30,9 @@
       </td>
       <td>
         <div class="button-group">
-          <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
-          <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
-          <a class="button border-main" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
+          <a class="button border-main" id="check" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
+          <a class="button border-main" id="recommend" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
+          <a class="button border-main" id="top" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
           <a class="button border-red" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-trash-o"></span> 删除</a>
         </div>
       </td>
@@ -43,7 +43,7 @@
 <script src="./jquery.min.js"></script>
 <script type="text/javascript">
     //手记审核
-    $('.border-main').click(function(){
+    $('#check').click(function(){
       var id = $(this).data('id');
       var status = $(this).parent().parent().prev().data('status');
       var obj = $(this);
@@ -81,6 +81,19 @@
           } else {
             alert('删除失败');
           }
+        }
+      })
+    })
+
+    //手记置顶
+    $('#top').click(function(){
+      var id = $(this).data('id');
+      var obj = $(this);
+      $.ajax({
+        url:"{{ url('article_top') }}",
+        data:{id:id},
+        success:function(res){
+          console.log(res);
         }
       })
     })
