@@ -88,8 +88,8 @@
 
    <?php  foreach ($ke as $key => $v) {?>
   
-	<li>												
-			<div class="course-card-container">
+	<li >												
+			<div class="course-card-container" style="padding-left:60px;">
 	<a target="_blank" href="{{url('course_learn')}}/{{$v->id}}" class="course-card">
 		
 		<div class="course-card-top">

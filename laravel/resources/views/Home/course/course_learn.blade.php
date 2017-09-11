@@ -139,7 +139,7 @@
        
                     <h3>
                       
-                        <span class="icon-drop_down js-close js-open" id="{{$v->id}}"></span>
+                        <span class="js-close " id="{{$v->id}}" style="font-size:13px">▶</span>
                         <strong>
                             <i class="icon-chapter"></i>
                             {{$v->chapter_name}}
@@ -169,25 +169,27 @@
      <div style="display:none" id="pi">
             <div class="publish-wrap publish-wrap-pl">
                 <div class="pl-input-wrap clearfix">
-                 
-                    <div id="js-pl-input-fake" class="pl-input-inner l">
-                       <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"  style="width:800px;height:100px; border:solid 1px #00AA00; resize:none;"></textarea>
+               
+                    <div id="js-pl-input-fake" class="pl-input-inner l" style="margin-left:5px;">
+                       
+                       <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"  style="width:764px;height:100px; border:solid 1px #DDDDDD; resize:none;  margin:20px;20px;20px;20px;"></textarea>
                       
                     </div>
-                    <div class="pl-input-btm input-btm clearfix">
+             
                         <div class="verify-code l"></div>
-                      
-             <button style="width: 140px; cursor: pointer;
+              
+             <button style="width: 80px; cursor: pointer;
+ 
 line-height: 38px;
 text-align: center;
 font-weight: bold;
-color: #00000;
+color: #FFFFFF;
+background-color: #00AA00;
 text-shadow:1px 1px 1px #3333;
 border-radius: 5px;
-margin:0 20px 20px 0;
 position: relative;
-overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
-                    </div>
+overflow: hidden;margin-left:708px;" id="fa">发表评论</button>
+              
                 </div>
 
             </div>
@@ -197,12 +199,12 @@ overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
               <ul id="yan"> 
             <?php foreach ($arr as $key => $v) {?>  
            
-                   <li class="pl-list clearfix" style=" border-bottom:2px #DDDDDD solid;">
-                        <div class="pl-list-main"> 
-                                 <a href="#" target="_blank" ><?=$v->user_id?></a>
+                   <li class="pl-list clearfix" style="border-top:2px #DDDDDD solid; border-bottom:2px #DDDDDD solid;">
+                        <div class="pl-list-main" style="margin:30px;30px;40px;40px;"> 
+                                 <a href="#" target="_blank"  style="font-size:16px;color:#AAAAAA">发言者：<?=$v->user_id?></a>
                                  <div class="pl-list-content"><?=$v->user_desc?></div>  
                                  <div class="pl-list-btm clearfix">
-                                      <span class="pl-list-time l">时间:<?=$v->add_time?></span>
+                                      <span style="font-size:12px;color:#AAAAAA">时间: <?=date('Y-m-d H:i:s',$v->add_time)?></span>
                                  </div> 
                         </div> 
                    </li> 
@@ -256,8 +258,14 @@ overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
 <script src="/public/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
     $('.js-close').live('click',function(){
+      var html = $(this).html(); 
       var id = $(this).attr('id');
       var _token=$("input[name='_token']").val();
+      if (html!='▶') {
+        $('#'+id).html('▶');
+         $('.ying').hide();
+      }else{
+    
         $.ajax({
                 type: "POST",
                 url: "/public/course_ajax",
@@ -266,11 +274,13 @@ overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
                 success: function(msg){
                   str='';
                   $(msg).each(function(k,v){
-                       str+='<li><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
+                       str+='<li class="ying"><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
                   })
                 $(".video"+id).html(str)
+                $('#'+id).html('▼');
                 }
         });
+     }
     })
 
  $("#zhang").live('click',function(){
@@ -297,10 +307,10 @@ overflow: hidden;margin-left:720px;" id="fa">发表评论</button>
                     }else{
                         str='';
                         $.each(msg,function(k,v){
-                           str+='<li class="pl-list clearfix" style=" border-bottom:2px #DDDDDD solid;">';
-                           str+='<div class="pl-list-main"><a href="#" target="_blank" >发言者：'+v.user_id+'</a>';
+                           str+='<li class="pl-list clearfix" style="border-top:2px #DDDDDD solid; border-bottom:2px #DDDDDD solid;">';
+                           str+='<div class="pl-list-main" style="margin:30px;30px;40px;40px;"><a href="#" target="_blank"  style="font-size:16px;color:#AAAAAA">发言者：'+v.user_id+'</a>';
                            str+='<div class="pl-list-content">'+v.user_desc+'</div>';
-                           str+='<div class="pl-list-btm clearfix"><span class="pl-list-time l">时间：'+v.add_time+'</span>';
+                           str+='<div class="pl-list-btm clearfix"><span style="font-size:12px;color:#AAAAAA">时间：'+v.add_time+'</span>';
                            str+='</div></div></li>';
                         })
                         $('#yan').html(str);

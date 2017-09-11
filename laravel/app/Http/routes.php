@@ -18,12 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin_index','Admin_courseController@index');
-Route::get('/admin_cate','Admin_courseController@cate');
-Route::post('/cate_add','Admin_courseController@cate_add');
-Route::post('/some','Admin_courseController@some');
-Route::get('/admin_mold','Admin_courseController@mold');
-Route::post('/mold_add','Admin_courseController@mold_add');
+        Route::get('/admin_index','Admin_courseController@index');
+        Route::get('/admin_cate','Admin_courseController@cate');
+        Route::post('/cate_add','Admin_courseController@cate_add');
+        Route::post('/some','Admin_courseController@some');
+        Route::get('/admin_mold','Admin_courseController@mold');
+        Route::post('/mold_add','Admin_courseController@mold_add');
  //这个Home为命名空间
 Route::group(['namespace' => 'Home'], function(){
                    //这个为前缀     如果加上a    则效果是  a/index_index  不加便是index_index
@@ -33,7 +33,6 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
         Route::get('article_index','ArticleController@article_index');
         //手记模块
-
         Route::get('article_add','ArticleController@article_add');
         Route::post('article_insert','ArticleController@article_insert');
         Route::get('article_info/{id}','ArticleController@article_info');
@@ -89,6 +88,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/course_sofen/{id?}',['uses'=>'CourseController@course_sofen']);
         Route::get('/course_sole/{id?}',['uses'=>'CourseController@course_sole']);
         Route::post('/course_fa',['uses'=>'CourseController@course_fa']);
+        Route::post('/course_zfa',['uses'=>'CourseController@course_zfa']);
 
 
 

@@ -26,7 +26,7 @@
               <source src="/public/uploads/{{$arr[0]->video_path}}" type="video/mp4">
               <source src="" type="video/webm">
             </video>
-  
+          
     <!--此处结构为练习题，视频，编程公用的侧栏-->
 </div></div>
 
@@ -45,29 +45,43 @@
     <!--
     <li class="course-menu-item"><a href="javascript:void(0)" id="wikiMenu">WIKI</a></li>
     -->
-        </ul>
+        </ul>{{csrf_field()}}
 <div id="disArea" class="lists-container list-wrap">
     <div id="pl-content" class="list-tab-con">
         <div class="publish clearfix" id="discus-publish">
             <div class="publish-wrap publish-wrap-pl">
                 <div class="pl-input-wrap clearfix">
-                    <a href="http://www.imooc.com/u/5591889" class="user-head l">
-                        <img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/596e05dd0001f73001000100-100-100.jpg" alt="稍息立正">
-                    </a>
-                    <div id="js-pl-input-fake" class="pl-input-inner l">
+                    
+                    <div id="js-pl-input-fake" class="pl-input-inner l" style="margin-left:80px;">
                        <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"></textarea>
                        <span class="num-limit"><span id="js-pl-limit">0</span>/300</span>
                     </div>
                     <div class="pl-input-btm input-btm clearfix">
                         <div class="verify-code l"></div>
-                        <input id="js-pl-submit" class="r course-btn" value="发表评论" type="button">
+                        <input id="js-pl-submit" class="r course-btn" zid="{{$arr[0]->chapter_id}}" value="发表评论" type="button">
                     </div>
                 </div>
 
             </div>
         </div>
-        <div id="plLoadListData"><div class="pl-container"> <ul>   <li class="pl-list clearfix"> <div class="pl-list-avator"> <a href="http://www.imooc.com/u/3164558/courses" target="_blank"><img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/580aeb710001b73106400640-40-40.jpg" title="西兰花伟大炮" width="40" height="40"></a> </div> <div class="pl-list-main"> <div class="pl-list-nick"> <a href="http://www.imooc.com/u/3164558/courses" target="_blank">西兰花伟大炮</a> </div> <div class="pl-list-content">我在前面探探路，沙发哟</div>  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-15</span>  <a title="赞" href="javascript:;" class="js-pl-praise list-praise r" data-id="479139"><i class="icon-thumb-revert"></i>  <span>3</span></a> </div> </div> </li>  <li class="pl-list clearfix"> <div class="pl-list-avator"> <a href="http://www.imooc.com/u/2116935/courses" target="_blank"><img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/5599e8e100010c2110800960-40-40.jpg" title="网络侦探" width="40" height="40"></a> </div> <div class="pl-list-main"> <div class="pl-list-nick"> <a href="http://www.imooc.com/u/2116935/courses" target="_blank">网络侦探</a> </div> <div class="pl-list-content">然目前慕课网里全部免费的渗透测试课程都是最基础的内容。（实战的没学过，不过仅看目录还是要比免费的好一些）<br>
-免费的课程适合做软件测试且对渗透测试一点都不了解的学习者。想深入还是下去自己多啃点专业书籍。另外考虑法律问题，自学还是建议自己搭建靶机。</div>  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-15</span>  <a title="赞" href="javascript:;" class="js-pl-praise list-praise r" data-id="479311"><i class="icon-thumb-revert"></i>  <span>2</span></a> </div> </div> </li>  <li class="pl-list clearfix"> <div class="pl-list-avator"> <a href="http://www.imooc.com/u/3379710/courses" target="_blank"><img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/57dcb3740001be2904930511-40-40.htm" title="沐小晨曦" width="40" height="40"></a> </div> <div class="pl-list-main"> <div class="pl-list-nick"> <a href="http://www.imooc.com/u/3379710/courses" target="_blank">沐小晨曦</a> </div> <div class="pl-list-content">哇，现在都教渗透测试了？吃惊。</div>  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-15</span>  <a title="赞" href="javascript:;" class="js-pl-praise list-praise r" data-id="479303"><i class="icon-thumb-revert"></i>  <span>1</span></a> </div> </div> </li>  <li class="pl-list clearfix"> <div class="pl-list-avator"> <a href="http://www.imooc.com/u/5170524/courses" target="_blank"><img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/58eb5dca0001233809960996-40-40.jpg" title="这个微博纯属人工智能" width="40" height="40"></a> </div> <div class="pl-list-main"> <div class="pl-list-nick"> <a href="http://www.imooc.com/u/5170524/courses" target="_blank">这个微博纯属人工智能</a> </div> <div class="pl-list-content">学习下这个sql注入</div>  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-21</span>  <a title="赞" href="javascript:;" class="js-pl-praise list-praise r" data-id="482286"><i class="icon-thumb-revert"></i>  <span>0</span></a> </div> </div> </li>  <li class="pl-list clearfix"> <div class="pl-list-avator"> <a href="http://www.imooc.com/u/3595497/courses" target="_blank"><img src="1-SQL%E6%B3%A8%E5%85%A5-%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D-%E6%85%95%E8%AF%BE%E7%BD%91_files/533e4cd40001c4fb02000200-40-40.jpg" title="小菜鸟在校生" width="40" height="40"></a> </div> <div class="pl-list-main"> <div class="pl-list-nick"> <a href="http://www.imooc.com/u/3595497/courses" target="_blank">小菜鸟在校生</a> </div> <div class="pl-list-content">舒服舒服1</div>  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-19</span>  <a title="赞" href="javascript:;" class="js-pl-praise list-praise r" data-id="481553"><i class="icon-thumb-revert"></i>  <span>0</span></a> </div> </div> </li> </ul></div><div class="page pl-list-page"></div></div>
+        <div id="plLoadListData"><div class="pl-container"> 
+
+            <ul id="yan">  
+
+
+               <li class="pl-list clearfix" > 
+                  <div class="pl-list-avator">  </div> 
+                  <div class="pl-list-main"> <div class="pl-list-nick"> 西兰花伟大炮</div>
+                  <div class="pl-list-content">我在前面探探路，沙发哟</div>  
+                  <div class="pl-list-btm clearfix"> <span class="pl-list-time l">时间: 2017-08-15</span>  </div>
+               </li>  
+
+
+            </ul>
+
+            </div>
+            <div class="page pl-list-page"></div>
+          </div>
     </div>
     <div id="qa-content" class="list-tab-con" style="display:none">
         <div id="qaLoadListData"><div class="sortlist"> 			<div class="ordertab clearfix"> 				<a href="javascript:void(0)" hidefocus="true" data-order="1" class="quealltab onactive">全部</a>				<a href="javascript:void(0)" hidefocus="true" data-order="2" class="quealltab ">精华</a>			</div>		</div><div class="answertabcon"></div><div class="page discuss-list-page"></div></div>
@@ -113,7 +127,36 @@
 </div>
 <script src="/public/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
+$(".course-btn").live('click',function(){
+    var html = $("#js-pl-textarea").val();
+    var zid = $(".course-btn").attr('zid');
+   
+    var _token=$("input[name='_token']").val();
+        $.ajax({
+                type: "POST",
+                url: "{{url('course_zfa')}}",
+                data: "content="+html+"&zid="+zid+"&_token="+_token,
+                dataType:"json",
+                success: function(msg){
+                    if (msg==2) {
+                        alert('发表失败！');
+                    }else{
+                        str='';
+                        $.each(msg,function(k,v){
+                           str+='<li class="pl-list clearfix">';
+                           str+='<div class="pl-list-avator"></div>';
+                           str+='<div class="pl-list-main"><div class="pl-list-nick"> '+v.user_id+'</div>';
+                           str+='<div class="pl-list-content">'+v.user_desc+'</div>';
+                           str+='<div class="pl-list-btm clearfix"><span class="pl-list-time l">时间: '+v.add_time+'</span></div>';
+                           str+='</li>';
+                        })
+                        $('#yan').html(str);
+                        $("#js-pl-textarea").val('');
+                    }
+                }
+        });
 
+ })
 </script>
 
 

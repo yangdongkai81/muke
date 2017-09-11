@@ -42,13 +42,17 @@ class CourseController extends Controller
      {
         $id = $res->id;
         $arr = DB::table('free_attr')->where('chapter_id',$id)->get();
-        echo json_encode($arr);
+        
+        return json_encode($arr);
      }
      //播放视频
      public function course_bo($id='')
      {  
 
         $arr = DB::table('free_attr')->where('id',$id)->get();
+
+
+
         return view('Home.course.course_fang',['arr'=>$arr]);
      }
      //搜索方向
@@ -62,6 +66,7 @@ class CourseController extends Controller
         $row['pid'] = $id;
         $row['fid'] = 0;
         $row['lx'] = '';
+
         return view('Home.course.so',$row);
      }
      //搜索分类
@@ -75,6 +80,7 @@ class CourseController extends Controller
         $row['fid'] = $id;
         $row['pid'] = 0;
         $row['lx'] = '';
+
         return view('Home.course.so',$row);
      }
      //搜索类型
@@ -87,6 +93,7 @@ class CourseController extends Controller
         $row['fid'] = '';
         $row['pid'] = 0;
         $row['lx'] = $id;
+
         return view('Home.course.so',$row);
 
 
@@ -101,9 +108,31 @@ class CourseController extends Controller
         $in = DB::table('free_comment')->insert($row);
         if ($in) {
             $arr = DB::select('SELECT  FROM_UNIXTIME(add_time, "%Y-%c-%d %h:%i:%s" ) as add_time,id,user_id,curriculum_id,user_desc,zhang_id,is_name,status  FROM  free_comment order by id desc');
-           echo json_encode($arr);
+          
+           return json_encode($arr);
         }else{
-            echo 2;
+
+           return 2;
+        }
+     }
+
+      //3级页面发表评论
+     public function course_zfa(request $res)
+     {  
+        $zid = $res->zid;
+        $row['zhang_id'] = $res->zid;//章节ID
+        $row['user_desc'] = $res->content;
+        $row['add_time'] = time();
+        $row['user_id'] = 1;//模拟用户ID
+        $in = DB::table('free_comment')->insert($row);
+        if ($in) {
+            $arr = DB::select("SELECT  FROM_UNIXTIME(add_time, '%Y-%c-%d %h:%i:%s' ) as add_time,id,user_id,curriculum_id,user_desc,zhang_id,is_name,status  FROM  free_comment WHERE zhang_id ='$zid'  order by id desc");
+            
+            return json_encode($arr);
+
+        }else{
+
+            return 2;
         }
      }
 
