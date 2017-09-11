@@ -15,10 +15,12 @@ class IntegralController extends Controller
     public function integral_index()
     {
         $login_id=\Session::get('login_id');
+
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
+         //var_dump($res);die;
         $res2=DB::table('users')->where('id',$login_id)->first();
-    	$data=DB::table('integral')->get();
-    	 return view('Home.integral.index',['data'=>$data,'res'=>$res,'res2'=>$res2]);
+      	$data=DB::table('integral')->get();
+    	  return view('Home.integral.index',['data'=>$data,'res'=>$res,'res2'=>$res2]);
     }
 //前台积分展示虚拟商品 
     public function fictitious()
@@ -26,8 +28,8 @@ class IntegralController extends Controller
         $login_id=\Session::get('login_id');
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
         $res2=DB::table('users')->where('id',$login_id)->first();
-    	$data=DB::table('integral')->where('classification',"虚拟分类")->get();
-    	 return view('Home.integral.index1',['data'=>$data,'res'=>$res,'res2'=>$res2]);
+      	$data=DB::table('integral')->where('classification',"虚拟分类")->get();
+      	return view('Home.integral.index1',['data'=>$data,'res'=>$res,'res2'=>$res2]);
     }
 //前台积分展示实体商品 
     public function entity()
@@ -35,44 +37,45 @@ class IntegralController extends Controller
         $login_id=\Session::get('login_id');
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
         $res2=DB::table('users')->where('id',$login_id)->first();
-    	$data=DB::table('integral')->where('classification',"实体分类")->get();
-    	 return view('Home.integral.index2',['data'=>$data,'res'=>$res,'res2'=>$res2]);
+      	$data=DB::table('integral')->where('classification',"实体分类")->get();
+    	  return view('Home.integral.index2',['data'=>$data,'res'=>$res,'res2'=>$res2]);
     }
 //前台商品详情方法
     public function details(Request $res)
     {
         $login_id=\Session::get('login_id');
+        //var_dump($login_id);die;
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
         //var_dump($res);die;
         $res2=DB::table('users')->where('id',$login_id)->first();
-       // var_dump($res2);die;
-    	$id=$res->id;
-    	//echo $id;die;
-    	$data=DB::table('integral')->where('id',$id)->first();
-    	//var_dump($data);die;
-    	 return view('Home.integral.details',['data'=>$data,'res'=>$res,'res2'=>$res2]);
+        // var_dump($res2);die;
+      	$id=$res->id;
+      	//echo $id;die;
+    	  $data=DB::table('integral')->where('id',$id)->first();
+      	//var_dump($data);die;
+    	  return view('Home.integral.details',['data'=>$data,'res'=>$res,'res2'=>$res2]);
     }
 //前台兑换商品页面
     public function exchange(Request $res)
     {
-    	 $login_id=\Session::get('login_id');
+    	  $login_id=\Session::get('login_id');
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
         $money=$res->integral;
-       // echo $money;die;;
-    	$id=$res->id;
-    	// echo $id;die;
-    	$data=DB::table('integral')->where('id',$id)->first();
-    	$money1=$data->integral;
-    	//echo $money1;die;
-    	if ($money<$money1) {
+        //echo $money;die;;
+    	  $id=$res->id;
+      	// echo $id;die;
+      	$data=DB::table('integral')->where('id',$id)->first();
+      	$money1=$data->integral;
+      	//echo $money1;die;
+      	if ($money<$money1) {
     	  return view('pc.index.jump')->with([
              'message'=>'您的积分不足',
              'url'=>"/public/details/{$id}",
              'jumpTime'=>2, 
     	  	]);
-    	}else
-    	{
-            $id=$res->id;
+    	  }else
+    	  {
+        $id=$res->id;
         $res=DB::table('integral')->where('id',$id)->first();
         $name=$res->name;
         $logo=$res->logo;
