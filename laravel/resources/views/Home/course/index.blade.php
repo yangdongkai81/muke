@@ -18,14 +18,14 @@
                         <div class="bd">
                             <ul class="">
                                 <li class="course-nav-item  on">
-                                    <a href="http://www.imooc.com/course/list">全部</a>
+                                    <a href="{{url('course_index')}}">全部</a>
                                 </li>
                                 <?php foreach ($fang as $k => $v) {?>
                                  
                             
                                                                                                         <li class="course-nav-item ">
                                    
-                                        <a href="http://www.imooc.com/course/list?c=fe" data-ct="fe">{{$v->aspect_name}}</a>
+                                        <a href="{{url('course_so')}}/{{$v->id}}" data-ct="fe">{{$v->aspect_name}}</a>
                                     </li>
                                 <?php } ?>
                                    
@@ -37,7 +37,7 @@
                         <div class="bd">
                             <ul class="">
                                                                                                                         <li class="course-nav-item on">
-                                    <a href="http://www.imooc.com/course/list?c=fe">全部</a>
+                                    <a href="{{url('course_index')}}">全部</a>
                                 </li>
                                                                         
                                                                         
@@ -45,7 +45,7 @@
                                 <?php foreach ($fen as $key => $v) {?> 
                                                                
                                 <li class="course-nav-item ">
-                                                            <a href="http://www.imooc.com/course/list?c=html" data-id="7" data-ct="fe">{{$v->aspect_name}}</a>
+                                                            <a href="{{url('course_sofen')}}/{{$v->id}}">{{$v->aspect_name}}</a>
                                                         </li>
                                                 
                                <?php } ?>                                        
@@ -67,11 +67,11 @@
                             <ul class="">
 
                                 <li class="course-nav-item on">
-                                        <a href="http://www.imooc.com/course/list?c=fe">全部</a>
+                                        <a href="{{url('course_index')}}">全部</a>
                                 </li>
                                 <?php foreach ($le as $key => $v) {?>
                                                               <li class="course-nav-item ">
-                                        <a href="http://www.imooc.com/course/list?c=fe&amp;type=1">{{$v->mold_name}}</a>
+                                        <a href="{{url('course_sole')}}/{{$v->id}}">{{$v->mold_name}}</a>
                                     </li>
                                 <?php  } ?> 
                                 
@@ -88,8 +88,8 @@
 
    <?php  foreach ($ke as $key => $v) {?>
   
-	<li>												
-			<div class="course-card-container">
+	<li >												
+			<div class="course-card-container" style="padding-left:60px;">
 	<a target="_blank" href="{{url('course_learn')}}/{{$v->id}}" class="course-card">
 		
 		<div class="course-card-top">

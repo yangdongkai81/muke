@@ -15,9 +15,11 @@ class IntegralController extends Controller
     public function integral_index()
     {
         $login_id=\Session::get('login_id');
+
         $res=DB::table('integral2')->where('login_id',$login_id)->first();
         $res2=DB::table('users')->where('id',$login_id)->first();
     	$data=DB::table('integral')->get();
+        
     	 return view('Home.integral.index',['data'=>$data,'res'=>$res,'res2'=>$res2]);
     }
 //前台积分展示虚拟商品 

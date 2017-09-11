@@ -12,8 +12,15 @@ class LoginController extends Controller
 {
     public function index()
     {
-        // echo 1;die;
     	return view('login/login');
+    }
+    /**
+     * 清楚session
+     */
+    public function clearSession(request $request)
+    {
+        $request->session()->forget('login_id');
+        return redirect('index_index');
     }
 
     /**
@@ -90,9 +97,7 @@ class LoginController extends Controller
             //生成  4位数的验证码 并且存储$SESSION
             $rand=rand(1000,9999);
             //存储session
-           // Session::set('rand',$rand);
             $res->session()->put(['rand'=>$rand]);
-            //session('rand');
             $this->sendTemplateSMS($tel,array($rand,5),1);//手机号码，替换内容数组，模板ID
     }
 
@@ -107,9 +112,6 @@ class LoginController extends Controller
     public function qqlogin()
     {
         return redirect('charge_index');
-        // echo 1; exit;
-        // $user = Socialite::driver('qq')->user();
-        // dd($user);
     }
 
 /**

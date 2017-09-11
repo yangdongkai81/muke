@@ -30,9 +30,9 @@
                         <li class="cato-nav-item on">
                             <a href="/" id="cato">全部</a>
                         </li>
-                        @foreach ($typelist as $val)
+                        @foreach ($type as $val)
                             <li class="cato-nav-item ">
-                                <a href="/?c=op" data-ct="op">{{ $val->Type_name }}</a>
+                                <a href="/?c=op" data-ct="op">{{ $val->aspect_name }}</a>
                             </li>
                         @endforeach
 
@@ -40,12 +40,12 @@
                 </div>
             </div>
             <div class="skill-nav-box l">
-                <p class="smalle-title">热门分类:</p>
+                <p class="smalle-title">按分类:</p>
                 <div class="cato-nav-row">
                     <ul class="">
                         @foreach ($direction as $v)
                             <li class="cato-nav-item ">
-                                <a href="/?c=html" data-ct="html">{{ $v->Direction_name }}</a>
+                                <a href="/?c=html" data-ct="html">{{ $v->aspect_name }}</a>
                             </li>
                         @endforeach
 
@@ -57,12 +57,12 @@
         <!-- 类别 end -->
 
         <div class="screening-box clearfix">
-            <div class="screening-time l">
+           <!--  <div class="screening-time l">
                 <span><a href="/" class="on">默认排序</a></span>
                 <span><a href="/?sort=2" >最新</a></span>
                 <span><a href="/?sort=1" >销量</a></span>
                 <span><a href="/?sort=3" >评价数</a></span>
-            </div>
+            </div> -->
             <!-- 判断登录 && 并且购买过实战课程 -->
         </div>
 
@@ -71,9 +71,10 @@
             <div class="shizhan-course-list clearfix">
                 <!-- 前4个课程追加渠道统计链接 -->
 
-
-                @foreach ($curr as $v)
-
+ 
+  @foreach ($arr as $v)
+                         
+   
                 <div class="shizhan-course-wrap l">
                     <a href="/class/131.html">
 
@@ -81,20 +82,20 @@
                             <!-- 学习进度 -->
                             <div class="box">
                                 <div class="img-box">
-                                    <img  class="shizhan-course-img" alt="Vue + Django REST framework 打造生鲜电商项目" src="http://szimg.mukewang.com/59a5415a0001ccf505400300-360-202.jpg">
+                                    <img  class="shizhan-course-img" alt="{{$v->desc}}" src="/public/uploads/{{$v->img}}"  >
                                 </div>
                                 <div class="shizhan-intro-box">
-                                    <p class="shizan-name" title="Vue + Django REST framework 打造生鲜电商项目">{{$v->curriculum_name}}</p>
-                                    <p class="shizan-desc" title="{{$v->desc}}"> {{$v->desc}}</p>
+                                    <p class="shizan-name" title="{{$v->course_name}}">{{$v->course_name}}</p>
+                                    <p class="shizan-desc" title="{{$v->desc}}">{{$v->desc}}</p>
                                     <div class="shizhan-info-bottom">
                                         <div class="bottom-box clearfix">
                                             <div class="evaluation-box l">
                                                 <div class="shizhan-info">
-                                                    <span>中级</span>
-                                                    <i>·</i>
+                                                    <span>{{$v->leve}}</span>
+                                                    <i></i>
                                                     <span>23人学习</span>
                                                 </div>
-                                                <div class="stars"><i class="sz-star on"></i><i class="sz-star on"></i><i class="sz-star on"></i><i class="sz-star on"></i><i class="sz-star on"></i></div>
+                                              <!--   <div class="stars"><i class="sz-star on">12</i><i class="sz-star on"></i><i class="sz-star on"></i><i class="sz-star on"></i><i class="sz-star on"></i></div> -->
                                                 <div class="evaluation-desc-box clearfix">
                                                     <i class="trangle"></i>
                                                     <div class="left-box l">
@@ -114,7 +115,7 @@
                                                 <!-- 有促销价 -->
                                                 <!-- 没有促销价 -->
                                                 <p class="shizhan-price"></p>
-                                                <p class="shizhan-course-price">{{$v->price}}</p>
+                                                <p class="shizhan-course-price">￥{{$v->price}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -126,19 +127,14 @@
                         </div>
                     </a>
                 </div>
-                @endforeach
 
-            <div class="page"><span class="disabled_page">首页</span><span class="disabled_page">上一页</span><a href="javascript:void(0)" class="active">1</a><a href="/?sort=0&unlearn=0&page=2">2</a><a href="/?sort=0&unlearn=0&page=3">3</a><a href="/?sort=0&unlearn=0&page=2">下一页</a><a href="/?sort=0&unlearn=0&page=3">尾页</a></div>
+        @endforeach
+
+           
         </div>
     </div>
     <!-- 课程列表end -->
-
-
-
-
-
-
-
+ <div class="page"><span class="disabled_page">首页</span><span class="disabled_page">上一页</span><a href="javascript:void(0)" class="active">1</a><a href="/?sort=0&unlearn=0&page=2">2</a><a href="/?sort=0&unlearn=0&page=3">3</a><a href="/?sort=0&unlearn=0&page=2">下一页</a><a href="/?sort=0&unlearn=0&page=3">尾页</a></div>
 
 @stop
 

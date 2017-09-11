@@ -8,6 +8,7 @@
 
 
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,course/common-less.css,course/view-less.css,course/learn-less.css,u/dynamic/home-less.css?v=201708281028" type="text/css" />
+
 @stop
 
 @section('content')
@@ -30,8 +31,8 @@
         <div class="statics clearfix">
             
                         <div class="moco-btn l learn-btn green-btn red-btn"> 
-                <a href="http://www.imooc.com/code/49" class="J-learn-course">开始学习</a>
-                <em></em>
+
+               程序人生！
                 <i class="follow-action js-follow-action icon-star_outline" data-cid="9" data-cmd="follow" title="收藏"></i>
             </div>
                         
@@ -118,28 +119,27 @@
             <!-- 课程简介 end -->
             <div class="mod-tab-menu ">
 	<ul class="course-menu clearfix">
-		<li><a class="ui-tabs-active active" id="learnOn" href="http://www.imooc.com/learn/9"><span>章节</span></a></li>
-		<li><a id="commentOn" class="" href="http://www.imooc.com/comment/9"><span>评论</span></a></li>
-		<li><a id="qaOn" class="" href="http://www.imooc.com/qa/9/t/1?page=1"><span>问答</span></a></li>
-		<li><a id="noteOn" class="" href="http://www.imooc.com/note/9?sort=last&amp;page=1"><span>笔记</span></a></li>
+		<li><a class="ui-tabs-active active" id="learnOn" href="javascript:void(0)" ><span id="zhang">章节</span></a></li>
+		<li><a id="commentOn" class="" href="javascript:void(0)" ><span id="ping">评论</span></a></li>
+		
 	    <!--
         <li><a id="wikiOn" class="" href="/wiki/9">WIKI</a></li>
         -->
 	</ul>
-	
+	<input type="hidden" value="{{$kid}}" id="kid">
 </div><!-- 课程面板 -->
-     
+     <div id="sh" >
      <?php foreach ($zhang as $key => $v) {?>
 
             <!-- 课程章节 --> 
-            <div class="mod-chapters">
+            <div class="mod-chapters" >
                                         <div class="chapter chapter-active">
                     <!-- 章节标题 -->
        
        
                     <h3>
                       
-                        <span class="icon-drop_down js-close js-open" id="{{$v->id}}"></span>
+                        <span class="js-close " id="{{$v->id}}" style="font-size:13px">▶</span>
                         <strong>
                             <i class="icon-chapter"></i>
                             {{$v->chapter_name}}
@@ -164,6 +164,56 @@
                                     </div> 
      <?php } ?>   
             <!-- 课程章节 end -->
+     </div>
+    <!-- 评论开始   --> 
+     <div style="display:none" id="pi">
+            <div class="publish-wrap publish-wrap-pl">
+                <div class="pl-input-wrap clearfix">
+               
+                    <div id="js-pl-input-fake" class="pl-input-inner l" style="margin-left:5px;">
+                       
+                       <textarea id="js-pl-textarea" class="js-placeholder" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！"  style="width:764px;height:100px; border:solid 1px #DDDDDD; resize:none;  margin:20px;20px;20px;20px;"></textarea>
+                      
+                    </div>
+             
+                        <div class="verify-code l"></div>
+              
+             <button style="width: 80px; cursor: pointer;
+ 
+line-height: 38px;
+text-align: center;
+font-weight: bold;
+color: #FFFFFF;
+background-color: #00AA00;
+text-shadow:1px 1px 1px #3333;
+border-radius: 5px;
+position: relative;
+overflow: hidden;margin-left:708px;" id="fa">发表评论</button>
+              
+                </div>
+
+            </div>
+       <br/>
+        <div id="plLoadListData">
+           <div class="pl-container">
+              <ul id="yan"> 
+            <?php foreach ($arr as $key => $v) {?>  
+           
+                   <li class="pl-list clearfix" style="border-top:2px #DDDDDD solid; border-bottom:2px #DDDDDD solid;">
+                        <div class="pl-list-main" style="margin:30px;30px;40px;40px;"> 
+                                 <a href="#" target="_blank"  style="font-size:16px;color:#AAAAAA">发言者：<?=$v->user_id?></a>
+                                 <div class="pl-list-content"><?=$v->user_desc?></div>  
+                                 <div class="pl-list-btm clearfix">
+                                      <span style="font-size:12px;color:#AAAAAA">时间: <?=date('Y-m-d H:i:s',$v->add_time)?></span>
+                                 </div> 
+                        </div> 
+                   </li> 
+            <?php  } ?>
+              </ul>
+           </div>
+        </div>
+    </div>
+    <!-- 评论结束 -->
         </div><!--content end-->
         <div class="aside r">
             <div class="bd">
@@ -208,8 +258,14 @@
 <script src="/public/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
     $('.js-close').live('click',function(){
+      var html = $(this).html(); 
       var id = $(this).attr('id');
       var _token=$("input[name='_token']").val();
+      if (html!='▶') {
+        $('#'+id).html('▶');
+         $('.ying').hide();
+      }else{
+    
         $.ajax({
                 type: "POST",
                 url: "/public/course_ajax",
@@ -218,10 +274,59 @@
                 success: function(msg){
                   str='';
                   $(msg).each(function(k,v){
-                       str+='<li><a href="id='+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
+                       str+='<li class="ying"><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
                   })
                 $(".video"+id).html(str)
+                $('#'+id).html('▼');
                 }
         });
+     }
     })
+
+ $("#zhang").live('click',function(){
+    $("#sh").show();
+    $("#pi").hide();
+ })
+
+ $("#ping").live('click',function(){
+    $("#pi").show();
+    $("#sh").hide();
+ })
+ $("#fa").live('click',function(){
+    var html = $("#js-pl-textarea").val();
+    var kid = $("#kid").val();
+    var _token=$("input[name='_token']").val();
+        $.ajax({
+                type: "POST",
+                url: "{{url('course_fa')}}",
+                data: "content="+html+"&kid="+kid+"&_token="+_token,
+                dataType:"json",
+                success: function(msg){
+                    if (msg==2) {
+                        alert('发表失败！');
+                    }else{
+                        str='';
+                        $.each(msg,function(k,v){
+                           str+='<li class="pl-list clearfix" style="border-top:2px #DDDDDD solid; border-bottom:2px #DDDDDD solid;">';
+                           str+='<div class="pl-list-main" style="margin:30px;30px;40px;40px;"><a href="#" target="_blank"  style="font-size:16px;color:#AAAAAA">发言者：'+v.user_id+'</a>';
+                           str+='<div class="pl-list-content">'+v.user_desc+'</div>';
+                           str+='<div class="pl-list-btm clearfix"><span style="font-size:12px;color:#AAAAAA">时间：'+v.add_time+'</span>';
+                           str+='</div></div></li>';
+                        })
+                        $('#yan').html(str);
+                        $("#js-pl-textarea").val('');
+                    }
+                }
+        });
+
+ })
 </script>
+
+                         
+                                 
+                                   
+                                 
+                                      
+                                 
+                         
+                    

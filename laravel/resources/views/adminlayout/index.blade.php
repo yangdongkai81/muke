@@ -34,6 +34,7 @@
     <li><a href="info.html" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
     <li><a href="pass.html" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
   </ul>   
+
   <h2><span class="icon-user"></span>回复用户</h2>
   <ul style="display:block">
     <li><a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu' target="right"><span class="icon-caret-right"></span>回复用户</a></li>
@@ -52,6 +53,10 @@
             <li><a href="admin_charge_type" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
             <li><a href="admin_charge_direction" target="right"><span class="icon-caret-right"></span>课程方向管理</a></li>
         </ul> 
+  <h2><span class="icon-pencil-square-o"></span>手记管理</h2>
+    <ul>
+        <li><a href="{{ url('article_manage') }}" target="right"><span class="icon-caret-right"></span>手记列表</a></li>
+    </ul> 
 </div>
 <script type="text/javascript">
 $(function(){
