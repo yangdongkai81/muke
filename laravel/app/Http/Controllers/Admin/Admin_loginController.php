@@ -19,22 +19,26 @@ class Admin_loginController extends Controller
    public function login_do(Request $res)
    {
    		
-   		$name=$res->name;
-   		$password=$res->password;
-   		$code=$res->code;
-   		$data=DB::table('admin_login')->where('name',$name)->where('pwd',$password)->first();
-   		if ($data) {
-   			$session = new Session;
-   			$code1 = $session->get("session");
-   			if ($code!=$code1) {
-   				echo "验证码错误";
-   			}else {
-   			 return view('Admin.admin_course.index');
-   			}
-   		}else
-   		{
-   			echo "用户名或者密码错误";
-   		}
+   	$name=$res->name;
+		$password=$res->password;
+		$code=$res->code;
+		$data=DB::table('admin_login')->where('name',$name)->where('pwd',$password)->first();
+		if ($data) {
+			$session = new Session;
+			$code1 = $session->get("session");
+         //echo $code1;die;
+			if ($code!=$code1) {
+				echo "验证码错误";
+			}else {
+         $session->set("name",$name);
+         $name = $session->get("name");
+        
+			 return view('Admin.admin_course.index');
+			}
+		}else
+		{
+			echo "用户名或者密码错误";
+		}
    }
   
   
