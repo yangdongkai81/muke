@@ -174,7 +174,7 @@
                 </div>
                 @endif
                 <div class="df-bottom clearfix">
-                    <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px; height:40px;" class="ipt">
+                    <input type="text" id="comment-ipt" placeholder="请输入..." style="width:440px; height:50px;" class="ipt">
                     <button id="js-submit" data-id="{{ $info->id }}" class="btn btn-green r">评论</button>
                 </div>
             </div>

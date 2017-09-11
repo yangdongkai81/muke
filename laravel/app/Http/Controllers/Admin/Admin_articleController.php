@@ -49,8 +49,10 @@ class Admin_articleController extends Controller
 
     	if($art_data['status'] == 0){
     		$res = $article->where('id', '=', $id)->update(['status'=>1]);
+            
     		return $res;
     	}
+
     	return 0;
     }
 
@@ -67,10 +69,19 @@ class Admin_articleController extends Controller
 
     	$result = $article->where('id', '=', $id)->delete();
 
-    	if ($result) {
-    		return 1;
-    	} else {
-    		return 0;
-    	}
+    	return $result ? 1 : 0;
+    }
+
+    /**
+     * 手记置顶
+     * @return [int]       1 设置成功  0 设置失败
+     */
+    public function article_top(Request $res)
+    {
+        $id = $res->id;
+
+        $article = new Article;
+
+        $article->where('status', 3)->first();
     }
 }
