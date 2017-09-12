@@ -147,12 +147,9 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('del', 'Admin_integralController@del');
       Route::any('up', 'Admin_integralController@up');
       Route::any('update', 'Admin_integralController@update');
-<<<<<<< HEAD
 
-     //后台登录
-=======
     //后台登录
->>>>>>> 2017-9-2-integrar
+
       Route::any('admin_index', 'Admin_loginController@admin_index');
       Route::any('login_do', 'Admin_loginController@login_do');
             //定义一个验证码的路由，用验证码的时候直接调用这个方法就行

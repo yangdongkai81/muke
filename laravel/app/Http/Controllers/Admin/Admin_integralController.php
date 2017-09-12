@@ -7,49 +7,54 @@ use DB;
 use Symfony\Component\HttpFoundation\Session\Session;
 class Admin_integralController extends Controller
 {  
-//积分后台首页
+   
+    /**
+     * 积分后台首页
+     * @return [type] [description]
+     */
     public function admin_add()
     { 
-        // echo "111";die;
-     	  return view("Admin.admin_integral.add");
+     	return view("Admin.admin_integral.add");
     }
-//执行添加
+    /**
+     * 执行添加
+     * @return [type] [description]
+     */
     public function add_do(Request $res)
     {
        	$file = $res->file('logo');
-       	//var_dump($logo);die;
         if ($file->isValid()) {
-        // 上传目录。 public目录下 uploads 文件夹
         $dir = 'uploads/';
-        // 文件名。格式：时间戳 + 6位随机数 + 后缀名
         $filename = time() . mt_rand(100000, 999999) . '.' . $file ->getClientOriginalExtension();
         $file->move($dir, $filename);
         $path ="/public/uploads/".$filename;//
-        //接收表单的值
         $name=$_POST['name'];
         $classification=$_POST['classification'];
-        // echo $classification;die;
         $integral=$_POST['integral'];
         $time=time();
         $res=DB::table('integral')->insert(['name'=>$name,'classification'=>$classification,'integral'=>$integral,'logo'=>$path,'time'=>$time]);
         if($res){
-           return redirect('show');
+
+            return redirect('show');
             }
         }
     }
-//商品展示
+    /**
+     *商品展示
+     * @return [type] [description]
+     */
     public function show()
     {
         $users = DB::table('integral')->paginate(2);
-        // print_r($users);die;
-        // foreach ($users as $key => $value) {
-        //    print_r($value->id);die;
-        // }
+
         return view('Admin.admin_integral.show',[
           'data'=>$users
         ]);
     }
-//执行删除
+    /**
+     *执行删除
+     * @return [type] [description]
+     */
     public function del(Request $request)
     {
         header("content-type:text/html;charset=utf-8");
@@ -57,59 +62,58 @@ class Admin_integralController extends Controller
         $name = $session->get("name");
         $data1=DB::table('admin_login')->where('name',$name)->first();
         $role_id=$data1->role_id;
-        //echo $role_id;
         $uri = $request->path();
         $data2=DB::table('admin_auth')->where('auth_a',$uri)->first();
         $role_ids=$data2->role_id;
         $role_idss=explode(',', $role_ids);
-        //var_dump($role_idss);
-         if (in_array($role_id, $role_idss)) {
-          // exit('11');
-         echo "您没有权限进行删除";die;
-         }
-          // exit('22');
+        if (in_array($role_id, $role_idss)) {
+            
+           return "您没有权限进行删除";
+        }
         $id=$_GET['id'];
         $res=DB::table('integral')->where('id',$id)->delete();
         if ($res) {
+
          return redirect('show');
         }
     }
-//查询所要修改的语句 
+    /**
+     *查询所要修改的语句
+     * @return [type] [description]
+     */ 
     public function up()
     {
         $id=$_GET['id'];
         $res=DB::table('integral')->where('id',$id)->first();
         if ($res) {
-        //Admin.admin_integral.add_blade
+
         return view('Admin/admin_integral/update_blade',[
             'data'=>$res
         ]);
         }
     }
-//执行修改
+    /**
+     *执行修改
+     * @return [type] [description]
+     */ 
     public function update(Request $res)
     {
-        //获取图片信息
         $file = $res->file('logo');
-         //var_dump($logo);die;
         if ($file->isValid()) {
-        // 上传目录。 public目录下 uploads 文件夹
         $dir = 'uploads/';
-        // 文件名。格式：时间戳 + 6位随机数 + 后缀名
         $filename = time() . mt_rand(100000, 999999) . '.' . $file ->getClientOriginalExtension();
         $file->move($dir, $filename);
         $path ="/public/uploads/".$filename;//
-        //接收表单的值
         $id=$_POST['id'];
         $name=$_POST['name'];
         $classification=$_POST['classification'];
-        // echo $classification;die;
         $integral=$_POST['integral'];
         $time=date('Y-m-d H:i:s');
         $arr=array('id'=>$id,'name'=>$name,'classification'=>$classification,'integral'=>$integral,'logo'=>$path,'time'=>$time);
         $res=DB::table('integral')->where('id',$id)->update($arr);
         if ($res) {
-        return redirect('show');
+
+            return redirect('show');
           }
         }
     }
