@@ -104,6 +104,17 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('exchange_do/{id}', 'IntegralController@exchange_do');
         Route::any('order', 'IntegralController@order');
 
+        //首页订单中心
+        Route::any('order_index', 'OrderController@order_index');
+        //优惠券
+        Route::any('coupon', 'OrderController@coupon');
+        //消费记录
+        Route::any('record', 'OrderController@record');
+        Route::any('show_coupon', 'OrderController@show_coupon');
+        Route::any('coupon_detail/{id}', 'OrderController@ccoupon_detail');
+        Route::any('detail', 'OrderController@detail');
+        //个人的学习记录
+    Route::any('mycourse_index', 'MycourseController@mycourse_index');
     });
 });
 
@@ -130,7 +141,7 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::get('/mold_void',['uses'=>'Admin_courseController@mold_void']);
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
-        //积分商城后台路由设置
+    //积分商城后台路由设置
       Route::any('admin_add', 'Admin_integralController@admin_add');
       Route::any('add_do', 'Admin_integralController@add_do');
       Route::any('show', 'Admin_integralController@show');
@@ -138,7 +149,8 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('up', 'Admin_integralController@up');
       Route::any('update', 'Admin_integralController@update');
 
-     //后台登录
+    //后台登录
+
       Route::any('admin_index', 'Admin_loginController@admin_index');
       Route::any('login_do', 'Admin_loginController@login_do');
             //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
