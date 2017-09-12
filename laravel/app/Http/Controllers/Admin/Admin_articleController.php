@@ -49,8 +49,10 @@ class Admin_articleController extends Controller
 
     	if($art_data['status'] == 0){
     		$res = $article->where('id', '=', $id)->update(['status'=>1]);
+            
     		return $res;
     	}
+
     	return 0;
     }
 
@@ -67,10 +69,56 @@ class Admin_articleController extends Controller
 
     	$result = $article->where('id', '=', $id)->delete();
 
-    	if ($result) {
-    		return 1;
-    	} else {
-    		return 0;
-    	}
+    	return $result ? 1 : 0;
+    }
+
+    /**
+     * 手记置顶
+     * @return [int]       1 设置成功  0 设置失败
+     */
+    public function article_top(Request $res)
+    {
+        $id = $res->id;
+
+        $article = new Article;
+
+        $old_id = $article->where('status', 3)->lists('id');
+
+        if ($id == $old_id) {
+            return 2;
+        }
+        if ($old_id) {
+            //事务处理
+            DB::beginTransaction();
+            try{
+                $article->where('id', $old_id)->update(['status'=>1]);
+                $article->where('id', $id)->update(['status'=>3]);
+                DB::commit();
+
+                return 1;
+            }catch (\Exception $e){
+                //回滚
+                DB::rollBack();
+
+                return 0;
+            }
+        } else {
+            $result = $article->where('id', $id)->update(['status'=>3]);
+        }
+
+        return $result ? 1 : 0;
+    }
+
+    /**
+     * 手记推荐
+     * @return [int]    1 设置成功  0 设置失败
+     */
+    public function recommend(Request $res)
+    {
+        $id = $res->id;
+
+        $article = new Article;
+
+        
     }
 }

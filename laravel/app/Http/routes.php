@@ -156,6 +156,8 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');
       Route::get('article_del','Admin_articleController@article_del');
+      Route::get('article_top','Admin_articleController@article_top');
+      Route::get('recommend','Admin_articleController@recommend');
     
       //猿问
       Route::any('examine_list',['uses' => 'Admin_questionController@examine_list']);
