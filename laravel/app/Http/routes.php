@@ -160,9 +160,11 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::get('recommend','Admin_articleController@recommend');
     
       //猿问
-      Route::any('examine_list',['uses' => 'Admin_questionController@examine_list']);
-      Route::any('examine',['uses' => 'Admin_questionController@examine']);
-      Route::any('delete',['uses' => 'Admin_questionController@dsssselete']);
+      Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
+      Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
+      Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+      //在线考试
+        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
     });
 });
 });
