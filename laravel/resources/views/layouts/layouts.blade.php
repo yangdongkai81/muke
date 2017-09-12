@@ -276,32 +276,33 @@
 
 
         <div id="J_GotoTop" class="elevator">
-
-            <a href="/user/feedback" class="elevator-msg" target="_blank">
-                <i class="icon-feedback"></i>
-                <span class="">意见反馈</span>
-            </a>
-            <a href="/about/faq" class="elevator-faq" target="_blank">
+            <a href="/about/faq" class="elevator-faq" target="_blank" id="zone">
                 <i class="icon-ques"></i>
-                <span class="">常见问题</span>
-            </a>
-            <a href="http://www.imooc.com/mobile/app" target="_blank" class="elevator-app" >
-                <i class="icon-appdownload"></i>
-                <span class="">APP下载</span>
-                <div class="elevator-app-box"></div>
-            </a>
-            <a href="javascript:void(0)" class="elevator-weixin no-goto" id="js-elevator-weixin" >
-                <i class="icon-wxgzh"></i>
-                <span class="">官方微信</span>
-                <div class="elevator-weixin-box"></div>
-            </a>
-            <a href="javascript:void(0)" class="elevator-top no-goto" style="display:none" id="backTop">
-                <i class="icon-up2"></i>
-                <span class="">返回顶部</span>
+                <span class="">分享</span>
             </a>
         </div>
-
-
+       <script src="/public/jquery.js"></script>
+        <script type="text/javascript">
+        $("#zone").click(function(){
+                var p = {
+                    url:location.href,
+                    showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+                    desc:'',/*默认分享理由(可选)*/
+                    summary:'网站没在上线,',/*分享摘要(可选)*/
+                    title:'匀称科技有限公司',/*分享标题(可选)*/
+                    site:'匀称科技有限公司',/*分享来源 如：腾讯网(可选)*/
+                    pics:'__IMG__<%$info.img.0.url%>', /*分享图片的路径(可选)*/
+                    style:'203',
+                    width:98,
+                    height:22
+                };
+                var s = [];
+                for(var i in p){
+                    s.push(i + '=' + encodeURIComponent(p[i]||''));
+                }
+                window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?"+s.join('&'));
+            });   
+        </script>
 
         <!--script-->
         <script type="text/javascript" src="//moco.imooc.com/static/monitor/error.js"></script>
