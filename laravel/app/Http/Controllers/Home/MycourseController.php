@@ -9,7 +9,11 @@ use App\Http\Controllers\Controller;
 
 class MycourseController extends Controller
 {
-//前台展示我的浏览记录
+
+   /**
+    * 前台展示我的浏览记录
+    * @return [type] [description]
+    */
     public function mycourse_index()
     {
    	    header("content-type:text/html;charset=utf-8");
@@ -42,14 +46,14 @@ class MycourseController extends Controller
             'data1'=>$result1
             ]);
 #普通的两表联查
-    // $result=DB::table('history')
-    //         ->join('free_course', 'history.curriculum_id', '=', 'free_course.id')
-    //         //->select('users.*', 'contacts.phone', 'orders.price')
-    //         ->get();
-    //  $id=1;
-    //  $result1=DB::table('users')->where('id',$id)->first();
-    //  var_dump($result);die;
-    //  return view('Home.mycourse.showcourse',['data'=>$result,'data1'=>$result1]);
+        // $result=DB::table('history')
+        //         ->join('free_course', 'history.curriculum_id', '=', 'free_course.id')
+        //         //->select('users.*', 'contacts.phone', 'orders.price')
+        //         ->get();
+        //  $id=1;
+        //  $result1=DB::table('users')->where('id',$id)->first();
+        //  var_dump($result);die;
+        //  return view('Home.mycourse.showcourse',['data'=>$result,'data1'=>$result1]);
 
    }
 
