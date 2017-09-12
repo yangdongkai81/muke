@@ -171,9 +171,9 @@
                                                         <div class="boss-button wow fadeInRight">
                                                             <a href="{{url('integral_index')}}" class="boss-about-button btn btn-default">积分商城</a>
                                                             <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">我的课程</a>
+                                                            <a href="{{url('mycourse_index')}}" class="boss-subscribe-button btn btn-default">我的课程</a>
                                                              <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">订单中心</a>
+                                                            <a href="{{url('order_index')}}" class="boss-subscribe-button btn btn-default">订单中心</a>
                                                             <p class="text-center" style="color:black">AND</p>
                                                             <a href="{{url('login_clearSession')}}" class="boss-subscribe-button btn btn-default">退出</a>
                                                         </div>
