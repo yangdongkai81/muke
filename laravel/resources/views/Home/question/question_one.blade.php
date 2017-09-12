@@ -494,9 +494,6 @@
                 {
                     ser += '<li class="clearfix">\
                             <div class="user-pic">\
-                                <a target="_blank" href="/u/4754213/bbs">\
-                                    <img alt="qq_夜尽天明_15" src="http://static.mukewang.com/img/user/587d76680001503401000100-40-40.jpg">\
-                                </a>\
                             </div>\
                             <div class="user-info clearfix">\
                                 <a class="from-user reply_name" id="'+msg.data[i].reply_user_id+'" href="/u/4754213/bbs">'+msg.answer_name[i]+'</a>\
