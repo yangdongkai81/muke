@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAdminLogin extends Migration
+class CreateTableHistory extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateTableAdminLogin extends Migration
      */
     public function up()
     {
-        Schema::create('admin_login', function (Blueprint $table) {
+        Schema::create('history', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100)->comment('用户名');
-            $table->string('pwd')->comment('密码');
+            $table->integer('curriculum_id')->comment('课程id');
+            $table->integer('user_id')->comment('角色id');
+            $table->dateTime('addtime')->comment('添加时间');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateTableAdminLogin extends Migration
      */
     public function down()
     {
-        Schema::drop('admin_login');
+        Schema::drop('history');
     }
 }
