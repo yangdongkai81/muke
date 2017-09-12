@@ -199,17 +199,13 @@
             <div class="comment clearfix">
                 <div class="feed-author l">
                     <a class="nick" href="javascript:;" target="_blank">用户{{ $comment['userinfo'] }}  :</a>
-                    <span class="com-floor r">{{ $comment['id'] }}F</span>
                 </div>
                 <div class="feed-list-content" style="margin-left:50px;">
                     <p></p>
                     <p>{{ $comment['content'] }}</p>
                     <p></p>
                     <div class="comment-footer clearfix">
-                        <!-- <span class="agree-with l"><b class="imv2-thumb_up" title="赞同"></b>
-                            <em>0</em>
-                        </span> -->
-                        <span class="reply-btn" data-fromid="{{ $comment['user_id'] }}" data-commentid="39052" data-uid="2467824" data-username="Kian_">回复</span>
+                        <span class="reply-btn" data-fromid="{{ $comment['user_id'] }}">回复</span>
                         <span class="feed-list-times r"> {{ date('Y-m-d H:i:s',$comment['add_time']) }}</span>
                     </div>
                 </div>
@@ -221,8 +217,8 @@
                 <div class="comment clearfix">
                     
                     <div class="feed-list-content"  style="margin-left:30px;">
-                        <a href="/u/3184671/articles" class="from-user">{{ $reply['from_user'] }}</a>
-                         回复 <a href="/u/4663260/articles" class="to-user">{{ $reply['to_user'] }}</a>
+                        <a href="javascript:;" class="from-user">{{ $reply['from_user'] }}</a>
+                         回复 <a href="javascript:;" class="to-user">{{ $reply['to_user'] }}</a>
                          ：<p>{{ $reply['content'] }}</p>
                          <div class="comment-footer clearfix">
                             <span class="reply-btn reply-btns" data-fromid="{{ $reply['from_user_id'] }}">回复</span>
@@ -341,9 +337,10 @@
             data:{content:content,art_id:art_id},
             success:function(res){
                 if(res == 1) {
-                    var str = '<div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a class="nick" href="/u/2467824/articles" target="_blank">用户'+email+'</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>'+content+'</p><p></p><div class="comment-footer clearfix"><span class="agree-with l"><b class="imv2-thumb_up" title="赞同"></b><em>0</em></span><span class="reply-btn">回复</span><span class="feed-list-times r"> 刚刚</span></div></div></div><div class="reply-box"></div><div class="release-reply"><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div class="release-reply-btn">回复</div></div></div></div></div></div>'
+                    /*var str = '<div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a class="nick" href="/u/2467824/articles" target="_blank">用户'+email+'</a></div><div class="feed-list-content"  style="margin-left:50px;"><p></p><p>'+content+'</p><p></p><div class="comment-footer clearfix"><span class="reply-btn">回复</span><span class="feed-list-times r"> 刚刚</span></div></div></div><div class="reply-box"></div><div class="release-reply"><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div class="release-reply-btn">回复</div></div></div></div></div></div>'
                     $('#js-feedback-list').prepend(str);
-                    $('.comment-num').find('i').text(count+1);
+                    $('.comment-num').find('i').text(count+1);*/
+                    location.reload();
                 } else if (res == 3) {
                     alert('请先登录');
                 }

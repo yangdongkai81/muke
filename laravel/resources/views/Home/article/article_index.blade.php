@@ -31,7 +31,11 @@
 <a class="article-ad-txt" title="{{ $article_top->title}}" data-ast="wenzhangindex_1_261" href="{{url('article_info').'/'.$article_top->id }}" target="_blank">
 <span>{{ $article_top->title}}</span>
 </a>
+	@if(!empty($article_top['img_path']))
 	<img src="{{$prefix}}./uploads/{{ $article_top->img_path }}" style="width:100%; height:100%" alt="{{ $article_top->title}}">
+	@else
+	<img src="{{$prefix}}./uploads/15051040938881.jpg" style="width:100%; height:100%" alt="{{ $article_top->title}}">
+	@endif
 </div>
 <div class="ad-font l">
 	<ul>
@@ -54,15 +58,7 @@
 
 </div>
 <div class="tag-wrap clearfix">
-<!-- 标签 -->
 
-<!-- <div class="article-tab clearfix">
-<a data-id="2" href="/article/tag/2" target="_blank">PHP</a>
-<div id="tagPop" class="tag-pop-layer">
-<a href="/article/tag/17" class="tag-detail" target="_blank">JavaScript</a>
-
-</div>
-</div> -->
 @if(!empty($tags))
 <div class="article-tab clearfix">
 @foreach($tags['show'] as $tag)

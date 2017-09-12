@@ -10,7 +10,7 @@
       <th width="15%">用户名称</th>
       <th width="15%">标题</th>
       <th width="15%">添加时间</th>
-      <th width="15%">审核状态</th>
+      <th width="15%">发布状态</th>
       <th width="25%">操作</th>
     </tr>
 @foreach($articles as $k => $article)
@@ -19,20 +19,22 @@
       <td>{{ $article['userinfo']->email }}</td>
       <td>{{ $article['title'] }}</td>
       <td>{{ date('Y-m-d H:i:s', $article['add_time']) }}</td>
-      <td data-status="{{$article['status']}}">
+      <td class="status" data-status="{{$article['status']}}">
         @if($article['status'] == 0)
         未审核
         @elseif($article['status'] == 1)
         审核通过
-        @else
-        审核不通过
+        @elseif($article['status'] == 3)
+        <span id="top">置顶中</span>
+        @elseif($article['status'] == 4)
+        推荐中
         @endif
       </td>
       <td>
         <div class="button-group">
-          <a class="button border-main" id="check" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
-          <a class="button border-main" id="recommend" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
-          <a class="button border-main" id="top" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
+          <a class="button border-main check"  data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
+          <a class="button border-main recommend" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
+          <a class="button border-main top" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
           <a class="button border-red" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-trash-o"></span> 删除</a>
         </div>
       </td>
@@ -43,7 +45,7 @@
 <script src="./jquery.min.js"></script>
 <script type="text/javascript">
     //手记审核
-    $('#check').click(function(){
+    $('.check').click(function(){
       var id = $(this).data('id');
       var status = $(this).parent().parent().prev().data('status');
       var obj = $(this);
@@ -86,14 +88,44 @@
     })
 
     //手记置顶
-    $('#top').click(function(){
+    $('.top').click(function(){
       var id = $(this).data('id');
       var obj = $(this);
       $.ajax({
         url:"{{ url('article_top') }}",
         data:{id:id},
         success:function(res){
-          console.log(res);
+          if(res == 1) {
+            alert('置顶成功');
+            obj.parent().parent().prev().html('<span id="top">置顶中</span>');
+            $('#top').text("审核通过");
+          } else if(res == 2){
+            alert('此记录已置顶');
+          } else {
+            alert('置顶失败');
+          }
+        }
+      })
+    })
+
+    //手记推荐
+    $('.recommend').click(function(){
+      var id = $(this).data('id');
+      var obj = $(this);
+      $.ajax({
+        url:"{{ url('article_top') }}",
+        data:{id:id},
+        success:function(res){
+          console.log(res);return false;
+          if(res == 1) {
+            alert('置顶成功');
+            obj.parent().parent().prev().html('<span id="top">置顶中</span>');
+            $('#top').text("审核通过");
+          } else if(res == 2){
+            alert('此记录已置顶');
+          } else {
+            alert('置顶失败');
+          }
         }
       })
     })
