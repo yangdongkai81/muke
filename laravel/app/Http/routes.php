@@ -43,16 +43,17 @@ Route::group(['namespace' => 'Home'], function(){
 
 
         //猿问模块
-        Route::get("wenda_index",['uses'=>'WendaController@Index']);
-        Route::get("issue",['uses'=>'WendaController@Issue']);
-        Route::get("question",['uses'=>'WendaController@Question']);
-        Route::any("question_add",['uses'=>'WendaController@Question_Add']);
-        Route::get("question_show",['uses'=>'WendaController@Question_Show']);
-        Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
-        Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
-        Route::any("reply",['uses'=>'WendaController@Reply']);
-        Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
-        Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
+        Route::get("question_index/{page?}",['uses'=>'QuestionController@index']);
+        Route::get("question",['uses'=>'QuestionController@question']);
+        Route::any("question_add",['uses'=>'QuestionController@question_add']);
+        Route::get("question_show",['uses'=>'QuestionController@question_show']);
+        Route::get("question_one/{id}",['uses'=>'QuestionController@question_one']);
+        Route::any("answer_add",['uses'=>'QuestionController@answer_add']);
+        Route::any("reply",['uses'=>'QuestionController@reply']);
+        Route::any("answer_praise",['uses'=>'QuestionController@answer_praise']);
+        Route::any("answer_oppos",['uses'=>'QuestionController@answer_oppos']);
+        Route::any("question_newest/{page?}",['uses'=>'QuestionController@question_newest']);
+        Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
@@ -170,11 +171,15 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');
       Route::get('article_del','Admin_articleController@article_del');
+      Route::get('article_top','Admin_articleController@article_top');
+      Route::get('recommend','Admin_articleController@recommend');
     
       //猿问
       Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
       Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
       Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+      //在线考试
+        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
     });
 });
 });

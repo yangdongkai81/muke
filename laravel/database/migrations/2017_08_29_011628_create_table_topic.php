@@ -14,11 +14,15 @@ class CreateTableTopic extends Migration
     {
         Schema::create('topic', function (Blueprint $table) {
             $table->increments('id')->comment("主键id");
-            $table->string('topic_title',60)->comment("话题名称");
-            $table->string('topic_introduce')->comment("话题简介");
-            $table->integer('topic_guest')->comment("话题嘉宾");
-            $table->integer('topic_time')->comment("话题创建时间");
-            $table->tinyInteger('topic_start')->comment("话题审核（0通过，1未通过）");
+            $table->string('desc',255)->comment("试题描述");
+            $table->integer('course_id')->comment("所属课程id");
+            $table->integer('type_id')->comment("所属类型id");
+            $table->tinyInteger('status',2)->comment("状态  0 正常  1异常");
+            $table->tinyInteger('enterprise',2)->comment("是否企业试题  0 是 1不是");
+            $table->string('option',500)->comment("题目选项");
+            $table->tinyInteger('topic_type',2)->comment("题目类型 0单选 1多选 2判断");
+            $table->string('correct',10)->comment("正确选项");
+
         });
     }
 
