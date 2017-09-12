@@ -160,6 +160,9 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
       Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
       Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+      //在线考试
+        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
+
     });
 });
 });
