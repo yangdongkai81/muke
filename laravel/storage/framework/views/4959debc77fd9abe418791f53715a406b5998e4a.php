@@ -1,7 +1,4 @@
 <?php $__env->startSection('header'); ?>
-<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
- <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
-<a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu'></a>
 
     <!DOCTYPE html>
     <html>
@@ -138,7 +135,7 @@
                 <li>
                     <a href="<?php echo e(url('charge_index')); ?>" target="_self">实战</a>
                 </li>
-                <li><a href="<?php echo e(url('wenda_index')); ?>" class="active" target="_self">猿问</a></li>
+                <li><a href="<?php echo e(url('question_index')); ?>" class="active" target="_self">猿问</a></li>
                 <li><a href="<?php echo e(url('article_index')); ?>"  target="_self">手记</a></li>
 
             </ul>
@@ -171,9 +168,9 @@
                                                         <div class="boss-button wow fadeInRight">
                                                             <a href="<?php echo e(url('integral_index')); ?>" class="boss-about-button btn btn-default">积分商城</a>
                                                             <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">我的课程</a>
+                                                            <a href="<?php echo e(url('mycourse_index')); ?>" class="boss-subscribe-button btn btn-default">我的课程</a>
                                                              <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">订单中心</a>
+                                                            <a href="<?php echo e(url('order_index')); ?>" class="boss-subscribe-button btn btn-default">订单中心</a>
                                                             <p class="text-center" style="color:black">AND</p>
                                                             <a href="<?php echo e(url('login_clearSession')); ?>" class="boss-subscribe-button btn btn-default">退出</a>
                                                         </div>

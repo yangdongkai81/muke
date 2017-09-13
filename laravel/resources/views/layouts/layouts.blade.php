@@ -1,18 +1,34 @@
 @section('header')
-<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
- <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
-<a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu'></a>
 
     <!DOCTYPE html>
     <html>
     <head>
 
     <style type="text/css">
+    .item{
+       margin-top:10px; 
+    }
     .cent{
          position:absolute;
         z-index:20;
-        background-color:white;
-        border:3px dashed #000;
+    }
+    .row{
+        margin-top:1px;
+    }
+    .container{
+            background: rgba(34, 34, 34, 0);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+    }
+    #boss-cta .boss-button a{
+        font-color:black;
+        color: #14191e;
+        box-shadow: 0 0 6px black;
+    }
+    #boss-cta .boss-button a:hover{
+        color:red;
     }
 </style>
 
@@ -31,18 +47,46 @@
         <link rel="dns-prefetch" href="//img.mukewang.com" />
         <link rel="apple-touch-icon" sizes="76x76" href="/static/img/common/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="120x120" href="/static/img/common/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/static/img/common/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/static/ img/common/touch-icon-ipad-retina.png">
         <meta name="Keywords" content="IT程序员技术交流与问答,技术问答,慕课网社区,编程技术问答,技术问答平台,IT技术社区" />
         <meta name="Description" content="猿问是由慕课网为广大IT爱好者提供的专业问答交流平台,这里大牛云集,用户可根据自身需求,提出相关问题,也可为有问题同学进行解答,互帮互助,分享知识！" />
 
-        <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+        <meta name="viewport" content="width=device-width,target-d ensitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 
 
 
+ 
 
 
+        <!-- <link rel="icon" type="image/png" href="images/favicon.png" /> -->
 
 
+        <!-- ===============    animation core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/animate.min.css" media="all" />
+        <!-- ===============    icon-moon core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/icon-moon.css" media="all" />
+        <!-- ===============    Bootstrap core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/bootstrap.min.css" media="all" />
+        <!-- ===============    owl-carousel core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/owl.carousel.css" media="all" />
+        <!-- ===============    reset core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/reset.css" media="all" />
+        <!-- ===============    theme core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme.css" media="all" />
+        <!-- ===============    os core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme-style/os-style.css" media="all" />
+        <!-- ===============    dark core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/theme-style/dark.css" media="all" />
+        <!-- ===============    extra core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/extra.css" media="all" />
+        <!-- ===============    content color core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/content-color/green.css" media="all" />
+        <!-- ===============    responsive core CSS     =============== -->
+        <link rel="stylesheet" type="text/css" href="/public/csss/responsive.css" media="all" />
+
+ 
+        <!-- ===============    Google fonts CSS     =============== -->
+        <link href='http://fonts.googleapis.com/css?family=Raleway:600,700,900,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/static/moco/v1.0/dist/css/moco.min.css?t=201708281028" type="text/css" />
 
         <script type="text/javascript">
@@ -75,6 +119,7 @@
 
     <div id="header">
         <div class="page-container" id="nav"  >
+            <div class="beijing">
             <div id="logo" class="logo"><a href="{{url('index_index')}}" target="_self" class="hide-text" title="首页">慕课网</a></div>
 
 
@@ -90,9 +135,8 @@
                 <li>
                     <a href="{{url('charge_index')}}" target="_self">实战</a>
                 </li>
-                <li><a href="{{url('question_index')}}" target="_self">猿问</a></li>
+                <li><a href="{{url('question_index')}}" class="active" target="_self">猿问</a></li>
                 <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
-                <li><a href="{{url('exam_index')}}"  target="_self">薪资测试</a></li>
 
             </ul>
             <div id="login-area">
@@ -116,54 +160,25 @@
                          <li class="header-signin">
                             <div class="item" style="width:300px;">
                     <img src="/public/images/404_bg.png" width="50px" height="50px"><span style="color:white;">邮箱:{{\Session::get('email')}}</span>
-                                    <div class="cent" >
-                                        <div id="div1" class="cs" style="display:none;" style="height:300px; width:300px;">
-                                            <div class="card-inner" style="height:300px; width:300px;">
-                                                <div class="card-top clearfix">
-                                                       <a href="#" class="l">
-                                                            <img src="/public/images/404_bg.png" width="100px" height="100px" alt="qq_腹黑_0">
-                                                       </a>
-                                                       <div class="card-top-right-box l">
-                                                              <br/>
-                                                              <div class="meta" style="width:60px;height:90px;">
-                                                                 
-                                                              </div> 
-                                                       </div>
+                                    <div class="cent" > 
+                                        <section class="boss-cta-area" id="boss-cta">
+                                            <div class="container">
+                                                <div class="row" id="row" style="display:none">
+                                                    <div class="col-md-4 col-sm-12 text-center" style="width:23.33333333%;">
+                                                        <div class="boss-button wow fadeInRight">
+                                                            <a href="{{url('integral_index')}}" class="boss-about-button btn btn-default">积分商城</a>
+                                                            <p class="text-center" style="color:black">OR</p>
+                                                            <a href="{{url('mycourse_index')}}" class="boss-subscribe-button btn btn-default">我的课程</a>
+                                                             <p class="text-center" style="color:black">OR</p>
+                                                            <a href="{{url('order_index')}}" class="boss-subscribe-button btn btn-default">订单中心</a>
+                                                            <p class="text-center" style="color:black">AND</p>
+                                                            <a href="{{url('login_clearSession')}}" class="boss-subscribe-button btn btn-default">退出</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="user-center-box">
-                                                    <ul>
-                                                      <li>
-                                                        <a href="/u/5506882/courses" target="_blank" style="width:80px;">
-                                                          <span class="user-center-icon icon-tick"></span>我的课程
-                                                        </a>
-                                                      
-                                                        <a href="http://order.imooc.com/myorder" target="_blank" style="width:80px;">
-                                                          <span class="user-center-icon icon-receipt"></span>订单中心
-                                                        </a>
-                                                      
-                                                      </li>
-                                                         <li class="l">
-                                                           <a href="{{url('integral_index')}}" target="_blank" style="width:80px;">
-                                                          <span class="user-center-icon icon-score_shop"></span>积分商城
-                                                          </a>
-                                        
-                                                          <a href="{{url('user_index')}}/<?php echo \Session::get('login_id');?>" target="_blank" style="width:80px;">
-                                                          <span class="user-center-icon icon-set"></span>个人设置
-                                                          </a>
-                                                          </li> 
-                                                     </ul>                        
-                                                </div>
-                                                <div class="card-history">
-                                                    <span class="history-item">
-                                                    <span class="tit text-ellipsis" style="color:green">性能优化之MySQL优化</span>
-                                                       <span class="media-name text-ellipsis" style="color:green">3-3索引维护的方法</span>
-                                                       <i class="icon-clock"></i> <a href="http://www.imooc.com/video/3999" class="continue" title="索引维护的方法3-3索引维护的方法">继续</a>
-                                                        </span></div>
-                                                        <div class="card-sets clearfix">
-                                                        <a href="/passport/user/logout?referer=http://www.imooc.com" class="r">安全退出</a>
-                                                        </div>                    
                                             </div>
-                                        </div> 
+                                        </section>
+                                       
                                     </div>
                             </div> 
                             
@@ -175,17 +190,17 @@
 
                
                             
-                            
+                    </div>        
         </div>
         
         <script src="/public/jquery.js"></script>
-        <script type="text/javascript">         
+        <script type="text/javascript">  
             $(".item").hover(
                 function(){
-                    $("#div1").show("fast");            
+                    $("#row").show("fast");            
                 },
                 function(){
-                    $("#div1").hide("fast");
+                    $("#row").hide("fast");
                 }
             );
         </script>
@@ -258,33 +273,32 @@
 
 
         <div id="J_GotoTop" class="elevator">
-            <a href="/about/faq" class="elevator-faq" target="_blank" id="zone">
+
+            <a href="/user/feedback" class="elevator-msg" target="_blank">
+                <i class="icon-feedback"></i>
+                <span class="">意见反馈</span>
+            </a>
+            <a href="/about/faq" class="elevator-faq" target="_blank">
                 <i class="icon-ques"></i>
-                <span class="">分享</span>
+                <span class="">常见问题</span>
+            </a>
+            <a href="http://www.imooc.com/mobile/app" target="_blank" class="elevator-app" >
+                <i class="icon-appdownload"></i>
+                <span class="">APP下载</span>
+                <div class="elevator-app-box"></div>
+            </a>
+            <a href="javascript:void(0)" class="elevator-weixin no-goto" id="js-elevator-weixin" >
+                <i class="icon-wxgzh"></i>
+                <span class="">官方微信</span>
+                <div class="elevator-weixin-box"></div>
+            </a>
+            <a href="javascript:void(0)" class="elevator-top no-goto" style="display:none" id="backTop">
+                <i class="icon-up2"></i>
+                <span class="">返回顶部</span>
             </a>
         </div>
-       <script src="/public/jquery.js"></script>
-        <script type="text/javascript">
-        $("#zone").click(function(){
-                var p = {
-                    url:location.href,
-                    showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
-                    desc:'',/*默认分享理由(可选)*/
-                    summary:'网站没在上线,',/*分享摘要(可选)*/
-                    title:'匀称科技有限公司',/*分享标题(可选)*/
-                    site:'匀称科技有限公司',/*分享来源 如：腾讯网(可选)*/
-                    pics:'__IMG__<%$info.img.0.url%>', /*分享图片的路径(可选)*/
-                    style:'203',
-                    width:98,
-                    height:22
-                };
-                var s = [];
-                for(var i in p){
-                    s.push(i + '=' + encodeURIComponent(p[i]||''));
-                }
-                window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?"+s.join('&'));
-            });   
-        </script>
+
+
 
         <!--script-->
         <script type="text/javascript" src="//moco.imooc.com/static/monitor/error.js"></script>
@@ -292,7 +306,7 @@
         <script type="text/javascript" src="/static/sea-modules/seajs/seajs/2.1.1/sea.js"></script>
         <script type="text/javascript" src="/static/sea_config.js?v=201708281028"></script>
         <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
-
+    
 
 
 

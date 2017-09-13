@@ -29,7 +29,11 @@
 <a class="article-ad-txt" title="<?php echo e($article_top->title); ?>" data-ast="wenzhangindex_1_261" href="<?php echo e(url('article_info').'/'.$article_top->id); ?>" target="_blank">
 <span><?php echo e($article_top->title); ?></span>
 </a>
+	<?php if(!empty($article_top['img_path'])): ?>
 	<img src="<?php echo e($prefix); ?>./uploads/<?php echo e($article_top->img_path); ?>" style="width:100%; height:100%" alt="<?php echo e($article_top->title); ?>">
+	<?php else: ?>
+	<img src="<?php echo e($prefix); ?>./uploads/15051040938881.jpg" style="width:100%; height:100%" alt="<?php echo e($article_top->title); ?>">
+	<?php endif; ?>
 </div>
 <div class="ad-font l">
 	<ul>
@@ -52,15 +56,7 @@
 
 </div>
 <div class="tag-wrap clearfix">
-<!-- 标签 -->
 
-<!-- <div class="article-tab clearfix">
-<a data-id="2" href="/article/tag/2" target="_blank">PHP</a>
-<div id="tagPop" class="tag-pop-layer">
-<a href="/article/tag/17" class="tag-detail" target="_blank">JavaScript</a>
-
-</div>
-</div> -->
 <?php if(!empty($tags)): ?>
 <div class="article-tab clearfix">
 <?php foreach($tags['show'] as $tag): ?>
@@ -198,16 +194,18 @@
 </div>
 <?php endif; ?>
 <div class="other-article">
-<h2>本月热门</h2>
+<h2>本月最新热门</h2>
 <ul>
-<li>
-<a href="/article/19895" title="【慕课网连载漫画】第3弹更新啦！" target="_blank"><h3>【慕课网连载漫画】第3弹更新啦！</h3></a>
-<div class="show-box clearfix">
-<span class="spacer l">5146浏览</span>
-<span class="spacer l spacer-2">138推荐</span>
-<span class="spacer l" href="">18评论</span>
-</div>
-</li>
+	<?php foreach($hot_articles as $key => $hot): ?>
+	<li>
+		<a href="<?php echo e(url('article_info').'/'.$hot->id); ?>" title="<?php echo e($hot->title); ?>" target="_blank"><h3><?php echo e($hot->title); ?></h3></a>
+		<div class="show-box clearfix">
+			<span class="spacer l"><?php echo e($hot->browser); ?>浏览</span>
+			<span class="spacer l spacer-2"><?php echo e($hot->collection_num); ?>推荐</span>
+			<span class="spacer l" href=""><?php echo e($hot->comment_num); ?>评论</span>
+		</div>
+	</li>
+	<?php endforeach; ?>
 </ul>
 </div>
 </div>
