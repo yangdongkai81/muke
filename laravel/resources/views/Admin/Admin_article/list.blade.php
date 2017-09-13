@@ -111,9 +111,10 @@
     //手记推荐
     $('.recommend').click(function(){
       var id = $(this).data('id');
+      // alert(id);return;
       var obj = $(this);
       $.ajax({
-        url:"{{ url('article_top') }}",
+        url:"{{ url('recommend') }}",
         data:{id:id},
         success:function(res){
           console.log(res);return false;

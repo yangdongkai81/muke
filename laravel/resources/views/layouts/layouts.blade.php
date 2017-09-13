@@ -1,7 +1,4 @@
 @section('header')
-<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
- <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
-<a href='http://home.wolive.cc' user_id='' username='' avatar='' web_id='fuhei' id='workerman-kefu'></a>
 
     <!DOCTYPE html>
     <html>
@@ -120,6 +117,13 @@
     </head>
     <body >
 
+
+ <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
+ <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
+
+<a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='fuhei'   id='workerman-kefu'></a>
+
+
     <div id="header">
         <div class="page-container" id="nav"  >
             <div class="beijing">
@@ -138,8 +142,9 @@
                 <li>
                     <a href="{{url('charge_index')}}" target="_self">实战</a>
                 </li>
-                <li><a href="{{url('wenda_index')}}" class="active" target="_self">猿问</a></li>
+                <li><a href="{{url('question_index')}}" target="_self">猿问</a></li>
                 <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
+                <li><a href="{{url('exam_index')}}"  target="_self">薪资测试</a></li>
 
             </ul>
             <div id="login-area">
@@ -171,9 +176,9 @@
                                                         <div class="boss-button wow fadeInRight">
                                                             <a href="{{url('integral_index')}}" class="boss-about-button btn btn-default">积分商城</a>
                                                             <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">我的课程</a>
+                                                            <a href="{{url('mycourse_index')}}" class="boss-subscribe-button btn btn-default">我的课程</a>
                                                              <p class="text-center" style="color:black">OR</p>
-                                                            <a href="#" class="boss-subscribe-button btn btn-default">订单中心</a>
+                                                            <a href="{{url('order_index')}}" class="boss-subscribe-button btn btn-default">订单中心</a>
                                                             <p class="text-center" style="color:black">AND</p>
                                                             <a href="{{url('login_clearSession')}}" class="boss-subscribe-button btn btn-default">退出</a>
                                                         </div>
@@ -209,20 +214,7 @@
         </script>
 
                    
-            <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
-                <div class="pa searchTags" >
-                    <a href="http://class.imooc.com/sc/20" target="_blank">前端入门</a>
-                    <a href="http://class.imooc.com/sc/18" target="_blank">Java入门</a>
-                </div>
-
-                <div class="search-area" data-search="top-banner">
-                    <input class="search-input" data-suggest-trigger="suggest-trigger"      type="text" autocomplete="off">
-                    <input type='hidden' class='btn_search' data-search-btn="search-btn" />
-                    <ul class="search-area-result" data-suggest-result="suggest-result">
-                    </ul>
-                </div>
-                <div class='showhide-search' data-show='no'><i class='icon-search'></i></div>
-            </div>
+            
         </div>
     </div>
 
@@ -276,32 +268,32 @@
 
 
         <div id="J_GotoTop" class="elevator">
-
-            <a href="/user/feedback" class="elevator-msg" target="_blank">
-                <i class="icon-feedback"></i>
-                <span class="">意见反馈</span>
-            </a>
-            <a href="/about/faq" class="elevator-faq" target="_blank">
+            <a href="javascript:;" class="elevator-faq" id="zone">
                 <i class="icon-ques"></i>
-                <span class="">常见问题</span>
-            </a>
-            <a href="http://www.imooc.com/mobile/app" target="_blank" class="elevator-app" >
-                <i class="icon-appdownload"></i>
-                <span class="">APP下载</span>
-                <div class="elevator-app-box"></div>
-            </a>
-            <a href="javascript:void(0)" class="elevator-weixin no-goto" id="js-elevator-weixin" >
-                <i class="icon-wxgzh"></i>
-                <span class="">官方微信</span>
-                <div class="elevator-weixin-box"></div>
-            </a>
-            <a href="javascript:void(0)" class="elevator-top no-goto" style="display:none" id="backTop">
-                <i class="icon-up2"></i>
-                <span class="">返回顶部</span>
+                分享
             </a>
         </div>
-
-
+        <script type="text/javascript">
+        $("#zone").click(function(){
+                var p = {
+                    url:location.href,
+                    showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+                    desc:'',/*默认分享理由(可选)*/
+                    summary:'网站没在上线,',/*分享摘要(可选)*/
+                    title:'匀称科技有限公司',/*分享标题(可选)*/
+                    site:'匀称科技有限公司',/*分享来源 如：腾讯网(可选)*/
+                    pics:'__IMG__<%$info.img.0.url%>', /*分享图片的路径(可选)*/
+                    style:'203',
+                    width:98,
+                    height:22
+                };
+                var s = [];
+                for(var i in p){
+                    s.push(i + '=' + encodeURIComponent(p[i]||''));
+                }
+                window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?"+s.join('&'));
+            });   
+        </script>
 
         <!--script-->
         <script type="text/javascript" src="//moco.imooc.com/static/monitor/error.js"></script>
