@@ -47,12 +47,7 @@
     <li><a href="admin_mold" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
     <li><a href="admin_cate" target="right"><span class="icon-caret-right"></span>课程分类管理</a></li>        
   </ul> 
-  <h2><span class="icon-pencil-square-o"></span>实战管理</h2>
-        <ul>
-            <li><a href="admin_charge_index" target="right"><span class="icon-caret-right"></span>课程添加</a></li>
-            <li><a href="admin_charge_type" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
-            <li><a href="admin_charge_direction" target="right"><span class="icon-caret-right"></span>课程方向管理</a></li>
-        </ul> 
+  
   <h2><span class="icon-pencil-square-o"></span>手记管理</h2>
     <ul>
         <li><a href="{{ url('article_manage') }}" target="right"><span class="icon-caret-right"></span>手记列表</a></li>

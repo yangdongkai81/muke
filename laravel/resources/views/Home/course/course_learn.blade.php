@@ -274,7 +274,7 @@ overflow: hidden;margin-left:708px;" id="fa">发表评论</button>
                 success: function(msg){
                   str='';
                   $(msg).each(function(k,v){
-                       str+='<li class="ying"><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn">开始学习</button></a></li>';
+                       str+='<li class="ying"><a href="{{url('course_bo')}}/'+v.id+'" class="J-media-item"><i class="icon-code type"></i>'+v.title+'<button class="r moco-btn moco-btn-red preview-btn" style="line-height:22px;">开始学习</button></a></li>';
                   })
                 $(".video"+id).html(str)
                 $('#'+id).html('▼');

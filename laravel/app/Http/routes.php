@@ -57,8 +57,12 @@ Route::group(['namespace' => 'Home'], function(){
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
         Route::any('charge_index', ['uses'=>'ChargeController@index']);
+        Route::get('/charge_learn/{id}',['uses'=>'ChargeController@charge_learn']);
+        Route::get('/charge_fang/{id}',['uses'=>'ChargeController@charge_fang']);
+        Route::get('/charge_sofen/{id}',['uses'=>'ChargeController@charge_sofen']);
         // 购物车  订单
         Route::any('cart_index',['uses'=>'CartController@index']);
+        Route::get('cart_add/{id}',['uses'=>'CartController@add']);
         Route::any('confirm_index',['uses'=>'ConfirmController@index']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
@@ -130,18 +134,18 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
         //积分商城后台路由设置
-      Route::any('admin_add', 'Admin_integralController@admin_add');
-      Route::any('add_do', 'Admin_integralController@add_do');
-      Route::any('show', 'Admin_integralController@show');
-      Route::any('del', 'Admin_integralController@del');
-      Route::any('up', 'Admin_integralController@up');
-      Route::any('update', 'Admin_integralController@update');
+        Route::any('admin_add', 'Admin_integralController@admin_add');
+        Route::any('add_do', 'Admin_integralController@add_do');
+        Route::any('show', 'Admin_integralController@show');
+        Route::any('del', 'Admin_integralController@del');
+        Route::any('up', 'Admin_integralController@up');
+        Route::any('update', 'Admin_integralController@update');
 
      //后台登录
-      Route::any('admin_index', 'Admin_loginController@admin_index');
-      Route::any('login_do', 'Admin_loginController@login_do');
+        Route::any('admin_index', 'Admin_loginController@admin_index');
+        Route::any('login_do', 'Admin_loginController@login_do');
             //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
-      Route::get('captcha',function(Request $res){
+        Route::get('captcha',function(Request $res){
         $builder = new CaptchaBuilder;
         $builder->build();
         $captch=$builder->getPhrase();
@@ -152,14 +156,14 @@ Route::group(['namespace' => 'Admin'], function(){
          
       });
       //手记文章后台管理
-      Route::get('article_manage','Admin_articleController@article_list');
-      Route::get('article_check','Admin_articleController@article_check');
-      Route::get('article_del','Admin_articleController@article_del');
+        Route::get('article_manage','Admin_articleController@article_list');
+        Route::get('article_check','Admin_articleController@article_check');
+        Route::get('article_del','Admin_articleController@article_del');
     
       //猿问
-      Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
-      Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
-      Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+        Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
+        Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
+        Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
     });
 });
 });

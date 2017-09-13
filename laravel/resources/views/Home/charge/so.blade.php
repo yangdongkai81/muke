@@ -30,9 +30,13 @@
                         <li class="cato-nav-item on">
                             <a href="{{url('charge_index')}}" id="cato">全部</a>
                         </li>
-                        @foreach ($type as $val)
+                        @foreach ($fang as $val)
                             <li class="cato-nav-item ">
-                                <a href="{{url('charge_fang')}}/{{$val->id}}" data-ct="op">{{ $val->aspect_name }}</a>
+                                <a href="{{url('charge_fang')}}/{{$val->id}}" data-ct="op"><?php if ($val->id==$pid) {
+                                    echo "<span style='color:red'>".$val->aspect_name."</span>";
+                                }else{
+                                    echo $val->aspect_name;   
+                                    }?></a>
                             </li>
                         @endforeach
 
@@ -43,9 +47,13 @@
                 <p class="smalle-title">按分类:</p>
                 <div class="cato-nav-row">
                     <ul class="">
-                        @foreach ($direction as $v)
+                        @foreach ($fen as $v)
                             <li class="cato-nav-item ">
-                                <a href="{{url('charge_sofen')}}/{{$val->id}}" data-ct="html">{{ $v->aspect_name }}</a>
+                                <a href="{{url('charge_sofen')}}/{{$v->id}}" data-ct="html"><?php if ($v->id==$fid) {
+                                    echo "<span style='color:red'>".$v->aspect_name."</span>";
+                                }else{
+                                    echo $v->aspect_name;
+                                    } ?></a>
                             </li>
                         @endforeach
 
@@ -72,7 +80,7 @@
                 <!-- 前4个课程追加渠道统计链接 -->
 
  
-  @foreach ($arr as $v)
+  @foreach ($ke as $v)
                          
    
                 <div class="shizhan-course-wrap l">
