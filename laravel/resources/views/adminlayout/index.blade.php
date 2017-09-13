@@ -57,6 +57,10 @@
     <ul>
         <li><a href="{{ url('article_manage') }}" target="right"><span class="icon-caret-right"></span>手记列表</a></li>
     </ul> 
+    <h2><span class="icon-pencil-square-o"></span>猿问管理</h2>
+    <ul>
+        <li><a href="{{ url('examine_list') }}" target="right"><span class="icon-caret-right"></span>猿问问题类表</a></li>
+    </ul>
 </div>
 <script type="text/javascript">
 $(function(){

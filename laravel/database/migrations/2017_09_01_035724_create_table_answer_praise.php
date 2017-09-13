@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAnswerAttitude extends Migration
+class CreateTableAnswerPraise extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateTableAnswerAttitude extends Migration
      */
     public function up()
     {
-        Schema::create('answer_attitude', function (Blueprint $table) {
+        Schema::create('answer_praise', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->comment('用户id');
             $table->integer('answer_id')->comment('回答id');
-            $table->integer('favor')->comment('点赞数');
-            $table->integer('oppose')->comment('反对数');
+            $table->integer('start')->comment('1是点赞，2是反对');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateTableAnswerAttitude extends Migration
      */
     public function down()
     {
-        Schema::drop('answer_attitude');
+        Schema::drop('answer_zan');
     }
 }

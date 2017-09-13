@@ -54,6 +54,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any("answer_oppos",['uses'=>'QuestionController@answer_oppos']);
         Route::any("question_newest/{page?}",['uses'=>'QuestionController@question_newest']);
         Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
+        Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
