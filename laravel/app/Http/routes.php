@@ -70,8 +70,12 @@ Route::group(['namespace' => 'Home'], function(){
         Route::get('/charge_sofen/{id}',['uses'=>'ChargeController@charge_sofen']);
         // 购物车  订单
         Route::any('cart_index',['uses'=>'CartController@index']);
+        Route::any('cart_del',['uses'=>'CartController@del']);
+        Route::any('cart_show',['uses'=>'CartController@show']);
         Route::get('cart_add/{id}',['uses'=>'CartController@add']);
-        Route::any('confirm_index',['uses'=>'ConfirmController@index']);
+        Route::any('confirm_index/{text}',['uses'=>'ConfirmController@index']);
+        Route::any('confirm_order',['uses'=>'ConfirmController@order']);
+        Route::any('confirm_pay',['uses'=>'ConfirmController@pay']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
         //登录
