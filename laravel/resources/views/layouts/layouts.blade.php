@@ -90,7 +90,7 @@
                 <li>
                     <a href="{{url('charge_index')}}" target="_self">实战</a>
                 </li>
-                <li><a href="{{url('wenda_index')}}" class="active" target="_self">猿问</a></li>
+                <li><a href="{{url('question_index')}}" target="_self">猿问</a></li>
                 <li><a href="{{url('article_index')}}"  target="_self">手记</a></li>
                 <li><a href="{{url('exam_index')}}"  target="_self">薪资测试</a></li>
 

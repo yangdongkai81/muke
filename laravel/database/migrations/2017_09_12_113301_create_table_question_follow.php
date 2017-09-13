@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePutQuestionsAttitude extends Migration
+class CreateTableQuestionFollow extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CreateTablePutQuestionsAttitude extends Migration
      */
     public function up()
     {
-        Schema::create('put_questions_attitude', function (Blueprint $table) {
+        Schema::create('question_follow', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->comment('用户id');
             $table->integer('questions_id')->comment('问题id');
-            $table->integer('favor')->comment('点赞数');
-            $table->integer('oppose')->comment('反对数');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +26,6 @@ class CreateTablePutQuestionsAttitude extends Migration
      */
     public function down()
     {
-        Schema::drop('put_questions_attitude');
+        Schema::drop('question_follow');
     }
 }

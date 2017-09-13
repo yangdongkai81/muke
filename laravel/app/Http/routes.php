@@ -54,13 +54,14 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any("answer_oppos",['uses'=>'QuestionController@answer_oppos']);
         Route::any("question_newest/{page?}",['uses'=>'QuestionController@question_newest']);
         Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
+        Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
 		
 		//考试平台
         Route::any("exam_index",['uses'=>'ExamController@exam_index']);
         Route::any("exam_check",['uses'=>'ExamController@exam_check']);
         Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
 		
-		
+
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
         Route::any('charge_index', ['uses'=>'ChargeController@index']);
@@ -178,9 +179,9 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::get('recommend','Admin_articleController@recommend');
     
       //猿问
-      Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
-      Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
-      Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+      Route::any('examine_list',['uses' => 'Admin_questionController@examine_list']);
+      Route::any('examine',['uses' => 'Admin_questionController@examine']);
+      Route::any('delete',['uses' => 'Admin_questionController@delete']);
       //在线考试
         Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
     });

@@ -46,7 +46,7 @@ return array(
     'CreateTableIntegral2' => $baseDir . '/database/migrations/2017_09_05_082448_create_table_integral2.php',
     'CreateTablePeopleintegral' => $baseDir . '/database/migrations/2017_09_12_014416_create_table_peopleintegral.php',
     'CreateTablePutQuestions' => $baseDir . '/database/migrations/2017_08_29_014438_create_table_put_questions.php',
-    'CreateTablePutQuestionsAttitude' => $baseDir . '/database/migrations/2017_08_29_020303_create_table_put_questions_attitude.php',
+    'CreateTableQuestionFollow' => $baseDir . '/database/migrations/2017_09_12_113301_create_table_question_follow.php',
     'CreateTableReply' => $baseDir . '/database/migrations/2017_08_29_023911_create_table_reply.php',
     'CreateTableTopic' => $baseDir . '/database/migrations/2017_08_29_011628_create_table_topic.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

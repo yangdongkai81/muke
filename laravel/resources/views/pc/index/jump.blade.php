@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
@@ -31,10 +29,6 @@
                     </p>  
                     <p>
                         不想敲代码，想睡觉！
-                    </p>
-
-                    <p>
-                       <a href="{{url('order')}}">点击查看订单</a>
                     </p>
                 </div>
                 <a href="{{$url}}" title="首页">
