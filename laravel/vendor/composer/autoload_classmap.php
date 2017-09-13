@@ -16,6 +16,7 @@ return array(
     'CreateChargeDirectionTable' => $baseDir . '/database/migrations/2017_08_29_000000_Create_charge_direction_table.php',
     'CreateChargeTypeTable' => $baseDir . '/database/migrations/2017_08_29_000000_Create_charge_type_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateRecommendLogsTable' => $baseDir . '/database/migrations/2017_09_13_021107_create_recommend_logs_table.php',
     'CreateTableAdmiinRole' => $baseDir . '/database/migrations/2017_09_11_132443_create_table_admiin_role.php',
     'CreateTableAdminAuth' => $baseDir . '/database/migrations/2017_09_11_131734_create_table_admin_auth.php',
     'CreateTableAdminLogin' => $baseDir . '/database/migrations/2017_09_11_131915_create_table_admin_login.php',

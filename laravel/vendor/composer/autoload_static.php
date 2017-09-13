@@ -310,6 +310,7 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         'CreateChargeDirectionTable' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_000000_Create_charge_direction_table.php',
         'CreateChargeTypeTable' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_000000_Create_charge_type_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateRecommendLogsTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_13_021107_create_recommend_logs_table.php',
         'CreateTableAdmiinRole' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_132443_create_table_admiin_role.php',
         'CreateTableAdminAuth' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_131734_create_table_admin_auth.php',
         'CreateTableAdminLogin' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_131915_create_table_admin_login.php',
