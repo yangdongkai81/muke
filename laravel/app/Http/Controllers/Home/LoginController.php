@@ -80,8 +80,9 @@ class LoginController extends Controller
             $id = DB::table('users')->insertGetId($arr);
             if ($id) {
                 $obj->session()->put(['login_id'=>$id,'email'=>$obj->email]);
+                $data = array('login_id'=>$id,'integral'=>'10');
+                DB::table('integral2')->insertGetId($arr);
                 return redirect('index_index');
-                return redirect('charge_index');
             }else{
                 return view('pc.index.jump')->with([
                     'message'=>'注册失败',

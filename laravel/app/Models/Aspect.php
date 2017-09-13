@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aspect extends Model
 {
-    protected $table = 'aspect';
+    protected $table = 'free_aspect';
 
     protected $primarykey = 'id';
 

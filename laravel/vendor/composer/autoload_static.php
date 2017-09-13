@@ -19,6 +19,7 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '3484a5f6916149a513b73c42925ec79a' => __DIR__ . '/../..' . '/app/Common/function.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -73,7 +74,6 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
-            'Gregwar\\Captcha\\' => 16,
         ),
         'F' => 
         array (
@@ -220,10 +220,6 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'Gregwar\\Captcha\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/gregwar/captcha',
-        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -314,11 +310,24 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         'CreateChargeDirectionTable' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_000000_Create_charge_direction_table.php',
         'CreateChargeTypeTable' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_000000_Create_charge_type_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateTableAdminLogin' => __DIR__ . '/../..' . '/database/migrations/2017_09_05_060701_create_table_admin_login.php',
+        'CreateTableAdmiinRole' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_132443_create_table_admiin_role.php',
+        'CreateTableAdminAuth' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_131734_create_table_admin_auth.php',
+        'CreateTableAdminLogin' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_131915_create_table_admin_login.php',
         'CreateTableAnswer' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_020835_create_table_answer.php',
         'CreateTableAnswerAttitude' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_023517_create_table_answer_attitude.php',
         'CreateTableAnswerFan' => __DIR__ . '/../..' . '/database/migrations/2017_09_01_040452_create_table_answer_fan.php',
         'CreateTableAnswerZan' => __DIR__ . '/../..' . '/database/migrations/2017_09_01_035724_create_table_answer_zan.php',
+        'CreateTableCoupon' => __DIR__ . '/../..' . '/database/migrations/2017_09_11_132825_create_table_coupon.php',
+        'CreateTableCourse0' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_012754_create_table_course_0.php',
+        'CreateTableCourse1' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013107_create_table_course_1.php',
+        'CreateTableCourse2' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013207_create_table_course_2.php',
+        'CreateTableCourse3' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013254_create_table_course_3.php',
+        'CreateTableCourse4' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013335_create_table_course_4.php',
+        'CreateTableCourse5' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013412_create_table_course_5.php',
+        'CreateTableCourse6' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013449_create_table_course_6.php',
+        'CreateTableCourse7' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013534_create_table_course_7.php',
+        'CreateTableCourse8' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013616_create_table_course_8.php',
+        'CreateTableCourse9' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013649_create_table_course_9.php',
         'CreateTableFreeAspect' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_070722_create_table_free_aspect.php',
         'CreateTableFreeAttr' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_080952_create_table_free_attr.php',
         'CreateTableFreeChapter' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_070422_create_table_free_chapter.php',
@@ -326,11 +335,14 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         'CreateTableFreeConsultaion' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_070553_create_table_free_consultaion.php',
         'CreateTableFreeCourse' => __DIR__ . '/../..' . '/database/migrations/2017_08_27_120812_create_table_free_course.php',
         'CreateTableFreeMold' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_070924_create_table_free_mold.php',
+        'CreateTableHistory' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_013752_create_table_history.php',
+        'CreateTableIntegral' => __DIR__ . '/../..' . '/database/migrations/2017_09_05_081541_create_table_integral.php',
+        'CreateTableIntegral2' => __DIR__ . '/../..' . '/database/migrations/2017_09_05_082448_create_table_integral2.php',
+        'CreateTablePeopleintegral' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_014416_create_table_peopleintegral.php',
         'CreateTablePutQuestions' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_014438_create_table_put_questions.php',
-        'CreateTablePutQuestionsAttitude' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_020303_create_table_put_questions_attitude.php',
+        'CreateTableQuestionFollow' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_113301_create_table_question_follow.php',
         'CreateTableReply' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_023911_create_table_reply.php',
         'CreateTableTopic' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_011628_create_table_topic.php',
-        'CreateTestTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_04_123758_create_test_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

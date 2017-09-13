@@ -43,16 +43,24 @@ Route::group(['namespace' => 'Home'], function(){
 
 
         //猿问模块
-        Route::get("wenda_index",['uses'=>'WendaController@Index']);
-        Route::get("issue",['uses'=>'WendaController@Issue']);
-        Route::get("question",['uses'=>'WendaController@Question']);
-        Route::any("question_add",['uses'=>'WendaController@Question_Add']);
-        Route::get("question_show",['uses'=>'WendaController@Question_Show']);
-        Route::get("question_one/{id}",['uses'=>'WendaController@Question_One']);
-        Route::any("answer_add",['uses'=>'WendaController@Answer_Add']);
-        Route::any("reply",['uses'=>'WendaController@Reply']);
-        Route::any("answer_zan",['uses'=>'WendaController@Answer_Zan']);
-        Route::any("answer_fan",['uses'=>'WendaController@Answer_Fan']);
+        Route::get("question_index/{page?}",['uses'=>'QuestionController@index']);
+        Route::get("question",['uses'=>'QuestionController@question']);
+        Route::any("question_add",['uses'=>'QuestionController@question_add']);
+        Route::get("question_show",['uses'=>'QuestionController@question_show']);
+        Route::get("question_one/{id}",['uses'=>'QuestionController@question_one']);
+        Route::any("answer_add",['uses'=>'QuestionController@answer_add']);
+        Route::any("reply",['uses'=>'QuestionController@reply']);
+        Route::any("answer_praise",['uses'=>'QuestionController@answer_praise']);
+        Route::any("answer_oppos",['uses'=>'QuestionController@answer_oppos']);
+        Route::any("question_newest/{page?}",['uses'=>'QuestionController@question_newest']);
+        Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
+        Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
+		
+		//考试平台
+        Route::any("exam_index",['uses'=>'ExamController@exam_index']);
+        Route::any("exam_check",['uses'=>'ExamController@exam_check']);
+        Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
+		
 
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
@@ -107,6 +115,17 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('exchange_do/{id}', 'IntegralController@exchange_do');
         Route::any('order', 'IntegralController@order');
 
+        //首页订单中心
+        Route::any('order_index', 'OrderController@order_index');
+        //优惠券
+        Route::any('coupon', 'OrderController@coupon');
+        //消费记录
+        Route::any('record', 'OrderController@record');
+        Route::any('show_coupon', 'OrderController@show_coupon');
+        Route::any('coupon_detail/{id}', 'OrderController@ccoupon_detail');
+        Route::any('detail', 'OrderController@detail');
+        //个人的学习记录
+    Route::any('mycourse_index', 'MycourseController@mycourse_index');
     });
 });
 
@@ -133,6 +152,7 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::get('/mold_void',['uses'=>'Admin_courseController@mold_void']);
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
+<<<<<<< HEAD
         //积分商城后台路由设置
         Route::any('admin_add', 'Admin_integralController@admin_add');
         Route::any('add_do', 'Admin_integralController@add_do');
@@ -144,6 +164,20 @@ Route::group(['namespace' => 'Admin'], function(){
      //后台登录
         Route::any('admin_index', 'Admin_loginController@admin_index');
         Route::any('login_do', 'Admin_loginController@login_do');
+=======
+    //积分商城后台路由设置
+      Route::any('admin_add', 'Admin_integralController@admin_add');
+      Route::any('add_do', 'Admin_integralController@add_do');
+      Route::any('show', 'Admin_integralController@show');
+      Route::any('del', 'Admin_integralController@del');
+      Route::any('up', 'Admin_integralController@up');
+      Route::any('update', 'Admin_integralController@update');
+
+    //后台登录
+
+      Route::any('admin_index', 'Admin_loginController@admin_index');
+      Route::any('login_do', 'Admin_loginController@login_do');
+>>>>>>> dev
             //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
         Route::get('captcha',function(Request $res){
         $builder = new CaptchaBuilder;
@@ -156,6 +190,7 @@ Route::group(['namespace' => 'Admin'], function(){
          
       });
       //手记文章后台管理
+<<<<<<< HEAD
         Route::get('article_manage','Admin_articleController@article_list');
         Route::get('article_check','Admin_articleController@article_check');
         Route::get('article_del','Admin_articleController@article_del');
@@ -164,6 +199,20 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::any('shenhe',['uses' => 'Admin_wendaController@Shehe']);
         Route::any('examine',['uses' => 'Admin_wendaController@Examine']);
         Route::any('delete',['uses' => 'Admin_wendaController@Delete']);
+=======
+      Route::get('article_manage','Admin_articleController@article_list');
+      Route::get('article_check','Admin_articleController@article_check');
+      Route::get('article_del','Admin_articleController@article_del');
+      Route::get('article_top','Admin_articleController@article_top');
+      Route::get('recommend','Admin_articleController@recommend');
+    
+      //猿问
+      Route::any('examine_list',['uses' => 'Admin_questionController@examine_list']);
+      Route::any('examine',['uses' => 'Admin_questionController@examine']);
+      Route::any('delete',['uses' => 'Admin_questionController@delete']);
+      //在线考试
+        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
+>>>>>>> dev
     });
 });
 });
