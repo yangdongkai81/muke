@@ -307,6 +307,11 @@
     //回复添加
     $(document).on('click','.release-reply-btn',function(){
         var reply_content = $(this).parents('.release-reply').find('.reply-text').val();
+        if(!reply_content){
+            alert('请输入回复内容');
+            $(this).parents('.release-reply').find('.reply-text').focus();
+            return false;
+        }
         var reply_cid = $(this).data('cid');
         // alert(from_user_id);return false;
         var obj = $(this);
@@ -328,6 +333,11 @@
     $('#js-submit').click(function(){
         //获取评论内容 评论文章ID
         var content = $('#comment-ipt').val();
+        if(!content){
+            alert('请输入评论内容');
+            $('#comment-ipt').focus();
+            return false;
+        }
         var art_id = $(this).data('id');
         var count = parseInt($('.comment-num').find('i').text());
         var email = $('#email').text();

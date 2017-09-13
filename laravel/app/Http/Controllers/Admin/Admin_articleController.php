@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use DB;
 use App\Models\Article;
+use App\Models\Recommend;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -14,11 +15,10 @@ class Admin_articleController extends Controller
 	/**
 	 * 后台手记列表
 	 */
-    public function article_list()
+    public function article_list($page = '')
     {
     	$article = new Article;
 
-    	// $articles = $article->leftJoin('users','article.user_id','=','users.id')->get();
     	$articles = $article->all()->toArray();
 
     	$user_id = array_unique(array_column($articles, 'user_id'));
@@ -30,7 +30,6 @@ class Admin_articleController extends Controller
     	foreach ($articles as $key => $value) {
     		$articles[$key]['userinfo'] = $users_arr[$articles[$key]['user_id']];
     	}
-    	
     	return view('Admin.admin_article.list',[
             'articles' => $articles,
         ]);
@@ -117,8 +116,12 @@ class Admin_articleController extends Controller
     {
         $id = $res->id;
 
+       /* $recommend = new Recommend;
         $article = new Article;
-
+        
+        $art_id = $article->where('status', 4)->lists('id', 'id');
+        
+        $recommend = $recommend->whereIn('id', $art_id)->*/
         
     }
 }
