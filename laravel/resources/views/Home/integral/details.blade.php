@@ -6,8 +6,6 @@
 @section('content')
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,mall/index-less.css?v=201708319527" type="text/css" />
 
-
-
 <div id="main">
 
 <div class="container clearfix">

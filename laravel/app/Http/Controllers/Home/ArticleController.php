@@ -38,7 +38,7 @@ class ArticleController extends Controller
             $prefix = '.';
         }
         $articles = $article->where('status', 1)->get();
-        $limit = 1;
+        $limit = 2;
         $page_total = ceil(count($articles)/$limit);
 
         $page = $page > $page_total ? $page_total : $page;
@@ -70,7 +70,7 @@ class ArticleController extends Controller
         }
 
         //获取月度热门手记
-        // $hot_articles = $this ->get_hot_articles('all');
+        $hot_articles = $this ->get_hot_articles('all');
 
         $count = count($tags);
         for ($i=0; $i < $count; $i++) {
@@ -94,6 +94,7 @@ class ArticleController extends Controller
             'userinfo' => $articles_userinfo,
             'article_top' => $article_top,
             'article_right' => $article_right,
+            'hot_articles' => $hot_articles,
         ]);
 
     }
@@ -266,7 +267,6 @@ class ArticleController extends Controller
     
     public function comment_add(Request $request)
     {
-        // return $request->all();
         //验证登录状态
         $check =  $this->check_login();
         if ($check == 3) {
@@ -335,6 +335,7 @@ class ArticleController extends Controller
         $info = $collection->where('user_id', '=', $user_id)
                     ->where('article_id', '=', $id)
                     ->first();
+                    
         if (empty($info)) {
             $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
             if ($result) {
@@ -354,7 +355,10 @@ class ArticleController extends Controller
     public function tag_article($tag_id, $page = '')
     {
         $article = new Article;
-        $articles = $article->where('status', '>', 0)->where('tag_id', 'like', "%$tag_id%")->get()->toArray();
+        $articles = $article->where('status', '>', 0)
+                        ->where('tag_id', 'like', "%$tag_id%")
+                        ->get()
+                        ->toArray();
         //获取所有用户信息
         $user_id = $this->unique(array_column($articles, 'user_id'));
         $userinfo = $this->get_info($user_id);
@@ -365,7 +369,9 @@ class ArticleController extends Controller
             $articles[$key]['content'] = str_replace($str, ' ', $value['content']);
         }
 
-        $tag_name = Article_tags::where('id', $tag_id)->lists('tag_name', 'id')->first();
+        $tag_name = Article_tags::where('id', $tag_id)
+                                ->lists('tag_name', 'id')
+                                ->first();
 
         $limit = 3;
         $page_total = ceil(count($articles)/$limit);
@@ -375,8 +381,12 @@ class ArticleController extends Controller
         
         $articles_page = collect($articles)->forPage($page, $limit)->all();
 
+        //获取标签热门手记
+        $hot_articles = $this->get_hot_articles('tag', $tag_id);
+
         return view('Home.article.article_tag',[
             'articles' => $articles_page,
+            'hot_articles' => $hot_articles,
             'page' => $page,
             'prefix' => '.',
             'page_total' => $page_total,
@@ -456,10 +466,27 @@ class ArticleController extends Controller
      * @return array 
      */
     protected function get_hot_articles($type, $tag = ''){
+        
+        $limit = 3;
+
         if ($type == 'all') {
-            $start_time = strtotime(date('Y m d'));
-            // $end_time = strtotime
-            // Article::where();
+            $start_time = strtotime(date("Y-m-01"));
+            $begin_time = date('Y-m-d', $start_time);
+            $end_time = strtotime("$begin_time +1 month -1 day");
+            
+            $articles = Article::where('status', '>', 0)
+                        ->whereBetween('add_time', [$start_time, $end_time])
+                        ->orderBy('browser', 'desc')
+                        ->take($limit)
+                        ->get();
+        } else if($type == 'tag') {
+            $articles = Article::where('status', '>', 0)
+                        ->where('tag_id', 'like', "%$tag%")
+                        ->orderBy('browser', 'desc')
+                        ->take($limit)
+                        ->get();
         }
+
+        return $articles;
     }
 }
