@@ -61,6 +61,12 @@
     <ul>
         <li><a href="{{ url('examine_list') }}" target="right"><span class="icon-caret-right"></span>猿问问题类表</a></li>
     </ul>
+
+    <h2><span class="icon-pencil-square-o"></span>积分管理</h2>
+    <ul>
+        <li><a href="{{ url('admin_add') }}" target="right"><span class="icon-caret-right"></span>积分添加</a></li>
+        <li><a href="{{ url('show') }}" target="right"><span class="icon-caret-right"></span>积分列表</a></li>
+    </ul> 
 </div>
 <script type="text/javascript">
 $(function(){

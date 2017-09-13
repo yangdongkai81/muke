@@ -59,6 +59,7 @@
 	</div>
 </div>
 @endforeach
+@if($page_total > 0)
 <!-- 分页 -->
 <div id="pagenation" class="pagenation">
 <div class="page">
@@ -104,6 +105,7 @@
 @endif
 </div>
 </div>
+@endif
   </div>
     
         
@@ -141,20 +143,22 @@
 	
 		
 			<!-- 热门手记 -->
-	    	        <div class="other-article">
-				<h2>热门手记</h2>
-	        	<ul>
-	            	            <li>
-	              <a href="/article/20220" title="AndroidStudio基本配置" target="_blank"><h3>AndroidStudio基本配置</h3></a>
-	              <div class="show-box clearfix">
-	                <span class="spacer l">424浏览</span>
-	                <span class="spacer l spacer-2">7推荐</span>
-	                <span class="spacer l" href="" >1评论</span>
-	              </div>
-	            </li>
-	            	            </ul>
-	        </div>
-	    	  </div>
+<div class="other-article">
+<h2>热门手记</h2>
+	<ul>
+		@foreach($hot_articles as $key => $hot)
+		<li>
+			<a href="{{ url('article_info').'/'.$hot->id }}" title="{{ $hot->title }}" target="_blank"><h3>{{ $hot->title }}</h3></a>
+			<div class="show-box clearfix">
+				<span class="spacer l">{{ $hot->browser }}浏览</span>
+				<span class="spacer l spacer-2">{{ $hot->collection_num }}推荐</span>
+				<span class="spacer l" href="">{{ $hot->comment_num }}评论</span>
+			</div>
+		</li>
+		@endforeach
+	</ul>
+</div>
+</div>
   
 
   </div>
