@@ -76,6 +76,7 @@
                             <!-- follow -->
                                                             <a href="javascript:void(0)" data-id="356939" title="关注" class="l wenda-add-collection js-collection-btn">
                                     <i class="icon-heart" id="1"></i>
+                                    <span class="detail-hearts js-detail-follow"></span>
                                 </a>
                                                     </div>
                         
@@ -128,7 +129,7 @@
         });
     </script>
     <br>
-    <input type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans huida" data-qid="356983" value="回答">
+    <input type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans questions_answer" data-qid="356983" value="回答">
     <input type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans answer_cancel" data-qid="356983" value="取消">
     </div>
             </div>
@@ -138,7 +139,7 @@
 
                             <div id="answer_div">
                             @foreach($arr as $key => $val)
-                            <div class="ques-answer ques-new-answer clearfix divhf" id="">
+                            <div class="ques-answer ques-new-answer clearfix div_reply" id="">
                     <!-- 已采纳标志 -->
                                     
                     <div class="edit-title">编辑回答</div>
@@ -166,7 +167,7 @@
                             <span class="oppose but_oppose" id="{{$val['id']}}" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em class="em_oppose">反对</em></span>
                             
                                                                                     
-                            <span class="reply huifu" id="{{$val['id']}}" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952">回复</span>
+                            <span class="reply reply_answer" id="{{$val['id']}}" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952">回复</span>
 
                                                         
                              <span class="time r">{{date('Y-m-d H:i:s',$val['answer_time'])}}</span>
@@ -190,14 +191,14 @@
 
                             <div class="textarea-con">
 
-                                                                <textarea name="release-reply" data-id="{{$val['answer_user_id']}}" class="huifunr" id="release-reply" placeholder="写下你的回复"></textarea>
+                                                                <textarea name="release-reply" data-id="{{$val['answer_user_id']}}" class="reply_textarea" id="release-reply" placeholder="写下你的回复"></textarea>
                                                             </div>
                             <p class="err-tip"></p>
                             <div class="userCtrl clearfix">
                                 <div class="verify-code"></div>
 
-                                <div class="do-reply-btn qvxiao" data-answer-id="259391" data-ques-uid="3722952">取消</div>
-                                <div class="do-reply-btn hdhf" id="{{$val['id']}}" data-answer-id="259391" data-ques-uid="3722952">回复</div>
+                                <div class="do-reply-btn reply_cancel" data-answer-id="259391" data-ques-uid="3722952">取消</div>
+                                <div class="do-reply-btn answer_reply" id="{{$val['id']}}" data-answer-id="259391" data-ques-uid="3722952">回复</div>
                             </div>
                         </div><!--.release-reply-con end-->
                     </div><!--.reply-con end-->
@@ -211,22 +212,24 @@
                         </div>
 
     </div>
-@if(!empty($user))
+@if(!empty($new_user))
 <div class="user-about" style="margin-left:880px;">
     <div class="user-info">
         <div class="user-pic">
         </div>
         <div class="user-name">
-            <a href="/u/5528284/bbs">{{$user['email']}}</a>
+            <a href="javascript:void">{{$new_user['email']}}</a>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <span style="color:black;">积分:<?php if (empty($integral)) { echo "";} else { echo $integral['integral'];}?></span>
                                 </div>
-    </div><!--.user-info end-->
+    </div>
     <div class="user-action">
-         <span class="ques"><a href="{{url('integral_index')}}">积分商城</a><!-- <i></i>--></span>
+         <span class="ques"><a href="{{url('integral_index')}}">积分商城</a></span>
         <span class="reply"><a href="{{url('integral_index')}}">我的课程</a></span>
         <span class="follow"><a href="{{url('integral_index')}}">订单中心</a></span>
-    </div><!--.user-action end-->
-</div><!--.user-about end-->
-@else 
+    </div>
+</div>
+@else
 
 @endif
         <div class="wenda-slider r">
@@ -281,12 +284,44 @@
 <script type="text/javascript" src="../jquery.min.js"></script>
 <script type="text/javascript">
     $(document).on("click",".icon-heart",function(){
+        var type_id = $(this).prop('id');
         $(this).prop('id','0');
-        $(this).removeClass().addClass('icon-heart-revert');
+        var obj = $(this);
+        var id = $("#hid_id").val();
+        $.ajax({
+            url:"{{url('question_follow')}}",
+            type:"get",
+            data:{id:id,type_id:type_id},
+            success:function(msg){
+                if (msg == 2) {
+                    alert("请先登录");
+                    window.location.href="http://www.mylaravel.com/public/login_index";
+                } else {
+                    $(".detail-hearts").html(msg);
+                    obj.removeClass().addClass('icon-heart-revert');
+                }
+            }
+        })
     })
     $(document).on("click",".icon-heart-revert",function(){
+        var type_id = $(this).prop('id');
         $(this).prop('id','1');
-        $(this).removeClass().addClass('icon-heart');
+        var obj = $(this);
+        var id = $("#hid_id").val();
+        $.ajax({
+            url:"{{url('question_follow')}}",
+            type:"get",
+            data:{id:id,type_id:type_id},
+            success:function(msg){
+                if (msg == 2) {
+                    alert("请先登录");
+                    window.location.href="http://www.mylaravel.com/public/login_index";
+                } else {
+                    $(".detail-hearts").html(msg);
+                    obj.removeClass().addClass('icon-heart');
+                }
+            }
+        })
     })
     $(document).on("click","#answer-frame",function(){
         $(this).css('display','none');
@@ -296,7 +331,7 @@
         $("#answer-frame").css('display','block');
         $("#div_answer").css('display','none');
     })
-    $(document).on("click",".huida",function(){
+    $(document).on("click",".questions_answer",function(){
         var text = $("#textarea").val();
         var id = $("#hid_id").val();
         $.ajax({
@@ -306,11 +341,12 @@
             dataType:"json",
             success:function(msg){
                 if (msg == 0) {
+                    alert("请先登录");
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 var ser = "";
                 for (var i=0; i<msg.data.length; i++) {
-                    ser += '<div class="ques-answer ques-new-answer clearfix divhf" id="">\
+                    ser += '<div class="ques-answer ques-new-answer clearfix div_reply" id="">\
                     <div class="edit-title">编辑回答</div>\
                     <div class="answer-con first" id="id_259404">\
                     <div class="user-pic l">\
@@ -332,7 +368,7 @@
                         <div class="ctrl-bar clearfix js-wenda-tool">\
                             <span class="agree-with dianzan" id="'+msg.data[i].id+'" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="icon-thumb-revert"></i><em class="em_praise"></em></span>\
                             <span class="oppose fandui" id="'+msg.data[i].id+'" data-ques-id="356939" data-answer-id="259404" data-hasop=""><i class="imv2-thumb_down"></i><em class="em_oppose">反对</em></span>\
-                            <span class="reply huifu" id="'+msg.data[i].id+'" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952">回复</span>\
+                            <span class="reply reply_answer" id="'+msg.data[i].id+'" data-replynum="0" data-reply-id="259404" data-ques-uid="3722952">回复</span>\
                             <span class="time r">'+msg.data[i].answer_time+'</span>\
                         </div><!--.ctrl-bar end-->\
                         </div><!--.answer-con end-->\
@@ -347,13 +383,13 @@
                             </div>\
                                                         <!--.user-pic end-->\
                             <div class="textarea-con">\
-                                                                <textarea name="release-reply" data-id="'+msg.data[i].answer_user_id+'" class="huifunr" id="release-reply" placeholder="写下你的回复"></textarea>\
+                                                                <textarea name="release-reply" data-id="'+msg.data[i].answer_user_id+'" class="reply_textarea" id="release-reply" placeholder="写下你的回复"></textarea>\
                                                             </div>\
                             <p class="err-tip"></p>\
                             <div class="userCtrl clearfix">\
                                 <div class="verify-code"></div>\
-                                <div class="do-reply-btn qvxiao" data-answer-id="259391" data-ques-uid="3722952">取消</div>\
-                                <div class="do-reply-btn hdhf" data-answer-id="259391" data-ques-uid="3722952">回复</div>\
+                                <div class="do-reply-btn reply_cancel" data-answer-id="259391" data-ques-uid="3722952">取消</div>\
+                                <div class="do-reply-btn answer_reply" data-answer-id="259391" data-ques-uid="3722952">回复</div>\
                             </div>\
                         </div><!--.release-reply-con end-->\
                     </div><!--.reply-con end-->\
@@ -378,6 +414,7 @@
             type:'get',
             success:function(msg){
                 if (msg == 0) {
+                    alert("请先登录");
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 if (msg.id == 1) {
@@ -413,6 +450,7 @@
             type:'get',
             success:function(msg){
                 if (msg == 0) {
+                    alert("请先登录");
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 if (msg.id == 1) {
@@ -436,10 +474,10 @@
             }
         })
     })
-    $(document).on("click",".huifu",function(){
-        $(this).parents('.divhf').find('.reply-con').css('display','block');
+    $(document).on("click",".reply_answer",function(){
+        $(this).parents('.div_reply').find('.reply-con').css('display','block');
         var user_name = $('.detail-name').html();
-        var text = $(this).parents('.divhf').find(".huifunr").attr('placeholder','回复'+user_name);
+        var text = $(this).parents('.div_reply').find(".reply_textarea").attr('placeholder','回复'+user_name);
         var id = $(this).prop('id');
         var obj = $(this);
         $.ajax({
@@ -449,6 +487,7 @@
             dataType:"json",
             success:function(msg){
                 if (msg == 0) {
+                    alert("请先登录");
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 var ser = "";
@@ -463,20 +502,20 @@
                                 <span class="r floor">#'+i+'</span>\
                             </div>\
                             <div class="reply-content">'+msg.data[i].reply_content+'</div>\
-                            <div class="reply-btn l twohu" id="'+msg.data[i].answer_id+'" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>\
+                            <div class="reply-btn l two_reply" id="'+msg.data[i].answer_id+'" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>\
                             <span class="time r">'+msg.data[i].reply_time+'</span>\
                         </li>';
                 }
-                obj.parents('.divhf').find('.reply-list').html(ser).css('disply','block');
+                obj.parents('.div_reply').find('.reply-list').html(ser).css('disply','block');
             }
         })
     })
-    $(document).on("click",".qvxiao",function(){
-        $(this).parents('.divhf').find('.reply-con').css('display','none');
+    $(document).on("click",".reply_cancel",function(){
+        $(this).parents('.div_reply').find('.reply-con').css('display','none');
     })
-    $(document).on("click",".hdhf",function(){
-        var text = $(this).parents('.divhf').find('.huifunr').val();
-        var user_id = $(this).parents('.divhf').find('.huifunr').attr('data-id');
+    $(document).on("click",".answer_reply",function(){
+        var text = $(this).parents('.div_reply').find('.reply_textarea').val();
+        var user_id = $(this).parents('.div_reply').find('.reply_textarea').attr('data-id');
         //alert(user_id);return false;
         var id = $(this).prop('id');
         var obj = $(this);
@@ -487,6 +526,7 @@
             dataType:"json",
             success:function(msg){
                 if (msg == 0) {
+                    alert("请先登录");
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 var ser ="";
@@ -502,18 +542,18 @@
                                 <span class="r floor">#'+i+'</span>\
                             </div>\
                             <div class="reply-content">'+msg.data[i].reply_content+'</div>\
-                            <div class="reply-btn l twohu" id="'+msg.data[i].answer_id+'" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>\
+                            <div class="reply-btn l two_reply" id="'+msg.data[i].answer_id+'" data-username="qq_夜尽天明_15" data-uid="4754213">回复</div>\
                             <span class="time r">'+msg.data[i].reply_time+'</span>\
                         </li>';
                 }
-                obj.parents('.divhf').find('.reply-list').html(ser);
+                obj.parents('.div_reply').find('.reply-list').html(ser);
             }
         })
     })
-    $(document).on('click','.twohu',function(){
+    $(document).on('click','.two_reply',function(){
         var r_id = $(this).parent('.clearfix').find(".reply_name").prop('id');
         var r_name = $(this).parent('.clearfix').find(".reply_name").html(); 
-        var a_name = $(this).parents().next().find(".huifunr").attr('data-id',r_id);
-        var text = $(this).parents().next().find(".huifunr").attr('placeholder','回复'+r_name);
+        var a_name = $(this).parents().next().find(".reply_textarea").attr('data-id',r_id);
+        var text = $(this).parents().next().find(".reply_textarea").attr('placeholder','回复'+r_name);
     })
 </script>

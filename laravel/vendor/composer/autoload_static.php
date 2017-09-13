@@ -341,7 +341,7 @@ class ComposerStaticInite0983ce2d534ef126c4ac9417ef95731
         'CreateTableIntegral2' => __DIR__ . '/../..' . '/database/migrations/2017_09_05_082448_create_table_integral2.php',
         'CreateTablePeopleintegral' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_014416_create_table_peopleintegral.php',
         'CreateTablePutQuestions' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_014438_create_table_put_questions.php',
-        'CreateTablePutQuestionsAttitude' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_020303_create_table_put_questions_attitude.php',
+        'CreateTableQuestionFollow' => __DIR__ . '/../..' . '/database/migrations/2017_09_12_113301_create_table_question_follow.php',
         'CreateTableReply' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_023911_create_table_reply.php',
         'CreateTableTopic' => __DIR__ . '/../..' . '/database/migrations/2017_08_29_011628_create_table_topic.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
