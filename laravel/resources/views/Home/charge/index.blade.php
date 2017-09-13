@@ -28,11 +28,11 @@
                 <div class="cato-nav-row">
                     <ul class="">
                         <li class="cato-nav-item on">
-                            <a href="/" id="cato">全部</a>
+                            <a href="{{url('charge_index')}}" id="cato">全部</a>
                         </li>
                         @foreach ($type as $val)
                             <li class="cato-nav-item ">
-                                <a href="/?c=op" data-ct="op">{{ $val->aspect_name }}</a>
+                                <a href="{{url('charge_fang')}}/{{$val->id}}" data-ct="op">{{ $val->aspect_name }}</a>
                             </li>
                         @endforeach
 
@@ -45,7 +45,7 @@
                     <ul class="">
                         @foreach ($direction as $v)
                             <li class="cato-nav-item ">
-                                <a href="/?c=html" data-ct="html">{{ $v->aspect_name }}</a>
+                                <a href="{{url('charge_sofen')}}/{{$val->id}}" data-ct="html">{{ $v->aspect_name }}</a>
                             </li>
                         @endforeach
 
@@ -76,7 +76,7 @@
                          
    
                 <div class="shizhan-course-wrap l">
-                    <a href="/class/131.html">
+                    <a href="{{url('charge_learn')}}/{{$v->id}}">
 
                         <div class="shizhan-course-box">
                             <!-- 学习进度 -->
