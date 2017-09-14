@@ -33,7 +33,7 @@
       <td>
         <div class="button-group">
           <a class="button border-main check"  data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 审核</a>
-          <a class="button border-main recommend" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>
+          {{--<a class="button border-main recommend" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 推荐</a>--}}
           <a class="button border-main top" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-edit"></span> 置顶</a>
           <a class="button border-red" data-id="{{ $article['id'] }}" href="javascript:;"><span class="icon-trash-o"></span> 删除</a>
         </div>

@@ -24,9 +24,8 @@ Route::get('/', function () {
         Route::post('/some','Admin_courseController@some');
         Route::get('/admin_mold','Admin_courseController@mold');
         Route::post('/mold_add','Admin_courseController@mold_add');
- //这个Home为命名空间
+                               //这个Home为命名空间
 Route::group(['namespace' => 'Home'], function(){
-                   //这个为前缀     如果加上a    则效果是  a/index_index  不加便是index_index
     Route::group(['middleware' => ['web']], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
@@ -194,7 +193,7 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('examine',['uses' => 'Admin_questionController@examine']);
       Route::any('delete',['uses' => 'Admin_questionController@delete']);
       //在线考试
-        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
+        Route::any('topic_add',['uses' => 'Admin_topicController@add']);
 
     });
 });

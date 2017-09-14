@@ -86,7 +86,7 @@
     </div><!--.user-info end-->
     <div class="user-action">
          <span class="ques"><a href="{{url('integral_index')}}">积分商城</a><!-- <i></i>--></span>
-        <span class="reply"><a href="{{url('user_index')}}">我的课程</a></span>
+        <span class="reply"><a href="{{url('mycourse_index')}}">我的课程</a></span>
         <span class="follow"><a href="{{url('order_index')}}">订单中心</a></span>
     </div><!--.user-action end-->
 </div><!--.user-about end-->

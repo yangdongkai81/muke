@@ -16,6 +16,8 @@ class CreateShoppingcartTable extends Migration
         Schema::create('shoppingcart', function (Blueprint $table) {
             $table->increments('sid')->comment('购物车主键自增ID');
             $table->integer('pid')->comment('课程编号');
+            $table->string('course_img',50)->comment('课程图片');
+            $table->string('course_name',50)->comment('课程');
             $table->string('price',20)->comment('课程价格');
             $table->integer('userid')->comment('用户编号');
         });

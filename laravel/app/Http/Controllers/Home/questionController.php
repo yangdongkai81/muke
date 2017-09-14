@@ -276,14 +276,12 @@ class QuestionController extends Controller
 		$data = $question->where('id', $request->id)
 						 ->first();
 		//查询用户
-		$user = $users->where('id',$data['user_id'])
-					  ->first();
+		$user = $users->where('id',$data['user_id'])->first();
 		//查询回答
 		$arr = $answer->where('questions_id',$data['id'])
 					  ->get()
 					  ->toArray();
-		$num = $answer->where('questions_id',$data['id'])
-					  ->count();
+		$num = $answer->where('questions_id',$data['id'])->count();
 		$name = [];
 		foreach ($arr as $key => $value) {
 			$name[] = $users->where("id",$value['answer_user_id'])

@@ -16,7 +16,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CartController extends Controller
 {
-    public function Index(){
+    public function index(){
     	$cart = DB::table('shoppingcart')->get();
         return view('Home/Cart/index',['cart'=>$cart]);
     }
@@ -24,7 +24,7 @@ class CartController extends Controller
     /*
      * 购买
      * */
-    public function Add($id){
+    public function add($id){
         $sid = $id;
         $res = DB::table('free_course')->where('id',$sid)->get();
         foreach ($res as $val){
