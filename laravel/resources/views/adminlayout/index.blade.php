@@ -18,7 +18,7 @@
     <title>后台管理中心</title>  
     <link rel="stylesheet" href="/public/css/pintuer.css">
     <link rel="stylesheet" href="/public/css/admin.css">
-    <script src="/public/js/jquery.js"></script>   
+    <script src="/public/js/jquery-1.7.2.min.js"></script>
 </head>
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">
@@ -47,12 +47,7 @@
     <li><a href="admin_mold" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
     <li><a href="admin_cate" target="right"><span class="icon-caret-right"></span>课程分类管理</a></li>        
   </ul> 
-  <h2><span class="icon-pencil-square-o"></span>实战管理</h2>
-        <ul>
-            <li><a href="admin_charge_index" target="right"><span class="icon-caret-right"></span>课程添加</a></li>
-            <li><a href="admin_charge_type" target="right"><span class="icon-caret-right"></span>课程类型管理</a></li>
-            <li><a href="admin_charge_direction" target="right"><span class="icon-caret-right"></span>课程方向管理</a></li>
-        </ul> 
+  
   <h2><span class="icon-pencil-square-o"></span>手记管理</h2>
     <ul>
         <li><a href="{{ url('article_manage') }}" target="right"><span class="icon-caret-right"></span>手记列表</a></li>
@@ -66,7 +61,11 @@
     <ul>
         <li><a href="{{ url('admin_add') }}" target="right"><span class="icon-caret-right"></span>积分添加</a></li>
         <li><a href="{{ url('show') }}" target="right"><span class="icon-caret-right"></span>积分列表</a></li>
-    </ul> 
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>考试管理</h2>
+    <ul>
+        <li><a href="{{ url('topic_add') }}" target="right"><span class="icon-caret-right"></span>试题添加</a></li>
+    </ul>
 </div>
 <script type="text/javascript">
 $(function(){

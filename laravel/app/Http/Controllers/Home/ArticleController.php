@@ -35,7 +35,7 @@ class ArticleController extends Controller
             $page = 1;
             $prefix = '';
         } else {
-            $prefix = '.';
+            $prefix = '';
         }
         $articles = $article->where('status', 1)->get();
         $limit = 2;
@@ -284,9 +284,9 @@ class ArticleController extends Controller
         if($res) {
             $article->where('id', $request->art_id)->increment('comment_num');
             return 1;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     /**
@@ -335,18 +335,19 @@ class ArticleController extends Controller
         $info = $collection->where('user_id', '=', $user_id)
                     ->where('article_id', '=', $id)
                     ->first();
-                    
-        if (empty($info)) {
-            $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
-            if ($result) {
-                $article->where('id', '=', $id)->increment('collection_num');
-                return 1;
-            } else {
-                return 0;
-            }
+
+        if (!empty($info)) {
+            return 2;
         }
-        
-        return 2;
+
+        $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
+        if ($result) {
+            $article->where('id', '=', $id)->increment('collection_num');
+            return 1;
+        }
+
+        return 0;
+
     }
 
     /**

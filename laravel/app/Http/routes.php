@@ -24,9 +24,8 @@ Route::get('/', function () {
         Route::post('/some','Admin_courseController@some');
         Route::get('/admin_mold','Admin_courseController@mold');
         Route::post('/mold_add','Admin_courseController@mold_add');
- //这个Home为命名空间
+                               //这个Home为命名空间
 Route::group(['namespace' => 'Home'], function(){
-                   //这个为前缀     如果加上a    则效果是  a/index_index  不加便是index_index
     Route::group(['middleware' => ['web']], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
@@ -65,9 +64,17 @@ Route::group(['namespace' => 'Home'], function(){
         //实战
         Route::any('index_index', ['uses'=>'IndexController@index']);
         Route::any('charge_index', ['uses'=>'ChargeController@index']);
+        Route::get('/charge_learn/{id}',['uses'=>'ChargeController@charge_learn']);
+        Route::get('/charge_fang/{id}',['uses'=>'ChargeController@charge_fang']);
+        Route::get('/charge_sofen/{id}',['uses'=>'ChargeController@charge_sofen']);
         // 购物车  订单
         Route::any('cart_index',['uses'=>'CartController@index']);
-        Route::any('confirm_index',['uses'=>'ConfirmController@index']);
+        Route::any('cart_del',['uses'=>'CartController@del']);
+        Route::any('cart_show',['uses'=>'CartController@show']);
+        Route::get('cart_add/{id}',['uses'=>'CartController@add']);
+        Route::any('confirm_index/{text}',['uses'=>'ConfirmController@index']);
+        Route::any('confirm_order',['uses'=>'ConfirmController@order']);
+        Route::any('confirm_pay',['uses'=>'ConfirmController@pay']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
         //登录
@@ -148,20 +155,22 @@ Route::group(['namespace' => 'Admin'], function(){
         Route::get('/mold_void',['uses'=>'Admin_courseController@mold_void']);
         Route::post('/mold_selectcha',['uses'=>'Admin_courseController@mold_selectcha']);
         Route::post('/add_void',['uses'=>'Admin_courseController@add_void']);
-    //积分商城后台路由设置
-      Route::any('admin_add', 'Admin_integralController@admin_add');
-      Route::any('add_do', 'Admin_integralController@add_do');
-      Route::any('show', 'Admin_integralController@show');
-      Route::any('del', 'Admin_integralController@del');
-      Route::any('up', 'Admin_integralController@up');
-      Route::any('update', 'Admin_integralController@update');
 
-    //后台登录
+       //积分商城后台路由设置
+        Route::any('admin_add', 'Admin_integralController@admin_add');
+        Route::any('add_do', 'Admin_integralController@add_do');
+        Route::any('show', 'Admin_integralController@show');
+        Route::any('del', 'Admin_integralController@del');
+        Route::any('up', 'Admin_integralController@up');
+        Route::any('update', 'Admin_integralController@update');
 
-      Route::any('admin_index', 'Admin_loginController@admin_index');
-      Route::any('login_do', 'Admin_loginController@login_do');
+       //后台登录
+
+        Route::any('admin_index', 'Admin_loginController@admin_index');
+        Route::any('login_do', 'Admin_loginController@login_do');
+
             //定义一个验证码的路由，用验证码的时候直接调用这个方法就行
-      Route::get('captcha',function(Request $res){
+        Route::get('captcha',function(Request $res){
         $builder = new CaptchaBuilder;
         $builder->build();
         $captch=$builder->getPhrase();
@@ -172,6 +181,7 @@ Route::group(['namespace' => 'Admin'], function(){
          
       });
       //手记文章后台管理
+
       Route::get('article_manage','Admin_articleController@article_list');
       Route::get('article_check','Admin_articleController@article_check');
       Route::get('article_del','Admin_articleController@article_del');
@@ -183,7 +193,8 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::any('examine',['uses' => 'Admin_questionController@examine']);
       Route::any('delete',['uses' => 'Admin_questionController@delete']);
       //在线考试
-        Route::any('topic_add',['uses' => 'Admin_topicController@Add']);
+        Route::any('topic_add',['uses' => 'Admin_topicController@add']);
+
     });
 });
 });

@@ -70,16 +70,16 @@
                                 <dl class="course-del l">
                                     <dd class="clearfix">
                                         <a href="http://coding.imooc.com/class/130.html" class="l">
-                                            <img class="l" src="http://www.mylaravel.com/public/images/timg.jpg" width="160" height="90"/>
+                                            <img class="l" src="http://www.muke.com/public/images/timg.jpg" width="160" height="90"/>
                                         </a>
-                                        <div class="del-box l">
+                                        <div class="del-box l" style="width:80px;height: 20px; margin-left:100px;margin-top: 30px;">
                                             <!-- type为类型 1实战购买 2实战续费 4职业路径购买 5职业路径续费 -->
 
 
                                             <!-- cate 订单类型 0无优惠 1组合套餐 2学生优惠 -->
 
 
-                                            <a href="http://coding.imooc.com/class/130.html"><p class="course-name"><?php echo $val->coupon; ?></p></a>
+                                            <p class="course-name"><?php echo $val->coupon; ?></p>
 
 
 

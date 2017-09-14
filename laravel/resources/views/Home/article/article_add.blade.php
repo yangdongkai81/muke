@@ -32,7 +32,7 @@
               <input type="text" id="art-title" name="title" class="art-title" placeholder="请在此输入标题，最多35中文字长度">
               <input  type="checkbox" name="original" value="">
               <label for="is-ori" class="ori-tip ">原创请勾选</label>
-              <span class="orl-txt">（原创内容可获得5积分，审核后发放）</span>
+              <!-- <span class="orl-txt">（原创内容可获得5积分，审核后发放）</span> -->
               <p class="form-ipt-error"></p>
           </div>
       </div>
@@ -56,7 +56,7 @@
           <p>请输入内容...</p>
       </div>
       <div style='margin-top:10px;'>
-          <a href="javascript:;" id='btnHtml'>查看html</a>
+          <!-- <a href="javascript:;" id='btnHtml'>查看html</a> -->
           <a href="javascript:;" id='btnText'>查看text</a>
           <a href="javascript:;" id='btnHide'>隐藏</a>
           <textarea id='textarea' name="content" style='width:100%; height:100px; margin-top:10px;'></textarea>
@@ -84,7 +84,7 @@
             <label for="" class="form-label l"></label>
             <div class="form-ipt-wrap">
                 <button id="js-submit" class="btn btn-red">发布</button>
-                <a target="_blank" href="/article/7791" class="edit-tip">手记频道发布手记规范</a>
+                <a target="_blank" href="javascript:;" class="edit-tip">手记频道发布手记规范</a>
                 <span class="submit-tip js-submit-tip"></span>
                 <p id="js-msg" class="form-ipt-error"></p>
             </div>

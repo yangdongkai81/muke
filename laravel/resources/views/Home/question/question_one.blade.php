@@ -33,7 +33,7 @@
                             <!-- 问答信息 -->
                             <div class="wenda-intro-box clearfix">
                                 <div class="detail-user l">
-                                    <a href="/u/3722952/bbs" class="author l">{{$user['email']}}</a>
+                                    <a href="javascript:;" class="author l">{{$user['email']}}</a>
                                     
                                                                     </div>
 
@@ -147,7 +147,7 @@
                         <div class="user-pic l">
                         </div><!--.user end-->
                         <div class="detail-r">    
-                                                        <a class="detail-name" href="/u/2411916/bbs" target="_blank">{{$name[$key]}}</a>
+                                                        <a class="detail-name" href="javascript:;" >{{$name[$key]}}</a>
                                                                                     
                                                         
                             
@@ -295,7 +295,7 @@
             success:function(msg){
                 if (msg == 2) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 } else {
                     $(".detail-hearts").html(msg);
                     obj.removeClass().addClass('icon-heart-revert');
@@ -315,7 +315,7 @@
             success:function(msg){
                 if (msg == 2) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 } else {
                     $(".detail-hearts").html(msg);
                     obj.removeClass().addClass('icon-heart');
@@ -342,7 +342,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 }
                 var ser = "";
                 for (var i=0; i<msg.data.length; i++) {
@@ -355,7 +355,7 @@
                             </a>\
                         </div><!--.user end-->\
                         <div class="detail-r">\
-                                <a class="detail-name" href="/u/2411916/bbs" target="_blank">InMyCity</a>\
+                                <a class="detail-name" href="javascript:;">InMyCity</a>\
                         </div>\
                         <div class="answer-content rich-text aimgPreview"><p><br />'+msg.data[i].answer_content+'</p></div>\
                                                 <div class="ctrl-bar js-msg-context clearfix js-reply-tool hide">\
@@ -415,7 +415,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 }
                 if (msg.id == 1) {
                     obj.find(".em_praise").html(msg.count);
@@ -451,7 +451,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 }
                 if (msg.id == 1) {
                     obj.prev().find(".em_praise").html(msg.count);
@@ -488,7 +488,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 }
                 var ser = "";
                 for (var i=0; i<msg.data.length; i++) {
@@ -496,9 +496,10 @@
                             <div class="user-pic">\
                             </div>\
                             <div class="user-info clearfix">\
-                                <a class="from-user reply_name" id="'+msg.data[i].reply_user_id+'" href="/u/4754213/bbs">'+msg.answer_name[i]+'</a>\
+                                <a class="from-user reply_name" id="'+msg.data[i].reply_user_id+'" href="javascript:;' +
+                    '">'+msg.answer_name[i]+'</a>\
                                 <em>回复</em>\
-                                <a class="from-user answer_name" href="/u/4754213/bbs">'+msg.reply_name[i]+'</a>\
+                                <a class="from-user answer_name" href="javascript:;">'+msg.reply_name[i]+'</a>\
                                 <span class="r floor">#'+i+'</span>\
                             </div>\
                             <div class="reply-content">'+msg.data[i].reply_content+'</div>\
@@ -527,7 +528,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.mylaravel.com/public/login_index";
+                    window.location.href="http://www.muke.com/public/login_index";
                 }
                 var ser ="";
                 for (var i=0; i<msg.data.length; i++) 
@@ -536,9 +537,9 @@
                             <div class="user-pic">\
                             </div>\
                             <div class="user-info clearfix">\
-                                <a class="from-user reply_name" id="'+msg.data[i].reply_user_id+'" href="/u/4754213/bbs">'+msg.answer_name[i]+'</a>\
+                                <a class="from-user reply_name" id="'+msg.data[i].reply_user_id+'" href="javascript:;">'+msg.answer_name[i]+'</a>\
                                 <em>回复</em>\
-                                <a class="from-user answer_name" href="/u/4754213/bbs">'+msg.reply_name[i]+'</a>\
+                                <a class="from-user answer_name" href="javascript:;">'+msg.reply_name[i]+'</a>\
                                 <span class="r floor">#'+i+'</span>\
                             </div>\
                             <div class="reply-content">'+msg.data[i].reply_content+'</div>\

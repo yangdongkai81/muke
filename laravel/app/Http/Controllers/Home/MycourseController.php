@@ -40,7 +40,7 @@ class MycourseController extends Controller
         $result = DB::select($sql);
         $id=1;
         $result1=DB::table('users')->where('id',$id)->first();
-
+       // var_dump($result1);die;
         return view('Home.mycourse.showcourse',[
             'data'=>$result,
             'data1'=>$result1

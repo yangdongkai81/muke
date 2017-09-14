@@ -58,18 +58,18 @@ class Admin_integralController extends Controller
     public function del(Request $request)
     {
         header("content-type:text/html;charset=utf-8");
-        $session = new Session;
-        $name = $session->get("name");
-        $data1=DB::table('admin_login')->where('name',$name)->first();
-        $role_id=$data1->role_id;
-        $uri = $request->path();
-        $data2=DB::table('admin_auth')->where('auth_a',$uri)->first();
-        $role_ids=$data2->role_id;
-        $role_idss=explode(',', $role_ids);
-        if (in_array($role_id, $role_idss)) {
-            
-           return "您没有权限进行删除";
-        }
+//        $session = new Session;
+//        $name = $session->get("name");
+//        $data1=DB::table('admin_login')->where('name',$name)->first();
+//        $role_id=$data1->role_id;
+//        $uri = $request->path();
+//        $data2=DB::table('admin_auth')->where('auth_a',$uri)->first();
+//        $role_ids=$data2->role_id;
+//        $role_idss=explode(',', $role_ids);
+//        if (in_array($role_id, $role_idss)) {
+//
+//           return "您没有权限进行删除";
+//        }
         $id=$_GET['id'];
         $res=DB::table('integral')->where('id',$id)->delete();
         if ($res) {
