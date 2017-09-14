@@ -32,14 +32,11 @@ class QuestionController extends Controller
 		$user = [];
 		$integral = [];
 		if (!empty(\Session::get('login_id'))) {
-			$user = $users->where("id",\Session::get('login_id'))
-						  ->first();
-			$integral = $integral2->where("login_id",\Session::get('login_id'))
-								  ->first();
+			$user = $users->where("id",\Session::get('login_id'))->first();
+			$integral = $integral2->where("login_id",\Session::get('login_id'))->first();
 		}
 		$page = $request->page ? $request->page : 1;
-		$total = $question->where('questions_examine',1)
-						  ->count();
+		$total = $question->where('questions_examine',1)->count();
 		$pagesize = 1;
 		$limit = ceil(($page-1)*$pagesize);
 		$data = $question->where('questions_examine',1)
@@ -48,8 +45,7 @@ class QuestionController extends Controller
 						 ->get();
 		foreach ($data as $key => $value) {
 			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)
-						  ->first();
+			$res = $aspect->where('id',$ser)->first();
 			$value['questions_type'] = $res['aspect_name'];
 		}
 
@@ -75,10 +71,8 @@ class QuestionController extends Controller
 		$user = [];
 		$integral = [];
 		if (!empty(\Session::get('login_id'))) {
-			$user = $users->where("id",\Session::get('login_id'))
-						  ->first();
-			$integral = $integral2->where("login_id",\Session::get('login_id'))
-								  ->first();
+			$user = $users->where("id",\Session::get('login_id'))->first();
+			$integral = $integral2->where("login_id",\Session::get('login_id'))->first();
 		}
 		$page = $request->page ? $request->page : 1;
 		//查询所有相应时间问题
@@ -100,8 +94,7 @@ class QuestionController extends Controller
 		}
 		foreach ($arr as $key => $value) {
 			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)
-						  ->first();
+			$res = $aspect->where('id',$ser)->first();
 			$value['questions_type'] = $res['aspect_name'];
 		}
 
@@ -127,10 +120,8 @@ class QuestionController extends Controller
 		$user = [];
 		$integral = [];
 		if (!empty(\Session::get('login_id'))) {
-			$user = $users->where("id",\Session::get('login_id'))
-						  ->first();
-			$integral = $integral2->where("login_id",\Session::get('login_id'))
-								  ->first();
+			$user = $users->where("id",\Session::get('login_id'))->first();
+			$integral = $integral2->where("login_id",\Session::get('login_id'))->first();
 		}
 		$page = $request->page ? $request->page : 1;
 		//查询所有提出问题
@@ -152,8 +143,7 @@ class QuestionController extends Controller
 		}
 		foreach ($arr as $key => $value) {
 			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)
-						  ->first();
+			$res = $aspect->where('id',$ser)->first();
 			$value['questions_type'] = $res['aspect_name'];
 		}
 
@@ -176,8 +166,7 @@ class QuestionController extends Controller
 		//实例化model
 		$aspect = new Aspect;
 		//查询所有类型
-		$data = $aspect->where('parent_id', '!=', 0)
-					   ->get();
+		$data = $aspect->where('parent_id', '!=', 0)->get();
 
 		return view('home.question.question',[
 			'data' => $data
@@ -190,8 +179,7 @@ class QuestionController extends Controller
 	{
 		$question = new Question;
 		$integral2 = new Integral2;
-		$integral_data = $integral2->where('login_id',\Session::get('login_id'))
-								   ->first();
+		$integral_data = $integral2->where('login_id',\Session::get('login_id'))->first();
 		if ($integral_data['integral'] < 2) {
 			return view('pc.index.jump')->with([
 					'message' => '积分不足，无法发布',
@@ -259,31 +247,25 @@ class QuestionController extends Controller
 		$new_user = [];
 		$integral = [];
 		if (!empty(\Session::get('login_id'))) {
-			$new_user = $users->where("id",\Session::get('login_id'))
-							  ->first();
-			$integral = $integral2->where("login_id",\Session::get('login_id'))
-								  ->first();
+			$new_user = $users->where("id",\Session::get('login_id'))->first();
+			$integral = $integral2->where("login_id",\Session::get('login_id'))->first();
 		}
 		//print_r($user);return;
 		//查询单条
-		$data = $question->where('id', $request->id)
-						 ->first();
+		$data = $question->where('id', $request->id)->first();
 		//修改浏览量
 		$browser = $question->where('id', $request->id)
 						    ->update([
 						    	'questions_browser' => $data['questions_browser']+1
 						    ]);
-		$data = $question->where('id', $request->id)
-						 ->first();
+		$data = $question->where('id', $request->id)->first();
 		//查询用户
-		$user = $users->where('id',$data['user_id'])
-					  ->first();
+		$user = $users->where('id',$data['user_id'])->first();
 		//查询回答
 		$arr = $answer->where('questions_id',$data['id'])
 					  ->get()
 					  ->toArray();
-		$num = $answer->where('questions_id',$data['id'])
-					  ->count();
+		$num = $answer->where('questions_id',$data['id'])->count();
 		$name = [];
 		foreach ($arr as $key => $value) {
 			$name[] = $users->where("id",$value['answer_user_id'])
@@ -323,15 +305,13 @@ class QuestionController extends Controller
         $answer->answer_time = time();
        	$answer->save();
        	//添加积分
-		$integral_data = $integral2->where('login_id',\Session::get('login_id'))
-								   ->first();
+		$integral_data = $integral2->where('login_id',\Session::get('login_id'))->first();
 		$integral2->where('login_id',\Session::get('login_id'))
 				  ->update([
 				  		'integral'=>$integral_data['integral']+2
 				  	]);
        	//修改问题状态
-       	$res = $question->where('id',$request->id)
-       					->first();
+       	$res = $question->where('id',$request->id)->first();
        	if ($res['questions_status'] == 0) {
        		$question->where('id',$request->id)
        				 ->update([
@@ -346,10 +326,8 @@ class QuestionController extends Controller
      		$value['answer_time'] = date('Y-m-d H:i:s',$value['answer_time']);
      	}
      	//查询回答数
-     	$num = $answer->where('questions_id',$request->id)
-     				  ->count();
-     	$browser = $question->where('id',$request->id)
-     						->first();
+     	$num = $answer->where('questions_id',$request->id)->count();
+     	$browser = $question->where('id',$request->id)->first();
      	$data = [
      		'data' => $data,
      		'num' => $num,
@@ -371,8 +349,8 @@ class QuestionController extends Controller
 		$answer_attitude = new Answer_Attitude;
 		$answer_praise = new Answer_Praise;
 		$arr = $answer_praise->where('answer_id',$id)
-						  ->where('user_id',\Session::get('login_id'))
-						  ->first();			 
+						     ->where('user_id',\Session::get('login_id'))
+						     ->first();			 
 		if ($arr) {
 			//判断字段是否是点赞，如是点赞修改成反对
 			if ($arr['start'] == 1 && $type == 0) {
@@ -429,12 +407,12 @@ class QuestionController extends Controller
 			$answer_praise->start = $type;
 			$res = $answer_praise->save();
 			$num = $answer_praise->where('user_id',\Session::get('login_id'))
-							         ->where('answer_id',$id)
-							         ->where('start',1)
-							         ->count();
+							     ->where('answer_id',$id)
+							     ->where('start',1)
+							     ->count();
 			$arr = $answer_praise->where('user_id',\Session::get('login_id'))
-							         ->where('answer_id',$id)
-							         ->first();
+							     ->where('answer_id',$id)
+							     ->first();
 			$data = [
 				'id' => 4,
 				'count' => $num,
@@ -492,13 +470,9 @@ class QuestionController extends Controller
 			return json_encode($data);
 		}
 		//添加回复并展示
-		$res = $answer->where("id",$id)
-					  ->first();
+		$res = $answer->where("id",$id)->first();
 		if ($res['answer_start'] == 0) {
-			$res = $answer->where("id",$id)
-						  ->update([
-						  		'answer_start'=>1
-						  	]);
+			$res = $answer->where("id",$id)->update(['answer_start'=>1]);
 		}
 		$reply->answer_id = $id;
 		$reply->answer_user_id = $user_id;
@@ -506,8 +480,7 @@ class QuestionController extends Controller
 		$reply->reply_content = $text;
 		$reply->reply_time = time();
 		$reply->save();
-		$data = $reply->where("answer_id",$id)
-					  ->get();
+		$data = $reply->where("answer_id",$id)->get();
 		foreach ($data as $key => &$value) {
      		$value['reply_time'] = date('Y-m-d H:i:s',$value['reply_time']);
      	}
@@ -550,15 +523,12 @@ class QuestionController extends Controller
 			$follow->user_id = \Session::get('login_id');
 			$follow->questions_id = $id;
 			$follow->save();
-			$res = $follow->where('questions_id',$id)
-						  ->count();
+			$res = $follow->where('questions_id',$id)->count();
 
 			return $res;
 		} else {
-			$follow->where('user_id',\Session::get('login_id'))
-					->delete();
-			$res = $follow->where('questions_id',$id)
-					->count();
+			$follow->where('user_id',\Session::get('login_id'))->delete();
+			$res = $follow->where('questions_id',$id)->count();
 
 			return $res;
 		}

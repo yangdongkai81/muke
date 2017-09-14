@@ -225,8 +225,8 @@
     </div>
     <div class="user-action">
          <span class="ques"><a href="{{url('integral_index')}}">积分商城</a></span>
-        <span class="reply"><a href="{{url('integral_index')}}">我的课程</a></span>
-        <span class="follow"><a href="{{url('integral_index')}}">订单中心</a></span>
+        <span class="reply"><a href="{{url('mycourse_index')}}">我的课程</a></span>
+        <span class="follow"><a href="{{url('order_index')}}">订单中心</a></span>
     </div>
 </div>
 @else
@@ -419,20 +419,20 @@
                 }
                 if (msg.id == 1) {
                     obj.find(".em_praise").html(msg.count);
-                    $(".but_oppose").find(".em_oppose").html("已反对");
+                    obj.next().find(".em_oppose").html("已反对");
                 } else if (msg.id == 2) {
                     obj.find(".em_praise").html(msg.count);
-                    $(".but_oppose").find(".em_oppose").html("反对");
+                    obj.next().find(".em_oppose").html("反对");
                 } else if (msg.id == 3) {
                     obj.find(".em_praise").html(msg.count);
-                    $(".but_oppose").find(".em_oppose").html("反对");
+                    obj.next().find(".em_oppose").html("反对");
                 } else if (msg.id == 4) {
                     if (msg.type == 1) {
                         obj.find(".em_praise").html(msg.count);
-                        $(".but_oppose").find(".em_oppose").html("反对");
+                        obj.next().find(".em_oppose").html("反对");
                     } else {
                         obj.find(".em_praise").html(msg.count);
-                        $(".but_oppose").find(".em_oppose").html("已反对");
+                        obj.next().find(".em_oppose").html("已反对");
                     }
                 }
             }
@@ -454,20 +454,20 @@
                     window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 if (msg.id == 1) {
-                    $(".but_praise").find(".em_praise").html(msg.count);
+                    obj.prev().find(".em_praise").html(msg.count);
                     obj.find(".em_oppose").html("已反对");
                 } else if (msg.id == 2) {
-                    $(".but_praise").find(".em_praise").html(msg.count);
+                    obj.prev().find(".em_praise").html(msg.count);
                     obj.find(".em_oppose").html("反对");
                 } else if (msg.id == 3) {
-                    $(".but_praise").find(".em_praise").html(msg.count);
+                    obj.prev().find(".em_praise").html(msg.count);
                     obj.find(".em_oppose").html("反对");
                 } else if (msg.id == 4) {
                     if (msg.type == 1) {
-                        $(".but_praise").find(".em_praise").html(msg.count);
+                        obj.prev().find(".em_praise").html(msg.count);
                         obj.find(".em_oppose").html("反对");
                     } else {
-                        $(".but_praise").find(".em_praise").html(msg.count);
+                        obj.prev().find(".em_praise").html(msg.count);
                         obj.find(".em_oppose").html("已反对");
                     }
                 }
