@@ -4,14 +4,15 @@
 @parent
 @section('title','猿问')
 <!-- <base href="mvc/laravel-v5.2.0/public/"> -->
-<link rel="stylesheet" type="text/css" href="./static/font/fontawesome-4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./static/font/css/wangEditor-1.1.0-min.css">
-<style type="text/css">
-    body{
-        padding: 0px 10px 0px 10px;
-        color:#333333;
-    }
-</style>
+  <link rel="stylesheet" type="text/css" href="./static/font/fontawesome-4.2.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="./static/font/css/wangEditor-1.1.0-min.css">
+    <style type="text/css">
+        body{
+            padding: 0px 10px 0px 10px;
+            color:#333333;
+        }
+    </style>
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,wenda/save-less.css,course/inc/course_credit-less.css?v=201708281028" type="text/css" />
 @stop
 
