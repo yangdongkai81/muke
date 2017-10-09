@@ -268,20 +268,11 @@
 
 
         <div id="J_GotoTop" class="elevator">
-<<<<<<< HEAD
-            <a href="javascript:;" class="elevator-faq"  id="zone">
-                <i class="con-ques"></i>
-                分享
-            </a>
-        </div>
-       
-=======
             <a href="javascript:;" class="elevator-faq" id="zone">
                 <i class="icon-ques"></i>
                 分享
             </a>
         </div>
->>>>>>> dev
         <script type="text/javascript">
         $("#zone").click(function(){
                 var p = {
