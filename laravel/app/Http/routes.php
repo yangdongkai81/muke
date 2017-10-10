@@ -56,7 +56,6 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
 		
 		//考试平台                  //制造冲突   测试原来为index
-        Route::any("exam_练习",['uses'=>'ExamController@exam_index']);
         Route::any("exam_check",['uses'=>'ExamController@exam_check']);
         Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
 		
