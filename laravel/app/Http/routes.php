@@ -25,8 +25,8 @@ Route::get('/', function () {
         Route::get('/admin_mold','Admin_courseController@mold');
         Route::post('/mold_add','Admin_courseController@mold_add');
                                //这个Home为命名空间
-Route::group(['namespace' => 'Home'], function(){
-    Route::group(['middleware' => ['web']], function(){
+        Route::group(['namespace' => 'Home'], function(){
+        Route::group(['middleware' => ['web']], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
         Route::any('Index_Index', ['uses'=>'IndexController@index']);
         Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
@@ -78,8 +78,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('confirm_pay',['uses'=>'ConfirmController@pay']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
-        //登录                       //制造冲突   测试原来为index
-        Route::get('/login_练习','LoginController@index');
+        //登录                     
+        Route::get('/login_index','LoginController@index');
         ROUTE::post('/login_handle','LoginController@handle');
         Route::get('/login_pc','LoginController@pc');
         Route::any('login_register','LoginController@register');
