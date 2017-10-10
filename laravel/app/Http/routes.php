@@ -55,8 +55,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
         Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
 		
-		//考试平台
-        Route::any("exam_index",['uses'=>'ExamController@exam_index']);
+		//考试平台                  //制造冲突   测试原来为index
+        Route::any("exam_练习",['uses'=>'ExamController@exam_index']);
         Route::any("exam_check",['uses'=>'ExamController@exam_check']);
         Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
 		
@@ -77,8 +77,8 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any('confirm_pay',['uses'=>'ConfirmController@pay']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
-        //登录
-        Route::get('/login_index','LoginController@index');
+        //登录                       //制造冲突   测试原来为index
+        Route::get('/login_练习','LoginController@index');
         ROUTE::post('/login_handle','LoginController@handle');
         Route::get('/login_pc','LoginController@pc');
         Route::any('login_register','LoginController@register');
