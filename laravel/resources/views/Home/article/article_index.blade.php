@@ -88,77 +88,39 @@
 <div class="article-lwrap ">
 	
 	<h3 class="item-title">
-		<a href="{{ url('article_info').'/'.$article->id }}" class="title-detail" target="_blank">{{ $article->title }}</a>
-		@if($article->is_original == 1)
+		<a href="{{ url('article_info').'/'.$article['id'] }}" class="title-detail" target="_blank">{{ $article['title'] }}</a>
+		@if($article['is_original'] == 1)
 			<span class="original">原创</span>
 		@endif
 	</h3>
 
 	<!-- text -->
 	<div class="item-txt">
-	@if(!empty($article->img_path))
+	@if(!empty($article['img_path']))
 		<div class="item-img l">
-			<a href="{{ url('article_info').'/'.$article->id }}" target="_blank">
-				<img src="{{$prefix}}./uploads/{{ $article->img_path }}" width="210" height="130">
+			<a href="{{ url('article_info').'/'.$article['id'] }}" target="_blank">
+				<img src="{{$prefix}}./uploads/{{ $article['img_path'] }}" width="210" height="130">
 			</a>
 		</div>
 	@endif
-		<p class="item-bd">{{ $article->content }}...</p>
+		<p class="item-bd">{{ $article['content'] }}...</p>
 		<div class="item-btm clearfix">
-			<ul class="l left-info"><li class="hd-pic"><a class="publisher-name" title="{{ $userinfo[$article->user_id] }}" href="{{ url('article_info').'/'.$article->id }}" target="_blank">{{ $userinfo[$article->user_id] }}</a></li>
-			<li class="pass-time">{{ date('Y-m-d H:i:s',$article->add_time) }}</li>							</ul>
+			<ul class="l left-info"><li class="hd-pic"><a class="publisher-name" title="{{ $userinfo[$article['user_id']] }}" href="{{ url('article_info').'/'.$article['id'] }}" target="_blank">{{ $userinfo[$article['user_id']] }}</a></li>
+			<li class="pass-time">{{ date('Y-m-d H:i:s',$article['add_time']) }}</li>							</ul>
 			<div class="r right-info">
-				<span class="looked">{{ $article->browser }}浏览</span>
-				<span class="recom">{{ $article->collection_num }}推荐</span>
-				<span class="judge">{{ $article->comment_num }}评论</span>
+				<span class="looked">{{ $article['browser'] }}浏览</span>
+				<span class="recom">{{ $article['collection_num'] }}推荐</span>
+				<span class="judge">{{ $article['comment_num'] }}评论</span>
 			</div>
 		</div>
 	</div>
 </div>
 @endforeach
-<!-- 分页 -->
+ <!-- 分页 -->
 <div id="pagenation" class="pagenation">
 <div class="page">
-@if($page == 1)
-<span class="disabled_page">首页</span>
-<span class="disabled_page">上一页</span>
-@else
-<a href="{{ url('article_index') }}">首页</a>
 <a href="{{ url('article_index').'/'.($page-1) }}">上一页</a>
-@endif
-
-@if($page <= 3)
-	@for($i = 1; $i <= ($page_total >= 5 ? 5 : $page_total); $i++)
-		@if($page == $i)
-			<a class="active text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@else
-			<a class="text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@endif
-	@endfor
-@elseif ($page >= $page_total - 2)
-	@for($i = ($page_total - 4 <= 0 ? 1 : $page_total - 4); $i <= $page_total; $i++)
-		@if($page == $i)
-			<a class="active text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@else
-			<a class="text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@endif
-	@endfor
-@else
-	@for($i = $page - 2; $i <= $page + 2; $i++)
-		@if($page == $i)
-			<a class="active text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@else
-			<a class="text-page-tag" href="{{ url('article_index').'/'.$i }}">{{$i}}</a>
-		@endif
-	@endfor
-@endif
-@if($page == $page_total)
-<span class="disabled_page">下一页</span>
-<span class="disabled_page">尾页</span>
-@else
 <a href="{{ url('article_index').'/'.($page+1) }}">下一页</a>
-<a href="{{ url('article_index').'/'.$page_total }}">尾页</a>
-@endif
 </div>
 </div>
 </div>

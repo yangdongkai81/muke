@@ -19,7 +19,7 @@ class Admin_topicController extends Controller
 	/**
 	 * 后台课程
 	 */
-    public function Add(request $request)
+    public function add(request $request)
     {
         if($request->isMethod('post')){
             $topic=new Admin_topic();

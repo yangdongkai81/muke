@@ -80,12 +80,14 @@
         </div>
         <div class="user-name">
             <a href="/u/5528284/bbs">{{$user['email']}}</a>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <span style="color:black;">积分:{{$integral['integral']}}</span>
                                 </div>
     </div><!--.user-info end-->
     <div class="user-action">
-         <span class="ques"><a href="{{url('integral_index')}}">积分商城</a><!-- <i></i>--></span>
-        <span class="reply"><a href="{{url('integral_index')}}">我的课程</a></span>
-        <span class="follow"><a href="{{url('integral_index')}}">订单中心</a></span>
+        <span class="ques"><a href="{{url('integral_index')}}">积分商城</a><!-- <i></i>--></span>
+        <span class="reply"><a href="{{url('mycourse_index')}}">我的课程</a></span>
+        <span class="follow"><a href="{{url('order_index')}}">订单中心</a></span>
     </div><!--.user-action end-->
 </div><!--.user-about end-->
 @else 
@@ -96,9 +98,10 @@
         <div class="panel-body">
           <h1>提问注意事项</h1>
           <dl>
-            <dd>1、您是来解决问题？请先搜索是否已经有同类问题吧。这样您就省心少打字。</dd>
-            <dd>2、没找到是么？就在发问题时精确描述你的问题，不要写与问题无关的内容哟；</dd>
-            <dd>3、慕课讨论更热衷于解达您想要的答案。能引起思考和讨论的知识性问题；</dd>
+            <dd>1、用户注册成功赠送十个积分，提问消耗两个积分，回答增加两个积分</dd>
+            <dd>2、您是来解决问题？请先搜索是否已经有同类问题吧。这样您就省心少打字。</dd>
+            <dd>3、没找到是么？就在发问题时精确描述你的问题，不要写与问题无关的内容哟；</dd>
+            <dd>4、慕课讨论更热衷于解达您想要的答案。能引起思考和讨论的知识性问题；</dd>
             <dt>问答禁止这些提问</dt>
             <dd>1、禁止发布求职、交易、推广、广告类与问答无关信息将一律清理。</dd>
             <dd>2、尽可能详细描述您的问题，如标题与内容不符，或与问答无关的信息将被删除扣分。</dd>

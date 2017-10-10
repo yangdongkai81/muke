@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use Session,Redirect;
+use Session,Redirect,Redis;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Article_tags;
@@ -24,31 +24,33 @@ class ArticleController extends Controller
         $collection = new Article_collections;
         $comment = new Article_comment;
 
-        $login_id = \Session::get('login_id');
-        //获取所有审核通过的手记文章
-        $article_all = $article->where('status', '>', 0)->get()->groupBy('status');
-        //获取创建手记所有用户信息
-        $articles_userinfo = $this->get_info();
-
-        //首页手记分页
-        if (empty($page)) {
-            $page = 1;
+        if (empty($page) && $page !== '0') {
+            $page = $page < 1 ? 1 : $page;
             $prefix = '';
         } else {
+            $page = $page < 1 ? 1 : $page;
             $prefix = '.';
         }
-        $articles = $article->where('status', 1)->get();
-        $limit = 2;
-        $page_total = ceil(count($articles)/$limit);
-
-        $page = $page > $page_total ? $page_total : $page;
-        $page = $page < 1 ? 1 : $page;
+        $login_id = \Session::get('login_id');
         
-        $articles_page = $articles->forPage($page, $limit)->all();
+        $limit = 15;
+        
+        //获取所有审核通过的手记文章
+        $article_all = $article->where('status', '>', '0')->offset($limit*($page-1))->limit($limit)->get()->toArray();
+        
+        $user_arr = array_column($article_all, 'user_id');
+        // dd($user_arr);return;
+        //获取创建手记所有用户信息
+        $articles_userinfo = $this->get_info($user_arr);
+        // dd($articles_userinfo);return;
+        
         //获取置顶手记
-        $article_top = $article_all['3']->first();
+        $article_top = $article->where('status', '3')->orderBy('id', 'desc')->first();
+        
         //获取置顶侧边手记
-        $article_right = $article_all['4']->toArray();
+        $article_right = $article->where('status', '4')->orderBy('id', 'desc')->take(2)->get()->toArray();
+        
+        // dd($article_right);return;
         $login_info = [];
         //获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
         if ($login_id) {
@@ -68,7 +70,7 @@ class ArticleController extends Controller
                 $article_right[$k]['tags'][$value] = $new_tags[$value]['tag_name'];
             }
         }
-
+        // dd($article_right);return;
         //获取月度热门手记
         $hot_articles = $this ->get_hot_articles('all');
 
@@ -83,12 +85,11 @@ class ArticleController extends Controller
                 $tags_arr['order'][] = $tags_order[$i];
             }
         }
-        // dd($articles_page);return;
+
         return view('Home.article.article_index',[
-            'articles' => $articles_page,
+            'articles' => $article_all,
             'page' => $page,
             'prefix' => $prefix,
-            'page_total' => $page_total,
             'tags' => $tags_arr,
             'login_info' => $login_info,
             'userinfo' => $articles_userinfo,
@@ -284,9 +285,9 @@ class ArticleController extends Controller
         if($res) {
             $article->where('id', $request->art_id)->increment('comment_num');
             return 1;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     /**
@@ -335,18 +336,19 @@ class ArticleController extends Controller
         $info = $collection->where('user_id', '=', $user_id)
                     ->where('article_id', '=', $id)
                     ->first();
-                    
-        if (empty($info)) {
-            $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
-            if ($result) {
-                $article->where('id', '=', $id)->increment('collection_num');
-                return 1;
-            } else {
-                return 0;
-            }
+
+        if (!empty($info)) {
+            return 2;
         }
-        
-        return 2;
+
+        $result = $collection->insert(['user_id' => $user_id, 'article_id' => $id]);
+        if ($result) {
+            $article->where('id', '=', $id)->increment('collection_num');
+            return 1;
+        }
+
+        return 0;
+
     }
 
     /**
@@ -355,12 +357,16 @@ class ArticleController extends Controller
     public function tag_article($tag_id, $page = '')
     {
         $article = new Article;
+        // DB::connection()->enableQueryLog();
+        // $redis = new Redis;
+        // $redis->set('test',111);
+        // return $redis->get('test');
         $articles = $article->where('status', '>', 0)
                         ->where('tag_id', 'like', "%$tag_id%")
                         ->get()
                         ->toArray();
         //获取所有用户信息
-        $user_id = $this->unique(array_column($articles, 'user_id'));
+        $user_id = array_column($articles, 'user_id');
         $userinfo = $this->get_info($user_id);
 
         $str = array("\r\n","\n","\r","\t",'<p>','</p>');
@@ -383,7 +389,7 @@ class ArticleController extends Controller
 
         //获取标签热门手记
         $hot_articles = $this->get_hot_articles('tag', $tag_id);
-
+        // print_r(DB::getQueryLog());return;
         return view('Home.article.article_tag',[
             'articles' => $articles_page,
             'hot_articles' => $hot_articles,
@@ -452,6 +458,7 @@ class ArticleController extends Controller
     protected function get_info($user_id = '')
     {
         if ($user_id) {
+            $user_id = collect($user_id)->unique();
             $userinfo = User::whereIn('id', $user_id)->lists('email', 'id')->toArray();
         } else {
             $articles_user = $this->unique(Article::where('status', 1)->lists('user_id')->toArray());
