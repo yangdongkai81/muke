@@ -56,7 +56,7 @@ Route::group(['namespace' => 'Home'], function(){
         Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
 		
 		//考试平台                  //制造冲突   测试原来为index
-        Route::any("exam_练习",['uses'=>'ExamController@exam_index']);
+        Route::any("exam_index",['uses'=>'ExamController@exam_index']);
         Route::any("exam_check",['uses'=>'ExamController@exam_check']);
         Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
 		
@@ -187,7 +187,6 @@ Route::group(['namespace' => 'Admin'], function(){
       Route::get('article_del','Admin_articleController@article_del');
       Route::get('article_top','Admin_articleController@article_top');
       Route::get('recommend','Admin_articleController@recommend');
-      Route::get('tit','Admin_articleController@tit');
     
       //猿问
       Route::any('examine_list',['uses' => 'Admin_questionController@examine_list']);
