@@ -1,3 +1,4 @@
+
 @extends('layouts.layouts')
 
 @section('header')
@@ -42,7 +43,12 @@
             </a>
                                     </div><!--.tag-img end-->
         <div class="from-tag">        来自
-                <a href="/wenda/3" target="_blank">{{ $val['questions_type'] }}</a>
+                <a href="/wenda/3" target="_blank">
+                    @if(!empty($res_vallue))
+                        {{ $res_value[substr($val['questions_type'],0,1)] }}
+                    @else
+                    @endif
+                </a>
             </div><!--.from-tag end-->
         <div class="ques-con">
         <a href="{{url('question_one')}}/{{$val['id']}}" class="ques-con-content" title="&amp;#24819;&amp;#33258;&amp;#23398;java&amp;#65292;&amp;#25214;&amp;#24037;&amp;#20316;&amp;#65292;&amp;#33021;&amp;#25214;&amp;#21040;&amp;#21527;&amp;#65292;&amp;#27714;&amp;#22823;&amp;#31070;&amp;#25351;&amp;#25945;">{{$val['questions_title']}}</a>
@@ -53,13 +59,6 @@
 <div class="page">
         <a href="{{url('question_no_answer')}}">首页</a>
         <a href="{{url('question_no_answer')}}/<?php echo $page-1 ? $page-1 : 1; ?>">上一页</a>
-        @for($i=1; $i<=$total; $i++)
-            @if($i == $page)
-            <a href="{{url('question_no_answer')}}/{{$i}}" id="{{$i}}" class="active text-page-tag">{{ $i }}</a>
-            @else
-            <a href="{{url('question_no_answer')}}/{{$i}}" id="{{$i}}" class="text-page-tag">{{ $i }}</a>
-            @endif
-        @endfor
         <a href="{{url('question_no_answer')}}/<?php if ($page+1 > $total) { echo $total;} else { echo $page+1;}?>">下一页</a>
         <a href="{{url('question_no_answer')}}/{{$total}}">尾页</a>
 </div>

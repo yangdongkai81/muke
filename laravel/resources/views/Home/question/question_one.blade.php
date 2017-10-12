@@ -6,14 +6,22 @@
 @stop
 
 @section('content')
-<link rel="stylesheet" type="text/css" href="../static/font/fontawesome-4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../static/font/css/wangEditor-1.1.0-min.css">
-<style type="text/css">
-    body{
-        padding: 0px 10px 0px 10px;
-        color:#333333;
-    }
-</style>
+<link href="../assets/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
+    <style>
+      #editor {
+        resize:vertical; 
+        overflow:auto; 
+        border:1px solid silver; 
+        border-radius:5px; 
+        min-height:200px;
+        box-shadow: inset 0 0 10px silver;
+        padding:1em;
+      }
+    </style>
+    <link rel="stylesheet" href="http://dreamsky.github.io/main/blog/common/init.css">
+    <script src="http://dreamsky.github.io/main/blog/common/jquery.min.js"></script>
+    <script src="http://dreamsky.github.io/main/blog/common/init.js"></script>
 <link rel="stylesheet" href="http://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,wenda/detail-less.css?v=201708281028" type="text/css" />
 
 
@@ -88,50 +96,57 @@
             
             <div id="js-qa-comment-input" class="detail-comment-input js-msg-context clearfix">
                 <h3 class="answer-add-tip">我要回答</h3>
-                <button id="answer-frame" class="answer-btn"></button>
-                <div id="div_answer" style="display:none">       
-    <input type="hidden" id="hid_id" name="questions_id" value="{{$data['id']}}">
-    <div id='txtDiv' style='border:1px solid #cccccc; height:240px;'>
-        <p>请输入内容...</p>
-    </div>
-    <div style='margin-top:10px;'>
-        <a href="javascript:void(0)" id='btnHtml'>查看html</a>
-        <a href="javascript:void(0)" id='btnText'>查看text</a>
-        <a href="javascript:void(0)" id='btnHide'>隐藏</a>
-        <textarea id='textarea' name="content" style='width:100%; height:100px; margin-top:10px;'></textarea>
-    </div>
-    <!--引入 jquery.js-->
-    <script src="../static/font/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <!--引入 wangEditor.js-->
-    <script type="text/javascript" src='../static/font/js/wangEditor-1.1.0-min.js'></script>
-    <script type="text/javascript">
-        $(function(){
-            $('#spanTime').text((new Date()).toString());
-            //一句话，即可把一个div 变为一个富文本框！o(∩_∩)o 
-            var $editor = $('#txtDiv').wangEditor();
-            //显示 html / text
-            var $textarea = $('#textarea'),
-                $btnHtml = $('#btnHtml'),
-                $btnText = $('#btnText'),
-                $btnHide = $('#btnHide');
-            $textarea.hide();
-            $btnHtml.click(function(){
-                $textarea.show();
-                $textarea.val( $editor.html() );
-            });
-            $btnText.click(function(){
-                $textarea.show();
-                $textarea.val( $editor.text() );
-            });
-            $btnHide.click(function(){
-                $textarea.hide();
-            });
-        });
+                
+                <div id="div_answer">     
+                 <input type="hidden" id="hid_id" name="questions_id" value="{{$data['id']}}">  
+    <div id='pad-wrapper'>
+          <div id="editparent">
+            <div id='editControls' class='span9'>
+              <div class='btn-group'>
+                <a class='btn' data-role='bold' href='javascript:;'><b>B</b></a>
+                <a class='btn' data-role='italic' href='javascript:;'><em>I</em></a>
+                <a class='btn' data-role='underline' href='javascript:;'><u><b>U</b></u></a>
+                <a class='btn' data-role='strikeThrough' href='javascript:;'><strike>—</strike></a>
+              </div>
+              <div class='btn-group'>
+                <a class='btn' data-role='h1' href='javascript:;'>h<sup>1</sup></a>
+                <a class='btn' data-role='h2' href='javascript:;'>h<sup>2</sup></a>
+                <a class='btn' data-role='p' href='javascript:;'>p</a>
+              </div>
+            </div>
+            <div id='editor' class='span9' style="width:700px;" contenteditable>
+            </div>
+            
+
+          </div>
+          </div>
+    
+    <textarea name="content" id="text_content" style="display:none;"></textarea>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script>
+
+      $(function() {
+        $('#editControls a').click(function(e) {
+          switch($(this).data('role')) {
+            case 'h1':
+            case 'h2':
+            case 'p':
+              document.execCommand('formatBlock', false, '<' + $(this).data('role') + '>');
+              break;
+            default:
+              document.execCommand($(this).data('role'), false, null);
+              break;
+          }
+          
+        })
+      });
+
     </script>
-    <br>
-    <input type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans questions_answer" data-qid="356983" value="回答">
-    <input type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans answer_cancel" data-qid="356983" value="取消">
-    </div>
+        </div>
+            <p style="margin-left:550px;">
+                <input style="width:150px;margin-top:10px;" type="button" id="js-wenda-ci-submit" class="btn btn-red detail-ans questions_answer" data-qid="356983" value="回答">
+            </p>
             </div>
             <!-- 回答数 -->
                                                 <div class="ans_num">{{$num}}回答</div>
@@ -295,7 +310,7 @@
             success:function(msg){
                 if (msg == 2) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 } else {
                     $(".detail-hearts").html(msg);
                     obj.removeClass().addClass('icon-heart-revert');
@@ -315,7 +330,7 @@
             success:function(msg){
                 if (msg == 2) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 } else {
                     $(".detail-hearts").html(msg);
                     obj.removeClass().addClass('icon-heart');
@@ -332,7 +347,8 @@
         $("#div_answer").css('display','none');
     })
     $(document).on("click",".questions_answer",function(){
-        var text = $("#textarea").val();
+        var text = $("#editor").html();
+        //var text = $("#text_content").val(content);
         var id = $("#hid_id").val();
         $.ajax({
             url:"{{url('answer_add')}}",
@@ -342,7 +358,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 }
                 var ser = "";
                 for (var i=0; i<msg.data.length; i++) {
@@ -415,7 +431,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 }
                 if (msg.id == 1) {
                     obj.find(".em_praise").html(msg.count);
@@ -451,7 +467,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 }
                 if (msg.id == 1) {
                     obj.prev().find(".em_praise").html(msg.count);
@@ -460,6 +476,9 @@
                     obj.prev().find(".em_praise").html(msg.count);
                     obj.find(".em_oppose").html("反对");
                 } else if (msg.id == 3) {
+                    obj.prev().find(".em_praise").html(msg.count);
+                    obj.find(".em_oppose").html("反对");
+                } else if (msg.id == 5) {
                     obj.prev().find(".em_praise").html(msg.count);
                     obj.find(".em_oppose").html("反对");
                 } else if (msg.id == 4) {
@@ -488,7 +507,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="http://www.mylaravel.com/public/login_index";
                 }
                 var ser = "";
                 for (var i=0; i<msg.data.length; i++) {
@@ -528,7 +547,7 @@
             success:function(msg){
                 if (msg == 0) {
                     alert("请先登录");
-                    window.location.href="http://www.muke.com/public/login_index";
+                    window.location.href="{{url('login_index')}}";
                 }
                 var ser ="";
                 for (var i=0; i<msg.data.length; i++) 

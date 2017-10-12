@@ -28,8 +28,8 @@ Route::get('/', function () {
         Route::group(['namespace' => 'Home'], function(){
         Route::group(['middleware' => ['web']], function(){
                    //请求地址   单词首字母大写如下       uses代表使用某个控制器下的每个方法
-        Route::any('Index_Index', ['uses'=>'IndexController@index']);
-        Route::any('Charge_Index', ['uses'=>'ChargeController@index']);
+        Route::any('index_index', ['uses'=>'IndexController@index']);
+        Route::any('charge_index', ['uses'=>'ChargeController@index']);
         Route::get('article_index/{page?}','ArticleController@article_index');
         //手记模块
         Route::get('article_add','ArticleController@article_add');
@@ -54,16 +54,14 @@ Route::get('/', function () {
         Route::any("question_newest/{page?}",['uses'=>'QuestionController@question_newest']);
         Route::any("question_no_answer/{page?}",['uses'=>'QuestionController@question_no_answer']);
         Route::any("question_follow/{page?}",['uses'=>'QuestionController@question_follow']);
-		
-		//考试平台                  //制造冲突   测试原来为index
-
+		//考试平台
         Route::any("exam_index",['uses'=>'ExamController@exam_index']);
         Route::any("exam_check",['uses'=>'ExamController@exam_check']);
         Route::any("exam_answer",['uses'=>'ExamController@exam_answer']);
 		
 
         //实战
-        Route::any('index_index', ['uses'=>'IndexController@index']);
+        Route::any('test/index.html', ['uses'=>'IndexController@index']);
         Route::any('charge_index', ['uses'=>'ChargeController@index']);
         Route::get('/charge_learn/{id}',['uses'=>'ChargeController@charge_learn']);
         Route::get('/charge_fang/{id}',['uses'=>'ChargeController@charge_fang']);
@@ -78,12 +76,14 @@ Route::get('/', function () {
         Route::any('confirm_pay',['uses'=>'ConfirmController@pay']);
         Route::any('indent_index',['uses'=>'IndentController@index']);
         Route::any('buy_index',['uses'=>'BuyController@index']);
+
         //登录                     
+
         Route::get('/login_index','LoginController@index');
         ROUTE::post('/login_handle','LoginController@handle');
         Route::get('/login_pc','LoginController@pc');
         Route::any('login_register','LoginController@register');
-        Route::any('login_Code','LoginController@code');
+        Route::any('login_code','LoginController@code');
         Route::post('/login_registerHandle','LoginController@registerHandle');
         Route::get('/login_qqlogin','LoginController@qqlogin');
         Route::get('login_qqlogin','LoginController@qq');
@@ -180,7 +180,7 @@ Route::group(['namespace' => 'Admin'], function(){
 
         return response($builder->output())->header('Content-type','image/jpeg');
          
-      });
+        });
       //手记文章后台管理
 
       Route::get('article_manage','Admin_articleController@article_list');
