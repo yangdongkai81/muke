@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-
 use DB;
 use App\Models\Question;
 use App\Models\Aspect;
@@ -15,6 +14,7 @@ use App\Models\Integral2;
 use App\Models\Question_follow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 
 class QuestionController extends Controller
 {
@@ -22,7 +22,7 @@ class QuestionController extends Controller
 	 * 猿问首页展示
 	*/
 	public function index(Request $request)
-	{
+	{	
 		//实例化model
 		$question = new Question;
 		$aspect = new Aspect;
@@ -31,22 +31,36 @@ class QuestionController extends Controller
 		$integral2 = new Integral2;
 		$user = [];
 		$integral = [];
+		//Redis::flushall();return;
+		$page = $request->page ? $request->page : 1;
 		if (!empty(\Session::get('login_id'))) {
 			$user = $users->where("id",\Session::get('login_id'))->first();
 			$integral = $integral2->where("login_id",\Session::get('login_id'))->first();
 		}
-		$page = $request->page ? $request->page : 1;
-		$total = $question->where('questions_examine',1)->count();
-		$pagesize = 1;
+		$total = $question->where('questions_examine',1)->count('id');
+		$pagesize = 10;
+		$total = ceil($total/$pagesize);
 		$limit = ceil(($page-1)*$pagesize);
-		$data = $question->where('questions_examine',1)
-						 ->offset($limit)
-						 ->limit($pagesize)
-						 ->get();
+		$redis_page = Redis::exists('index_'.$page);
+		if (!$redis_page) {
+			$data = $question->where('questions_examine',1)
+							 ->offset($limit)
+							 ->limit($pagesize)
+							 ->get();
+
+			Redis::set('index_'.$page,$data);
+		}
+		else {
+			$data = json_decode(Redis::get('index_'.$page));
+		}
+		
 		foreach ($data as $key => $value) {
-			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)->first();
-			$value['questions_type'] = $res['aspect_name'];
+			$ser[] = substr($value->questions_type,0,1);
+		}
+		
+		foreach ($ser as $key => $value) {
+				$res = $aspect->where('id',$value)->first();
+				$res_value[$value] = $res->aspect_name;
 		}
 
 		return view('home.question.index',[
@@ -54,7 +68,8 @@ class QuestionController extends Controller
 				'page'=>$page,
 				'total'=>$total,
 				'user'=>$user,
-				'integral'=>$integral
+				'integral'=>$integral,
+				'res_value'=>$res_value
 		]);
 	}
 	/*
@@ -76,13 +91,16 @@ class QuestionController extends Controller
 		}
 		$page = $request->page ? $request->page : 1;
 		//查询所有相应时间问题
-		$total = $question->where('questions_time','>',time()-7200)
+		$time = time();
+		$total = $question->where('questions_time','>',$time-7200)
 						  ->where('questions_examine',1)
-						  ->count();
+						  ->count('id');
 		$arr = [];
-		$pagesize = 1;
+		$res_value = [];
+		$pagesize = 2;
+		$total = ceil($total/$pagesize);
 		$limit = ceil(($page-1)*$pagesize);
-		$data = $question->where('questions_time','>',time()-7200)
+		$data = $question->where('questions_time','>',$time-7200)
 						 ->where('questions_examine',1)
 						 ->offset($limit)
 						 ->limit($pagesize)
@@ -92,10 +110,14 @@ class QuestionController extends Controller
 				$arr[] = $value;
 			} 
 		}
-		foreach ($arr as $key => $value) {
-			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)->first();
-			$value['questions_type'] = $res['aspect_name'];
+		if (!empty($arr)) {
+			foreach ($data as $key => $value) {
+				$ser[] = substr($value['questions_type'],0,1);
+			}
+			foreach ($ser as $key => $value) {
+				$res = $aspect->where('id',$value)->first();
+				$res_value[$value] = $res->aspect_name;
+			}
 		}
 
 		return view('home.question.newest',[
@@ -103,7 +125,8 @@ class QuestionController extends Controller
 			'page'=>$page,
 			'total'=>$total,
 			'user'=>$user,
-			'integral'=>$integral
+			'integral'=>$integral,
+			'res_value'=>$res_value
 		]);
 	}
 	/*
@@ -125,26 +148,32 @@ class QuestionController extends Controller
 		}
 		$page = $request->page ? $request->page : 1;
 		//查询所有提出问题
-		$total = $question->where('questions_status','!=',1)
+		$total = $question->where('questions_status',0)
 						  ->where('questions_examine',1)
-						  ->count();
+						  ->count('id');
 		$arr = [];
-		$pagesize = 1;
+		$res_value = [];
+		$pagesize = 2;
+		$total = ceil($total/$pagesize);
 		$limit = ceil(($page-1)*$pagesize);
-		$data = $question->where('questions_status','!=',1)
+		$data = $question->where('questions_status',0)
 						 ->where('questions_examine',1)
 						 ->offset($limit)
 						 ->limit($pagesize)
-						 ->get();	
+						 ->get();
 		foreach ($data as $key => $value) {
 			if ($value['questions_status'] != 1) {
 				$arr[] = $value;
 			} 
 		}
-		foreach ($arr as $key => $value) {
-			$ser = substr($value['questions_type'],0,1);
-			$res = $aspect->where('id',$ser)->first();
-			$value['questions_type'] = $res['aspect_name'];
+		if (!empty($arr)) {
+			foreach ($data as $key => $value) {
+				$ser[] = substr($value['questions_type'],0,1);
+			}
+			foreach ($ser as $key => $value) {
+				$res = $aspect->where('id',$value)->first();
+				$res_value[$value] = $res['aspect_name'];
+			}
 		}
 
 		return view('home.question.no_answer',[
@@ -152,7 +181,8 @@ class QuestionController extends Controller
 			'page'=>$page,
 			'total'=>$total,
 			'user'=>$user,
-			'integral'=>$integral
+			'integral'=>$integral,
+			'res_value'=>$res_value
 		]);
 	}
 	/*
@@ -188,6 +218,7 @@ class QuestionController extends Controller
 				]);
 		}
 		//文件上传
+		$path = '';
 		$file = $request->file('img');
 		if (!empty($file)) {
 	        $dir = 'uploads/';
@@ -195,13 +226,6 @@ class QuestionController extends Controller
 	        $filename = time() . mt_rand(100000, 999999) . '.' . $file ->getClientOriginalExtension();
 	        $file->move($dir, $filename);
 	        $path = $filename;//图片路径
-		} else {
-
-			return view('pc.index.jump')->with([
-					'message' => '必须上传文件，否则无法发布',
-					'url' => 'question',
-					'jumpTime' => 3
-				]);
 		}
 		if (empty($request->question) && empty($request->content)) {
 
@@ -265,6 +289,8 @@ class QuestionController extends Controller
 		$arr = $answer->where('questions_id',$data['id'])
 					  ->get()
 					  ->toArray();
+		/*echo "<pre>";
+		print_r($arr);return;*/
 		$num = $answer->where('questions_id',$data['id'])->count();
 		$name = [];
 		foreach ($arr as $key => $value) {
@@ -380,6 +406,22 @@ class QuestionController extends Controller
 							         ->count();
 				$data = [
 					'id' => 2,
+					'count' => $num,
+				];
+
+				return json_encode($data);
+			}
+			//判断字段是否是点赞，如是点赞删除该点赞
+			if ($arr['start'] == 0 && $type == 0) {
+				$answer_praise->where('user_id',\Session::get('login_id'))
+							  ->where('answer_id',$id)
+							  ->delete();
+				$num = $answer_praise->where('user_id',\Session::get('login_id'))
+							         ->where('answer_id',$id)
+							         ->where('start',0)
+							         ->count();
+				$data = [
+					'id' => 5,
 					'count' => $num,
 				];
 
