@@ -34,7 +34,9 @@ class Admin_topicController extends Controller
             $topic->enterprise=$request->input('is_ent');
             $topic->Topic_type=$request->input('topic_type');
             if($topic->save()){
+
               return Redirect::to('topic_add');
+
             };
 
 
