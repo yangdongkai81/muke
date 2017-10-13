@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
 
-use Session,Redirect,Redis;
+use Session,Redirect;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Article_tags;
@@ -23,7 +24,7 @@ class ArticleController extends Controller
         $article = new Article;
         $collection = new Article_collections;
         $comment = new Article_comment;
-
+        DB::connection()->enableQueryLog();
         if (empty($page) && $page !== '0') {
             $page = $page < 1 ? 1 : $page;
             $prefix = '';
@@ -45,11 +46,10 @@ class ArticleController extends Controller
         // dd($articles_userinfo);return;
         
         //获取置顶手记
-        $article_top = $article->where('status', '3')->orderBy('id', 'desc')->first();
-        
+        $article_top = $article->where('status', '3')->orderBy('id', 'desc')->select('id')->first();
         //获取置顶侧边手记
         $article_right = $article->where('status', '4')->orderBy('id', 'desc')->take(2)->get()->toArray();
-        
+        // print_r(DB::getQueryLog());return;
         // dd($article_right);return;
         $login_info = [];
         //获取当前登录用户个人信息 发布手记数量 推荐数 以及评论数
@@ -73,7 +73,7 @@ class ArticleController extends Controller
         // dd($article_right);return;
         //获取月度热门手记
         $hot_articles = $this ->get_hot_articles('all');
-
+        // print_r(DB::getQueryLog());return;
         $count = count($tags);
         for ($i=0; $i < $count; $i++) {
             if($i < 9){
@@ -358,26 +358,39 @@ class ArticleController extends Controller
     {
         $article = new Article;
         // DB::connection()->enableQueryLog();
-        // $redis = new Redis;
-        // $redis->set('test',111);
-        // return $redis->get('test');
-        $articles = $article->where('status', '>', 0)
+        
+        if(Redis::get('tag_'.$tag_id) == null) {
+            $articles = $article->where('status', '>', 0)
+                        ->where('add_time', '>', '1504679516')
                         ->where('tag_id', 'like', "%$tag_id%")
+                        ->take(600)
                         ->get()
                         ->toArray();
-        //获取所有用户信息
-        $user_id = array_column($articles, 'user_id');
-        $userinfo = $this->get_info($user_id);
 
-        $str = array("\r\n","\n","\r","\t",'<p>','</p>');
-        foreach ($articles as $key => $value) {
-            $articles[$key]['email'] = $userinfo[$value['user_id']];
-            $articles[$key]['content'] = str_replace($str, ' ', $value['content']);
+            //获取所有用户信息
+            $user_id = array_column($articles, 'user_id');
+            $userinfo = $this->get_info($user_id);
+
+            $str = array("\r\n","\n","\r","\t",'<p>','</p>');
+            foreach ($articles as $key => $value) {
+                $articles[$key]['email'] = $userinfo[$value['user_id']];
+                $articles[$key]['content'] = str_replace($str, ' ', $value['content']);
+            }
+            $put_articles = serialize($articles);
+            Redis::set('tag_'.$tag_id, $put_articles);
+            
+        } else {
+            $articles = unserialize(Redis::get('tag_'.$tag_id));
         }
-
-        $tag_name = Article_tags::where('id', $tag_id)
-                                ->lists('tag_name', 'id')
-                                ->first();
+        if (Redis::get('tag_name_'.$tag_id) == null) {
+            $tag_name = Article_tags::where('id', $tag_id)
+                                    ->lists('tag_name', 'id')
+                                    ->first();
+            $put_tag_name = serialize($tag_name);
+            Redis::set('tag_name_'.$tag_id,$put_tag_name);
+        } else {
+            $tag_name = unserialize(Redis::get('tag_name_'.$tag_id));
+        }
 
         $limit = 3;
         $page_total = ceil(count($articles)/$limit);
@@ -487,11 +500,17 @@ class ArticleController extends Controller
                         ->take($limit)
                         ->get();
         } else if($type == 'tag') {
-            $articles = Article::where('status', '>', 0)
+            if (Redis::get('tag_hot_'.$tag) == null) {
+                $articles = Article::where('status', '>', 0)
                         ->where('tag_id', 'like', "%$tag%")
                         ->orderBy('browser', 'desc')
                         ->take($limit)
                         ->get();
+                $put_articles = serialize($articles);
+                Redis::set('tag_hot_'.$tag, $put_articles);
+            } else {
+                $articles = unserialize(Redis::get('tag_hot_'.$tag));
+            }
         }
 
         return $articles;
